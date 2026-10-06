@@ -30,10 +30,18 @@ und frage nach der Auswahl, sofern der Nutzer nicht freie Gestaltung erlaubt hat
   Chromium-PWA, iOS oder ein eigener App-Ladebildschirm? Frage nur, wenn dies
   aus dem Auftrag noch offen ist und für die Einbindung relevant wird.
 
+## Social-Vorschau
+
+Das Open-Graph-Bild gehört immer zum Ergebnis. Frage nach zusätzlichen Text-
+oder Motivwünschen, wenn diese offen sind; Name, Farben und Logo müssen nicht
+nochmals abgefragt werden. Ohne abweichenden Wunsch gestalte eine Vorschau mit
+Logo, Portalname und gegebenenfalls Claim. Erstelle die fertige Datei als
+`public/og-image.png` (1200 × 630 Pixel) und binde sie in das gebaute HTML ein.
+
 ## Antworten verwenden
 
 Halte den Markenbrief knapp fest: Name, Claim, Beschreibung, Farben, Logoquelle,
-Icon-Variante, Avatar-Modus/Zuordnung und gewünschte Zielplattform. Bekannte Werte
+Icon-Variante, Avatar-Modus/Zuordnung, OG-Bildgestaltung und gewünschte Zielplattform. Bekannte Werte
 können unmittelbar umgesetzt werden. Noch offene Asset-Entscheidungen bleiben
 sichtbar offen; ersetze sie nicht ungefragt durch Acme-Assets oder erfundene Fotos.
 Bietet der Nutzer ausdrücklich freie Gestaltung oder vorläufige Platzhalter an,

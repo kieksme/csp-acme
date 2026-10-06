@@ -19,6 +19,18 @@ Einstellungen anbieten.
 | `.github/workflows/pages.yml` | Anzeigename; dynamische Owner-/Repo-Ausdrücke erhalten; Demo-Modus beibehalten                                   |
 | `README.md`                   | Repo-/Portalname, Markenbeispiele, Assetpfade, Domains und Demo-Link                                             |
 
+## Open Graph
+
+`public/og-image.png` ist ein fertig erstelltes PNG mit 1200 × 630 Pixeln aus
+Logo, Markenfarben und Portalname, nicht nur ein geplanter Dateiname. Der Build
+kopiert es nach `dist/og-image.png`.
+
+`vite.config.ts` kann ein lokales Plugin für die OG-/Twitter-Metadaten im gebauten
+HTML ergänzen. Der CSP-Kern enthält dafür aktuell keinen automatischen Schritt.
+Die absolute Bild-URL verwendet `CSP_DOMAIN` plus `CSP_BASE_PATH` und den Bildnamen;
+`CSP_API_URL` ist dafür ungeeignet. Der Pages-Workflow setzt bereits Domain und
+Basispfad. Produktionsbeispiele müssen dieselbe öffentliche Origin berücksichtigen.
+
 ## Avatare und generierte Logo-Assets
 
 `CSP_AVATARS_PATH` referenziert eine lokale JSON-Datei, die Personen-IDs auf
@@ -46,6 +58,7 @@ Hintergrundfarbe: #0f172a
 Kontaktlabel: Northwind Support-Hotline
 Logo: ausgewählte Wort-/Bildmarke, auch als Quelle für Favicon und Splash-Icons
 Avatare: Provider-Bilder, eigene Assets mit Personen-IDs oder Initialen
+Open Graph: fertiges 1200 × 630 PNG aus Markenlogo, Farben und Portalname
 Offene Farben/Assets/Avatar-Wünsche: interaktiv erfragen
 Hotline/Ticket-/API-Domain: noch offen, Platzhalter beibehalten
 Modus: lokale Demo und statische GitHub-Pages-Demo

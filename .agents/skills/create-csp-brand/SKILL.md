@@ -3,7 +3,8 @@ name: create-csp-brand
 description: >-
   Personalize a customer repository created from kieksme/csp-acme for a new
   brand. Use when the user asks to replace Acme branding, change portal naming,
-  colors, logos, splash-screen/favicons or team avatars, or configure a new customer's identity after using
+  colors, logos, splash-screen/favicons, Open Graph images or team avatars,
+  or configure a new customer's identity after using
   the CSP repository template. Covers public branding, customer content,
   configuration examples and the static GitHub Pages demo. Interactively ask
   for missing color, logo and avatar preferences before implementing the brand.
@@ -124,7 +125,40 @@ Die konkrete Zuordnung steht in [Dateien und Einstellungen](references/branding-
   Assets sind auch ohne Provider erreichbar. Fehlende oder fehlerhafte Bilder
   dürfen nicht als erfolgreich umgesetzte Avatar-Anpassung gemeldet werden.
 
-## 5. Inhalte, Beispiele und Demo konsistent machen
+## 5. Open-Graph-Bild erstellen und einbinden
+
+- Erstelle für die neue Marke eine **echte Bilddatei** `public/og-image.png`
+  mit **1200 × 630 Pixeln**. Ein Dateipfad, ein Prompt oder Meta-Tags ohne
+  Bilddatei erfüllen diesen Schritt nicht. Verwende die gewählte Logoquelle,
+  Markenfarben und einen gut lesbaren Portalnamen; übernimm den Claim, wenn er
+  auf der Vorschau sinnvoll lesbar bleibt. Ersetze ein vorhandenes Acme-Bild.
+- Frage nur nach noch offenen Wünschen für die Social-Vorschau, beispielsweise
+  zusätzlichem Text oder einem Motiv. Ohne abweichenden Wunsch verwende die
+  bereits festgelegte Marke und den Portalnamen. Nutze verfügbare Bild-/Layout-
+  Werkzeuge für ein fertiges PNG, mit ausreichend Rand und ohne verzerrtes Logo.
+  Betrachte die resultierende Datei, auch als verkleinerte Link-Vorschau.
+- Binde das Bild im **gebauten HTML** ein, beispielsweise über einen lokalen
+  Vite-Plugin-Schritt in `vite.config.ts`. Der aktuelle CSP-Build erzeugt noch
+  keine OG-Metadaten automatisch. Erfinde keine vom Paket unbeachteten
+  `CSP_OG_*`-Variablen. JavaScript-Metadaten nach dem Laden reichen für
+  Social-Crawler nicht zuverlässig aus.
+- Setze `og:type=website`, `og:title`, `og:description`, `og:url`,
+  `og:image`, `og:image:type=image/png`, `og:image:width=1200`,
+  `og:image:height=630` und ein passendes `og:image:alt`. Ergänze für
+  Twitter/X `twitter:card=summary_large_image`, Titel, Beschreibung, Bild und Alttext.
+  Leite Titel und Beschreibung aus derselben öffentlichen Konfiguration ab.
+- Verwende für Bild und Seiten-URL absolute HTTPS-URLs aus der öffentlichen
+  Frontend-Origin und `CSP_BASE_PATH`, beispielsweise
+  `https://northwind.github.io/csp-northwind/og-image.png`. Verwende nicht die
+  API-Origin. Aktualisiere Produktionsbeispiele und den Pages-Build passend;
+  letzterer liefert die Origin bereits über `CSP_DOMAIN`. Ohne reale öffentliche
+  Origin kennzeichne die Live-Verifikation als offen, statt eine localhost-URL
+  als fertige Sharing-Konfiguration auszugeben.
+- Stelle sicher, dass `public/og-image.png` nach `dist/og-image.png` kopiert
+  wird. Eine optionale bearbeitbare Layoutquelle kann zusätzlich mitgeführt
+  werden; die ausgelieferte OG-Datei ist das fertige Rasterbild.
+
+## 6. Inhalte, Beispiele und Demo konsistent machen
 
 - Überarbeite markenbezogene Texte, FAQ-Antworten, Prozessbeschreibungen,
   Ticketnamen und URLs in `content.json`. Erhalte das Schema und die Bedeutung
@@ -152,7 +186,7 @@ Die konkrete Zuordnung steht in [Dateien und Einstellungen](references/branding-
   lokale Runtime-Konfigurationen nur im beauftragten Umfang; weise auf Overrides
   hin, die die neue Marke überlagern könnten.
 
-## 6. Ergebnis prüfen
+## 7. Ergebnis prüfen
 
 1. Suche nach alten Markenreferenzen, ohne private dotenv-Dateien oder
    `node_modules` zu durchsuchen. Prüfe gezielt die oben genannten Quelldateien,
@@ -170,12 +204,15 @@ Die konkrete Zuordnung steht in [Dateien und Einstellungen](references/branding-
    kopiertes Logo: Titel, PWA-Name, Farben, Basispfad und Canonical-Link stimmen.
    Stelle sicher, dass Favicon und PWA-/Splash-Icons aus dem ausgewählten Logo
    erzeugt werden und dass alle referenzierten Avatarbilder existieren.
+   Prüfe `dist/og-image.png` als echtes PNG mit 1200 × 630 Pixeln und kontrolliere
+   OG-/Twitter-Metadaten im gebauten HTML auf Logo, Titel, Beschreibung, Bild-URL,
+   Alttext und Basispfad. Prüfe auch, dass keine API-Origin als Bild-URL dient.
    Prüfe sowohl `/` als auch `/<repository-name>/`, wenn beide unterstützt werden.
 5. Nutze für Builds mit abweichenden Konfigurationen einen temporären separaten
    Arbeitsstand mit den aktuellen Änderungen und ohne private dotenv-Dateien.
    Überschreibe oder entferne nicht die lokale Konfiguration des Nutzers.
 6. Wenn eine Browserprüfung verfügbar ist, kontrolliere Desktop/Mobilansicht,
-   Logo, Favicon, Avatare, Lesbarkeit, Navigation und den Demo-Modus. Wenn
+   Logo, Favicon, Avatare, Open-Graph-Bild, Lesbarkeit, Navigation und den Demo-Modus. Wenn
    möglich, installiere die PWA auf der Zielplattform und prüfe den Splash Screen;
    andernfalls kennzeichne die tatsächliche Splash-Darstellung als ungeprüft. Prüfe die Pages-Demo ohne
    laufenden API-Service. Melde fehlende Browser- oder Deployment-Prüfungen klar.
@@ -188,7 +225,7 @@ an GitHub-Einstellungen oder kein Live-Deployment ohne entsprechende Bestätigun
 ## Ergebnis mitteilen
 
 Nenne die umgesetzte Marke, gewählte Farben/Assets und Avatar-Zuordnungen,
-wesentliche Dateien, Prüfungen und noch offene echte
+die erstellte OG-Bilddatei und ihre Einbindung, wesentliche Dateien, Prüfungen und noch offene echte
 Betriebswerte. Beschreibe kurz, ob die Instanz als Demo oder produktiv konfiguriert
 ist. Verlinke einen erstellten Commit/PR oder die verifizierte Veröffentlichung,
 wenn dies Teil des Auftrags war.
