@@ -52,7 +52,7 @@ Branding-, Naming- und Inhaltsänderungen erfordern einen neuen Frontend-Build u
 3. `pnpm install --frozen-lockfile && pnpm check` ausführen. `dist/` beim gewünschten statischen HTTPS-Host ausliefern. DNS und Custom Domain dort separat einrichten.
 4. Auf dem API-Host `.env.api.example` als `.env` verwenden, Platzhalter und Provider-Zugänge ersetzen. `CSP_ALLOWED_ORIGINS` auf die exakte Frontend-Origin setzen. `pnpm start:api` im Projektverzeichnis ausführen.
 
-Für GitHub Pages unter einem Repository-Pfad `CSP_BASE_PATH=/csp-acme/` setzen. CI baut bewusst eine gekennzeichnete Demo und prüft das API-Image; der Workflow führt kein automatisches Produktivdeployment aus. Produktionswerte lassen sich auch als Prozessvariablen beim Build setzen. Ein Frontend-Build überträgt keine Variablen an den API-Host.
+Für GitHub Pages unter einem Repository-Pfad `CSP_BASE_PATH=/csp-acme/` setzen. CI baut eine gekennzeichnete Demo und prüft das API-Image. Der separate Pages-Workflow veröffentlicht die statische Beispieldemo bei Pushes auf `main`; produktive API-Instanzen werden separat betrieben. Produktionswerte lassen sich auch als Prozessvariablen beim Build setzen. Ein Frontend-Build überträgt keine Variablen an den API-Host.
 
 Der API-Service kann mit dem enthaltenen `Dockerfile` gebaut werden:
 
@@ -85,3 +85,11 @@ pnpm check
 Für einen weiteren Kunden dieses Repository kopieren, einen eigenen Repository-/Paketnamen setzen und `.env.branding`, Bilder, `content.json` sowie beide Produktionskonfigurationen anpassen. Jede Instanz betreibt ihre eigene API mit eigenen Provider-Zugängen. Gemeinsame Produktänderungen kommen durch neue CSP-Paketversionen.
 
 Weitere Konfiguration: [CSP-Konfigurationsdokumentation](https://github.com/kieksme/csp/blob/main/docs/configuration.md).
+
+## GitHub Pages und Repository-Template
+
+Die veröffentlichte Acme-Demo ist für [kieksme.github.io/csp-acme/](https://kieksme.github.io/csp-acme/) vorbereitet. Der Workflow `.github/workflows/pages.yml` berücksichtigt automatisch Repository-Name und Owner.
+
+Repository-Einstellungen: unter **Settings → General → Template repository** aktivieren; unter **Settings → Pages → Build and deployment → Source** die Option **GitHub Actions** wählen. Danach den Workflow **Publish Acme demo to GitHub Pages** starten oder auf `main` pushen.
+
+GitHub Pages hostet ausschließlich statische Dateien. Nur der Pages-Build aktiviert `VITE_CSP_STATIC_DEMO=true` zusammen mit `CSP_DEMO=true`. `pages-demo.ts` liefert lokal fiktive Personen, Schichten, Alerts, Systemstatus, Kontakt-Downloads und eine feste, als Demo erklärte Chat-Antwort. Es gibt keine echten Provider-Aufrufe oder KI-Antworten. Normale Kundenbuilds verwenden weiterhin die konfigurierte API. Für eine produktive Instanz das Pages-Demo-Deployment deaktivieren und echte Frontend-/API-Konfiguration verwenden.
