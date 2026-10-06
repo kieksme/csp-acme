@@ -93,3 +93,17 @@ Die veröffentlichte Acme-Demo ist für [kieksme.github.io/csp-acme/](https://ki
 Repository-Einstellungen: unter **Settings → General → Template repository** aktivieren; unter **Settings → Pages → Build and deployment → Source** die Option **GitHub Actions** wählen. Danach den Workflow **Publish Acme demo to GitHub Pages** starten oder auf `main` pushen.
 
 GitHub Pages hostet ausschließlich statische Dateien. Nur der Pages-Build aktiviert `VITE_CSP_STATIC_DEMO=true` zusammen mit `CSP_DEMO=true`. `pages-demo.ts` liefert lokal fiktive Personen, Schichten, Alerts, Systemstatus, Kontakt-Downloads und eine feste, als Demo erklärte Chat-Antwort. Es gibt keine echten Provider-Aufrufe oder KI-Antworten. Normale Kundenbuilds verwenden weiterhin die konfigurierte API. Für eine produktive Instanz das Pages-Demo-Deployment deaktivieren und echte Frontend-/API-Konfiguration verwenden.
+
+## Neue Marke mit einem Agent Skill erstellen
+
+Das Template enthält den Repository-Skill [`create-csp-brand`](.agents/skills/create-csp-brand/SKILL.md). Codex kann ihn aus `.agents/skills/` entdecken. Nach dem Erstellen eines eigenen Repositories aus diesem Template beispielsweise anweisen:
+
+```text
+Nutze $create-csp-brand und passe dieses Kundenrepository auf Northwind an.
+Paketname: csp-northwind, Portalname: Northwind Service Portal.
+Akzentfarbe: #2563eb, Hintergrundfarbe: #0f172a.
+Behalte die lokale Demo und GitHub Pages bei.
+Echte Kontakte und Provider-Adressen liegen noch nicht vor.
+```
+
+Der Skill führt durch Naming, Farben, Logo/PWA-Icon, Inhalte, Konfigurationsbeispiele und die Pages-Demo und prüft das Ergebnis. Echte Betriebswerte bleiben bis zur Bereitstellung als Platzhalter gekennzeichnet. Andere Agenten können die `SKILL.md` direkt lesen und befolgen.
