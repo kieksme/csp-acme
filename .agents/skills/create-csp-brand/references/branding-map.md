@@ -4,20 +4,46 @@ Die Pfade sind relativ zum Kundenrepository. Vor Änderungen immer die aktuelle
 Implementierung lesen; eine später aktualisierte CSP-Version kann zusätzliche
 Einstellungen anbieten.
 
-| Datei                         | Zu prüfende Markenwerte                                                              |
-| ----------------------------- | ------------------------------------------------------------------------------------ |
-| `package.json`                | `name` für den technischen Instanznamen; CSP-Paketnamen beibehalten                  |
-| `.env.branding`               | Portalname, Claim, Beschreibung, Farben, Kontaktlabel, Hotline, Iconpfad             |
-| `customer.config.ts`          | Logo-Fallback mit `CSP_BASE_PATH` und passendem Dateinamen                           |
-| `public/*`                    | Wortmarke, SVG-Farben und Beschriftung, PWA-Icon; keine verwaisten alten Assets      |
-| `.env.example`                | Lokale Demo; keine echten Zugangsdaten und keine ungewollten Naming-Overrides        |
-| `.env.production.example`     | Naming-/Hotline-Overrides, Portal-/API-Domain, Basispfad und Logo-Overrides          |
-| `.env.api.example`            | Kunden-Origin, API-Adresse, Hotline, Provider-Platzhalter und Statusseiten-Slug      |
-| `content.json`                | Kundentexte, Ticketnamen/-URLs, Prozesse, FAQ; vorhandenes Schema erhalten           |
-| `pages-demo.ts`               | Fiktive Systemnamen, Meldungen, Chat-Text und zusammengehörige Personen-/Schicht-IDs |
-| `.github/workflows/ci.yml`    | Anzeigename und gegebenenfalls kundenspezifische Artifact-/Image-Namen               |
-| `.github/workflows/pages.yml` | Anzeigename; dynamische Owner-/Repo-Ausdrücke erhalten; Demo-Modus beibehalten       |
-| `README.md`                   | Repo-/Portalname, Markenbeispiele, Assetpfade, Domains und Demo-Link                 |
+| Datei                         | Zu prüfende Markenwerte                                                                                          |
+| ----------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `package.json`                | `name` für den technischen Instanznamen; CSP-Paketnamen beibehalten                                              |
+| `.env.branding`               | Portalname, Claim, Beschreibung, Farben, Kontaktlabel, Hotline, Logoquelle für Icon/Splash, Avatarpfad           |
+| `customer.config.ts`          | Logo-Fallback mit `CSP_BASE_PATH` und passendem Dateinamen                                                       |
+| `public/*`                    | Wortmarke, SVG-Farben und Beschriftung, PWA-/Splash-/Favicon-Quelle, Avatarbilder; keine verwaisten alten Assets |
+| `.env.example`                | Lokale Demo; keine echten Zugangsdaten und keine ungewollten Naming-Overrides                                    |
+| `.env.production.example`     | Naming-/Hotline-Overrides, Portal-/API-Domain, Basispfad und Logo-Overrides                                      |
+| `.env.api.example`            | Kunden-Origin, API-Adresse, Hotline, Provider-Platzhalter und Statusseiten-Slug                                  |
+| `content.json`                | Kundentexte, Ticketnamen/-URLs, Prozesse, FAQ; vorhandenes Schema erhalten                                       |
+| `pages-demo.ts`               | Fiktive Systemnamen, Meldungen, Chat-Text und zusammengehörige Personen-/Schicht-IDs                             |
+| `.github/workflows/ci.yml`    | Anzeigename und gegebenenfalls kundenspezifische Artifact-/Image-Namen                                           |
+| `.github/workflows/pages.yml` | Anzeigename; dynamische Owner-/Repo-Ausdrücke erhalten; Demo-Modus beibehalten                                   |
+| `README.md`                   | Repo-/Portalname, Markenbeispiele, Assetpfade, Domains und Demo-Link                                             |
+
+## Open Graph
+
+`public/og-image.png` ist ein fertig erstelltes PNG mit 1200 × 630 Pixeln aus
+Logo, Markenfarben und Portalname, nicht nur ein geplanter Dateiname. Der Build
+kopiert es nach `dist/og-image.png`.
+
+`vite.config.ts` kann ein lokales Plugin für die OG-/Twitter-Metadaten im gebauten
+HTML ergänzen. Der CSP-Kern enthält dafür aktuell keinen automatischen Schritt.
+Die absolute Bild-URL verwendet `CSP_DOMAIN` plus `CSP_BASE_PATH` und den Bildnamen;
+`CSP_API_URL` ist dafür ungeeignet. Der Pages-Workflow setzt bereits Domain und
+Basispfad. Produktionsbeispiele müssen dieselbe öffentliche Origin berücksichtigen.
+
+## Avatare und generierte Logo-Assets
+
+`CSP_AVATARS_PATH` referenziert eine lokale JSON-Datei, die Personen-IDs auf
+öffentliche Bild-URLs abbildet. Beispiel: `avatars.json` enthält
+`{ "acme-lena": "/csp-northwind/avatars/lena.png" }`. IDs stammen aus der
+aktuellen Demo oder dem Provider; URLs berücksichtigen den jeweiligen Basispfad.
+`avatars.json` und `public/avatars/*` ergänzen die Dateizuordnung, wenn gewünscht.
+
+`CSP_ICON_PATH` referenziert die lokale Logoquelle oder eine daraus abgeleitete
+quadratische Variante. Daraus erzeugt der CSP-Build die PNG-Icons für Favicon
+und Webmanifest. PWA-Splash Screens verwenden je nach Plattform Manifest-Icons
+und Hintergrundfarbe. Ein eigener App-Ladebildschirm und iOS-Startup-Bilder
+sind im Template nicht vorhanden und benötigen bei Bedarf eine eigene Einbindung.
 
 ## Beispiel-Markenbrief
 
@@ -30,7 +56,10 @@ Beschreibung: Support, Systemstatus und Serviceinformationen für Northwind.
 Akzentfarbe: #2563eb
 Hintergrundfarbe: #0f172a
 Kontaktlabel: Northwind Support-Hotline
-Logo/Icon: bereitgestellte Assets; sonst ausdrücklich vorläufiges Beispiel-SVG
+Logo: ausgewählte Wort-/Bildmarke, auch als Quelle für Favicon und Splash-Icons
+Avatare: Provider-Bilder, eigene Assets mit Personen-IDs oder Initialen
+Open Graph: fertiges 1200 × 630 PNG aus Markenlogo, Farben und Portalname
+Offene Farben/Assets/Avatar-Wünsche: interaktiv erfragen
 Hotline/Ticket-/API-Domain: noch offen, Platzhalter beibehalten
 Modus: lokale Demo und statische GitHub-Pages-Demo
 ```

@@ -106,4 +106,4 @@ Behalte die lokale Demo und GitHub Pages bei.
 Echte Kontakte und Provider-Adressen liegen noch nicht vor.
 ```
 
-Der Skill führt durch Naming, Farben, Logo/PWA-Icon, Inhalte, Konfigurationsbeispiele und die Pages-Demo und prüft das Ergebnis. Echte Betriebswerte bleiben bis zur Bereitstellung als Platzhalter gekennzeichnet. Andere Agenten können die `SKILL.md` direkt lesen und befolgen.
+Der Skill fragt interaktiv nach noch offenen Farben, Logo-Assets und Avatar-Wünschen. Er führt durch Naming, die gemeinsame Logoquelle für Portal, Favicon und PWA-Splash-Icons, Avatar-Zuordnungen, ein fertig erstelltes Open-Graph-Bild (1200 × 630 PNG) mit OG-/Twitter-Metadaten, Inhalte, Konfigurationsbeispiele und die Pages-Demo und prüft das Ergebnis. Die konkrete Splash-Darstellung hängt von der Zielplattform ab. Echte Betriebswerte bleiben bis zur Bereitstellung als Platzhalter gekennzeichnet. Andere Agenten können die `SKILL.md` direkt lesen und befolgen.
