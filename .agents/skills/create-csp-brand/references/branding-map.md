@@ -1,4 +1,4 @@
-# Dateien und Einstellungen ab CSP 0.4.0
+# Dateien und Einstellungen ab CSP 0.5.0
 
 Alle Pfade beziehen sich auf das Kundenrepository.
 

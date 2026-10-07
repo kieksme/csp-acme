@@ -1,6 +1,6 @@
 # Acme Service Portal
 
-Eigenständige Kundeninstanz mit veröffentlichten CSP-Paketen **0.4.0**. Branding, Inhalte und Plugins sind deklarativ konfiguriert; Browser-, API- und Build-Code kommen aus Core und CLI.
+Eigenständige Kundeninstanz mit veröffentlichten CSP-Paketen **0.5.0**. Branding, Inhalte und Plugins sind deklarativ konfiguriert; Browser-, API- und Build-Code kommen aus Core und CLI.
 
 ## Dateien
 
@@ -24,6 +24,8 @@ pnpm dev
 `dev` startet Frontend und API gemeinsam. `.env.example` aktiviert synthetische API-Daten. `pnpm build` baut das Standardprofil, `pnpm start` startet die gebaute API; das statische Frontend unter `dist/` wird separat gehostet. Profil- und Plugin-Änderungen erfordern einen Neustart bzw. erneuten Build.
 
 `pnpm check` validiert beide Profile und baut Standard- sowie Demo-Frontend und API. Am Ende enthalten `dist/` und `dist-api/` den Demo-Build. Vor einem produktiven Deployment ausdrücklich das Standardprofil neu bauen.
+
+Die Oberfläche und alle mitgelieferten Plugins verwenden Tailwind-Klassen direkt im JSX der veröffentlichten CSP-Pakete. Das Core-Paket liefert fertig kompiliertes CSS; im Kundenrepo ist keine Tailwind-Konfiguration nötig.
 
 ## Branding und Overrides
 
@@ -71,7 +73,7 @@ Der Workflow `.github/workflows/deploy.yml` prüft beide Builds und ruft den gem
 ```sh
 pnpm exec csp plugin list
 pnpm exec csp plugin remove @kieksme/csp-plugin-kuma
-pnpm exec csp plugin add @kieksme/csp-plugin-kuma@0.4.0
+pnpm exec csp plugin add @kieksme/csp-plugin-kuma@0.5.0
 ```
 
 Plugin-Befehle ändern das ausgewählte Profil (`--config portal.demo.json` für die Demo). Beide Profile auf die gewünschte Plugin-Auswahl abstimmen und neu bauen. CSP-Paketversionen gemeinsam aktualisieren und das Lockfile einchecken.
@@ -80,6 +82,6 @@ Der Repository-Skill [create-csp-brand](.agents/skills/create-csp-brand/SKILL.md
 
 ## Migration von 0.3.0
 
-Die bisherigen `.env.branding`, `customer.config.ts`, Startdateien, Plugin-Registrierungen, Vite-/TypeScript-Konfiguration und Dockerfile wurden durch Profile und CSP-CLI ersetzt. Inhalte, Logos, öffentliche Markenwerte und alle fünf Plugins bleiben erhalten. Die eigene `pages-demo.ts` entfällt: Die drei bisherigen Beispielpersonen, Beispielmeldung und feste Chat-Antwort werden durch die gemeinsame Core-Demo ersetzt. Diese synthetischen Demodaten sind nicht kundenspezifisch konfigurierbar. CSP 0.4.0 unterstützt den vCard-Download nur über die API; der Kontakt-Download in der statischen Pages-Demo ist gegenüber der bisherigen Acme-Demo nicht verfügbar. Die Kundenversion ist unabhängig von der CSP-Version.
+Die bisherigen `.env.branding`, `customer.config.ts`, Startdateien, Plugin-Registrierungen, Vite-/TypeScript-Konfiguration und Dockerfile wurden durch Profile und CSP-CLI ersetzt. Inhalte, Logos, öffentliche Markenwerte und alle fünf Plugins bleiben erhalten. Die eigene `pages-demo.ts` entfällt: Die drei bisherigen Beispielpersonen, Beispielmeldung und feste Chat-Antwort werden durch die gemeinsame Core-Demo ersetzt. Diese synthetischen Demodaten sind nicht kundenspezifisch konfigurierbar. CSP 0.5.0 unterstützt den vCard-Download nur über die API; der Kontakt-Download in der statischen Pages-Demo ist gegenüber der bisherigen Acme-Demo nicht verfügbar. Die Kundenversion ist unabhängig von der CSP-Version.
 
 Weitere Informationen: [CSP-Konfiguration](https://github.com/kieksme/csp/blob/main/Docs/configuration.md).

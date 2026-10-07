@@ -2,11 +2,11 @@ allowBuilds:
   esbuild: true
   sharp: false
 minimumReleaseAgeExclude:
-  - '@kieksme/csp-cli@0.4.0'
-  - '@kieksme/csp-core@0.4.0'
-  - '@kieksme/csp-plugin-chat@0.4.0'
-  - '@kieksme/csp-plugin-contact@0.4.0'
-  - '@kieksme/csp-plugin-content@0.4.0'
-  - '@kieksme/csp-plugin-kuma@0.4.0'
-  - '@kieksme/csp-plugin-signl4@0.4.0'
-  - '@kieksme/csp-sdk@0.4.0'
+  - '@kieksme/csp-cli@0.5.0'
+  - '@kieksme/csp-core@0.5.0'
+  - '@kieksme/csp-plugin-chat@0.5.0'
+  - '@kieksme/csp-plugin-contact@0.5.0'
+  - '@kieksme/csp-plugin-content@0.5.0'
+  - '@kieksme/csp-plugin-kuma@0.5.0'
+  - '@kieksme/csp-plugin-signl4@0.5.0'
+  - '@kieksme/csp-sdk@0.5.0'
