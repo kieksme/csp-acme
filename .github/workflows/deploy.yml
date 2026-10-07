@@ -26,7 +26,7 @@ jobs:
       - run: pnpm check
   portal:
     needs: check
-    uses: kieksme/csp/.github/workflows/customer-build.yml@953c0f6b157753c54a3ce72cf5a276799fb709c5
+    uses: kieksme/csp/.github/workflows/customer-build.yml@3728ccaea4195ba025773fe59ed0b51024d7cebe
     with:
       config: portal.demo.json
       pages: true

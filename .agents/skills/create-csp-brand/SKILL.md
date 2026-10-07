@@ -84,7 +84,7 @@ Erstelle für die neue Marke ein tatsächliches PNG mit
 1200 × 630 Pixeln, Logo, Markenfarben und lesbarem Portalnamen. Frage nur nach
 noch offenen Motiven/Textwünschen. Prüfe das fertige Bild visuell.
 
-CSP 0.4.0 stellt weder OG-Profilfelder noch einen eigenen Vite-Plugin-Hook bereit.
+CSP 0.5.0 stellt weder OG-Profilfelder noch einen eigenen Vite-Plugin-Hook bereit.
 Erfinde keine `CSP_OG_*`-Variablen. Ergänze bei beauftragter OG-Einbindung einen
 expliziten kundeneigenen Nachbearbeitungsschritt für **alle** relevanten Builds,
 auch im CI-/Pages-Workflow. Er muss das PNG nach `dist/og-image.png` kopieren und
