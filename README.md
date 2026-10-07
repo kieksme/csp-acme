@@ -1,109 +1,85 @@
-# csp-acme
+# Acme Service Portal
 
-Eigenständige Customer-Service-Portal-Instanz für **einen Kunden: Acme**. Erstellt mit `@kieksme/csp-cli@0.3.0`, verwendet veröffentlichte CSP-Pakete aus [kieksme/csp](https://github.com/kieksme/csp). Keine Workspace-Verweise und keine Kopie des Produktkerns. Die Kundeninstanz hat eine eigene Versionsnummer; die CSP-Abhängigkeiten sind auf `0.3.0` festgelegt.
+Eigenständige Kundeninstanz mit veröffentlichten CSP-Paketen **0.4.0**. Branding, Inhalte und Plugins sind deklarativ konfiguriert; Browser-, API- und Build-Code kommen aus Core und CLI.
 
-## Lokale Demo starten
+## Dateien
 
-Voraussetzungen: Node 22.12+ und pnpm 11.19.0.
+- `portal.config.json`: Acme-Branding, Farben, Logo/Icon, Hotline und alle fünf Plugins. Standardmäßig kein Demo-Modus.
+- `portal.demo.json`: statische synthetische Pages-Demo ohne API oder Provider-Secrets.
+- `content.json`: bestehende Acme-Prozesse, FAQ und Ticketlinks.
+- `public/`: bestehende Acme-Logos; referenzierte Assets werden mit basispfadabhängigen URLs ausgeliefert.
+- `.env.example`: lokale API-Demo; `.env.production.example` und `.env.api.example`: getrennte öffentliche Build- und API-Runtime-Beispiele.
+
+## Lokal starten
+
+Node.js >= 22.12 und pnpm 12.8.1:
 
 ```sh
 pnpm install --frozen-lockfile
 cp .env.example .env
 pnpm check
-pnpm dev:api # Terminal 1: http://localhost:3001
-pnpm dev     # Terminal 2: http://localhost:5173
+pnpm dev
 ```
 
-Die Beispielkonfiguration aktiviert ausdrücklich `CSP_DEMO=true`. Personen, Schichten, Alerts, Status und Chat sind synthetisch; es werden keine Provider-Zugänge benötigt. Hotline und Ticketadressen sind Platzhalter und müssen vor dem Produktivbetrieb ersetzt werden. Für die gebaute Demo: `pnpm start:api` und in einem zweiten Terminal `pnpm preview` (http://localhost:4173).
+`dev` startet Frontend und API gemeinsam. `.env.example` aktiviert synthetische API-Daten. `pnpm build` baut das Standardprofil, `pnpm start` startet die gebaute API; das statische Frontend unter `dist/` wird separat gehostet. Profil- und Plugin-Änderungen erfordern einen Neustart bzw. erneuten Build.
 
-## Branding und Naming
+`pnpm check` validiert beide Profile und baut Standard- sowie Demo-Frontend und API. Am Ende enthalten `dist/` und `dist-api/` den Demo-Build. Vor einem produktiven Deployment ausdrücklich das Standardprofil neu bauen.
 
-Die versionierte Datei [`.env.branding`](.env.branding) enthält die gemeinsamen öffentlichen Acme-Defaults. Frontend und API lesen sie über `customer.config.ts`; Umgebungsvariablen können alle Werte überschreiben.
+## Branding und Overrides
 
-| Einstellung             | Acme-Beispiel / Wirkung                                            |
-| ----------------------- | ------------------------------------------------------------------ |
-| `package.json` → `name` | `csp-acme`: technischer npm-/Repository-Name                       |
-| `CSP_NAME`              | `Acme Service Portal`: sichtbarer Portalname, HTML-Titel, PWA-Name |
-| `CSP_TAGLINE`           | Acme-Hauptüberschrift                                              |
-| `CSP_DESCRIPTION`       | Beschreibung für Portal und PWA                                    |
-| `CSP_COLOR`             | `#f97316`: orange Akzentfarbe                                      |
-| `CSP_BACKGROUND`        | `#111827`: dunkler Hintergrund und PWA-Farbe                       |
-| `CSP_CONTACT_LABEL`     | `Acme Support-Hotline`                                             |
-| `CSP_CONTACT_PHONE`     | Fiktiver Kontakt; für den Kunden ersetzen                          |
-| `CSP_ICON_PATH`         | `public/acme-icon.svg`: erzeugt PWA-Icons                          |
-| `CSP_LOGO_URL`          | Standard: `<CSP_BASE_PATH>acme-logo.svg`; optional eigene URL      |
-| `CSP_CONTENT_PATH`      | `content.json`: Acme-Prozesse, Ticketlinks und FAQ                 |
-| `CSP_BASE_PATH`         | `/`, alternativ `/csp-acme/` bei Hosting im Unterpfad              |
-| `CSP_DOMAIN`            | Öffentliche Origin für den Canonical-Link                          |
-| `CSP_API_URL`           | Öffentliche API-Origin, ohne `/api/v1`                             |
+Acme-Name, Claim, Beschreibung, Akzentfarbe `#f97316`, Hero-/PWA-Farbe `#111827` und Hotline stehen in den beiden JSON-Profilen. Branding-Änderungen, die beide Betriebsarten betreffen, in beiden Profilen vornehmen. `branding.logoFile` und `branding.iconFile` verweisen auf lokale Assets; Core erzeugt die PWA-Icons. `theme.tokens` und `darkTokens` steuern das Design. `contentFile` referenziert die gemeinsame Inhaltsdatei.
 
-Hex-Farben in `.env`-Dateien in Anführungszeichen schreiben. Eigene Bilder gehören in `public/`. Das mitgelieferte Logo folgt dem Basispfad automatisch; bei einer expliziten `CSP_LOGO_URL` den Basispfad selbst berücksichtigen. Die Icons werden beim Build neu generiert.
+Öffentliche `CSP_*`-Overrides überschreiben Profilwerte. Frontend: Profil → `.env` → `.env.local` → `.env.<mode>` → `.env.<mode>.local` → Prozessvariablen. API: Profil → `.env` → `.env.local` → Prozessvariablen. Der API-Service lädt `.env.production` nicht automatisch. Branding- und Inhaltsänderungen benötigen einen Frontend-Build und API-Neustart.
 
-Frontend-Priorität: `.env.branding` → `.env` → `.env.local` → `.env.<mode>` → `.env.<mode>.local` → Prozessvariablen. API-Priorität: `.env.branding` → `.env` → `.env.local` → Prozessvariablen. Der API-Service lädt `.env.production` nicht automatisch.
+Optional `avatarsFile` in beiden Profilen setzen. Das Schema lautet `{ "ids": { "provider-id": "public/avatars/person.webp" }, "names": {} }`. IDs haben Vorrang; lokale referenzierte Bilder erhalten automatisch den jeweiligen Basispfad. Die gemeinsame statische Demo verwendet `demo-lena` und `demo-noah`; produktiv gelten SIGNL4-IDs.
 
-Branding-, Naming- und Inhaltsänderungen erfordern einen neuen Frontend-Build und einen API-Neustart. Der technische Paketname ersetzt keine Branding-Konfiguration.
+## Produktion
 
-## Produktive Kundeninstanz
-
-[`.env.production.example`](.env.production.example) zeigt öffentliche Produktionswerte einschließlich eines Naming-Overrides. [`.env.api.example`](.env.api.example) enthält die separat zu konfigurierenden API-Runtime-Werte.
-
-1. Lokale Demo-`.env` und `.env.local` entfernen bzw. außerhalb des Projekts sichern.
-2. `.env.production.example` nach `.env.production` kopieren und Domain, API-Adresse und Hotline ersetzen. `CSP_DEMO=false` beibehalten.
-3. `pnpm install --frozen-lockfile && pnpm check` ausführen. `dist/` beim gewünschten statischen HTTPS-Host ausliefern. DNS und Custom Domain dort separat einrichten.
-4. Auf dem API-Host `.env.api.example` als `.env` verwenden, Platzhalter und Provider-Zugänge ersetzen. `CSP_ALLOWED_ORIGINS` auf die exakte Frontend-Origin setzen. `pnpm start:api` im Projektverzeichnis ausführen.
-
-Für GitHub Pages unter einem Repository-Pfad `CSP_BASE_PATH=/csp-acme/` setzen. CI baut eine gekennzeichnete Demo und prüft das API-Image. Der separate Pages-Workflow veröffentlicht die statische Beispieldemo bei Pushes auf `main`; produktive API-Instanzen werden separat betrieben. Produktionswerte lassen sich auch als Prozessvariablen beim Build setzen. Ein Frontend-Build überträgt keine Variablen an den API-Host.
-
-Der API-Service kann mit dem enthaltenen `Dockerfile` gebaut werden:
+Die Hotline und Ticketadressen sind weiterhin Platzhalter. Lokale Demo-`.env` außerhalb des Projekts sichern; `.env.production.example` nach `.env.production` kopieren und echte öffentliche Werte konfigurieren. Provider-Secrets ausschließlich in der API-Runtime setzen, etwa anhand `.env.api.example`.
 
 ```sh
-docker build -t csp-acme-api .
+pnpm exec csp validate --production
+pnpm exec csp build --production
+pnpm start
+```
+
+`CSP_DEMO=false` beibehalten. Frontend unter `dist/` separat ausliefern. Das API-Image wird mit dem gemeinsamen Dockerfile gebaut:
+
+```sh
+pnpm exec csp build --production
+mkdir -p .csp
+cp node_modules/@kieksme/csp-cli/runtime/Dockerfile .csp/Dockerfile
+printf 'node_modules\n.git\n.env\n.env.*\ndist\n.csp\n' > .csp/Dockerfile.dockerignore
+docker build -f .csp/Dockerfile --build-arg PORTAL_CONFIG=portal.config.json -t csp-acme-api .
 docker run --rm --env-file .env.api -p 3001:3001 csp-acme-api
 ```
 
-Dafür eine ausgefüllte `.env.api` aus `.env.api.example` erstellen. Das Image enthält `.env.branding`, `content.json` und `public/`, aber keine lokalen `.env`-Dateien oder Provider-Schlüssel. Der statische Frontend-Build wird separat gehostet. Für Inhalte aus `content.json` denselben Stand in Frontend und API verwenden.
+`.env.api` vorher aus `.env.api.example` mit echten Runtime-Werten erstellen. `CSP_ALLOWED_ORIGINS` muss zur Frontend-Origin passen. SIGNL4, Kuma und Chat benötigen echte Provider-Konfiguration; das Ollama-Modell muss auf dem erreichbaren Host vorhanden sein. `localhost` im Container bezeichnet den API-Container.
 
-API-Provider:
+## GitHub Pages
 
-- SIGNL4: Acme-Team-ID und API-Schlüssel mit Leserechten konfigurieren.
-- Uptime Kuma: URL und veröffentlichten Acme-Statusseiten-Slug konfigurieren.
-- Chat: Ollama als Beispiel; OpenAI und Azure sind alternativ möglich. Das Ollama-Modell muss auf dem erreichbaren Ollama-Host vorhanden sein. `localhost` im Container bezeichnet den API-Container selbst.
+```sh
+pnpm build:demo
+```
 
-Alle Provider-Schlüssel bleiben in der API-Runtime. Öffentliche Inhalte, Kontaktinformationen und Statusdaten dieser Instanz sind im Portal lesbar; der Chat verwendet die Quellen dieser Kundeninstanz. Keine Secrets in `.env.branding`, `.env.production`, `content.json` oder `VITE_*` ablegen.
+Die [Acme-Demo](https://kieksme.github.io/csp-acme/) nutzt `public.demo: true` und `public.staticDemo: true`. Core liefert synthetische Personen, Schichten, Systemstatus und einen ausdrücklich als Demo gekennzeichneten Chat ohne Provider-Aufrufe.
 
-## Plugins und weitere Kunden
+Der Workflow `.github/workflows/deploy.yml` prüft beide Builds und ruft den gemeinsamen, auf eine CSP-Commit-SHA fixierten Build-Workflow auf. Pushes auf `main` veröffentlichen die Demo; Pull Requests prüfen Frontend und API-Image. Öffentliche Pages-URLs werden aus Repository-Name und Owner abgeleitet. Pages muss in den Repository-Einstellungen auf GitHub Actions stehen. Das Workflow-API-Image gehört zum Demo-Profil; produktives API-Hosting separat einrichten.
 
-Aktiviert sind Kontakt, SIGNL4, Uptime Kuma, Inhalte und Chat. `portal.plugins.json`, `portal.browser.ts`, `portal.server.ts` und Paketabhängigkeiten gehören zusammen. Mit der lokal gepinnten CLI verwalten:
+## Plugins und weitere Marken
 
 ```sh
 pnpm exec csp plugin list
 pnpm exec csp plugin remove @kieksme/csp-plugin-kuma
-pnpm exec csp plugin add @kieksme/csp-plugin-kuma@0.3.0
-pnpm check
+pnpm exec csp plugin add @kieksme/csp-plugin-kuma@0.4.0
 ```
 
-Für einen weiteren Kunden dieses Repository kopieren, einen eigenen Repository-/Paketnamen setzen und `.env.branding`, Bilder, `content.json` sowie beide Produktionskonfigurationen anpassen. Jede Instanz betreibt ihre eigene API mit eigenen Provider-Zugängen. Gemeinsame Produktänderungen kommen durch neue CSP-Paketversionen.
+Plugin-Befehle ändern das ausgewählte Profil (`--config portal.demo.json` für die Demo). Beide Profile auf die gewünschte Plugin-Auswahl abstimmen und neu bauen. CSP-Paketversionen gemeinsam aktualisieren und das Lockfile einchecken.
 
-Weitere Konfiguration: [CSP-Konfigurationsdokumentation](https://github.com/kieksme/csp/blob/main/docs/configuration.md).
+Der Repository-Skill [create-csp-brand](.agents/skills/create-csp-brand/SKILL.md) unterstützt neue Kundenmarken mit JSON-Profilen. Nach einer Template-Kopie Paketnamen, beide Profile, Inhalte, Assets und Konfigurationsbeispiele anpassen. Der Workflow berücksichtigt Owner und Repository-Namen automatisch.
 
-## GitHub Pages und Repository-Template
+## Migration von 0.3.0
 
-Die veröffentlichte Acme-Demo ist für [kieksme.github.io/csp-acme/](https://kieksme.github.io/csp-acme/) vorbereitet. Der Workflow `.github/workflows/pages.yml` berücksichtigt automatisch Repository-Name und Owner.
+Die bisherigen `.env.branding`, `customer.config.ts`, Startdateien, Plugin-Registrierungen, Vite-/TypeScript-Konfiguration und Dockerfile wurden durch Profile und CSP-CLI ersetzt. Inhalte, Logos, öffentliche Markenwerte und alle fünf Plugins bleiben erhalten. Die eigene `pages-demo.ts` entfällt: Die drei bisherigen Beispielpersonen, Beispielmeldung und feste Chat-Antwort werden durch die gemeinsame Core-Demo ersetzt. Diese synthetischen Demodaten sind nicht kundenspezifisch konfigurierbar. CSP 0.4.0 unterstützt den vCard-Download nur über die API; der Kontakt-Download in der statischen Pages-Demo ist gegenüber der bisherigen Acme-Demo nicht verfügbar. Die Kundenversion ist unabhängig von der CSP-Version.
 
-Repository-Einstellungen: unter **Settings → General → Template repository** aktivieren; unter **Settings → Pages → Build and deployment → Source** die Option **GitHub Actions** wählen. Danach den Workflow **Publish Acme demo to GitHub Pages** starten oder auf `main` pushen.
-
-GitHub Pages hostet ausschließlich statische Dateien. Nur der Pages-Build aktiviert `VITE_CSP_STATIC_DEMO=true` zusammen mit `CSP_DEMO=true`. `pages-demo.ts` liefert lokal fiktive Personen, Schichten, Alerts, Systemstatus, Kontakt-Downloads und eine feste, als Demo erklärte Chat-Antwort. Es gibt keine echten Provider-Aufrufe oder KI-Antworten. Normale Kundenbuilds verwenden weiterhin die konfigurierte API. Für eine produktive Instanz das Pages-Demo-Deployment deaktivieren und echte Frontend-/API-Konfiguration verwenden.
-
-## Neue Marke mit einem Agent Skill erstellen
-
-Das Template enthält den Repository-Skill [`create-csp-brand`](.agents/skills/create-csp-brand/SKILL.md). Codex kann ihn aus `.agents/skills/` entdecken. Nach dem Erstellen eines eigenen Repositories aus diesem Template beispielsweise anweisen:
-
-```text
-Nutze $create-csp-brand und passe dieses Kundenrepository auf Northwind an.
-Paketname: csp-northwind, Portalname: Northwind Service Portal.
-Akzentfarbe: #2563eb, Hintergrundfarbe: #0f172a.
-Behalte die lokale Demo und GitHub Pages bei.
-Echte Kontakte und Provider-Adressen liegen noch nicht vor.
-```
-
-Der Skill fragt interaktiv nach noch offenen Farben, Logo-Assets und Avatar-Wünschen. Er führt durch Naming, die gemeinsame Logoquelle für Portal, Favicon und PWA-Splash-Icons, Avatar-Zuordnungen, ein fertig erstelltes Open-Graph-Bild (1200 × 630 PNG) mit OG-/Twitter-Metadaten, Inhalte, Konfigurationsbeispiele und die Pages-Demo und prüft das Ergebnis. Die konkrete Splash-Darstellung hängt von der Zielplattform ab. Echte Betriebswerte bleiben bis zur Bereitstellung als Platzhalter gekennzeichnet. Andere Agenten können die `SKILL.md` direkt lesen und befolgen.
+Weitere Informationen: [CSP-Konfiguration](https://github.com/kieksme/csp/blob/main/Docs/configuration.md).

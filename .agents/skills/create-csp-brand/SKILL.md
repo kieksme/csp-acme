@@ -1,231 +1,132 @@
 ---
 name: create-csp-brand
 description: >-
-  Personalize a customer repository created from kieksme/csp-acme for a new
-  brand. Use when the user asks to replace Acme branding, change portal naming,
-  colors, logos, splash-screen/favicons, Open Graph images or team avatars,
-  or configure a new customer's identity after using
-  the CSP repository template. Covers public branding, customer content,
-  configuration examples and the static GitHub Pages demo. Interactively ask
-  for missing color, logo and avatar preferences before implementing the brand.
+  Personalize a CSP customer repository for a new brand. Covers portal naming,
+  colors, logos, PWA icons, team avatars, Open Graph images, customer content,
+  JSON configuration profiles and the static GitHub Pages demo. Ask for missing
+  color, logo and avatar preferences before implementing the brand.
 ---
 
 # Neue Kundenmarke für das CSP-Template
 
-Erstelle eine konsistente Kundenmarke im **aktuellen Kundenrepository**. Das
-Acme-Repository ist die Vorlage; der Produktkern kommt aus den veröffentlichten
-`@kieksme/csp-*`-Paketen. Passe die Instanz an und führe die verfügbaren Prüfungen
-bis zu einem nachvollziehbaren Ergebnis durch.
+Arbeite im aktuellen Kundenrepository. Die gemeinsame Anwendung kommt aus
+veröffentlichten `@kieksme/csp-*`-Paketen; ändere für Branding weder den Core noch
+`node_modules`. Nutzerauftrag und geltende Repository-Regeln haben Vorrang.
 
-## 1. Repository und Markenbrief prüfen
+## Bestand und Markenbrief
 
-- Lies die geltenden `AGENTS.md`, `README.md`, `package.json`, `.env.branding`,
-  `customer.config.ts`, `vite.config.ts`, `server.ts`, `content.json`, die drei
-  versionierten `.env*.example`-Dateien, `pages-demo.ts` und beide Workflows.
-- Prüfe Git-Status und Remote. Übernimm vorhandene Änderungen des Nutzers; arbeite
-  im Kundenrepo. Das Anwenden dieses Skills auf die Acme-Vorlage selbst ist nur
-  dann vorgesehen, wenn der Nutzer ausdrücklich deren Marke ändern möchte.
-- Ermittle aus dem Auftrag Markenname, technischen Paketnamen, Portalname,
-  Claim, Beschreibung, Akzent- und Hintergrundfarbe, Logo/Icon sowie Kontakt-
-  und Ticketangaben. Ziehe bereitgestellte Markenrichtlinien und Assets heran.
-- Nutze bereits angegebene Werte unmittelbar. Frage vor der visuellen Umsetzung
-  interaktiv nach noch offenen Farben, Logo-Assets und Avatar-Wünschen. Lege
-  diese Entscheidungen nicht stillschweigend durch Defaults fest. Die Fragen
-  stehen in [Interaktiver Markenbrief](references/brand-interview.md).
-- Bündele zusammengehörige Fragen in kurzen, verständlichen Gruppen und nutze
-  ein verfügbares Frage-Tool für Text/Optionen. Bitte um Datei-Uploads im Chat,
-  wenn das Frage-Tool keine Anhänge unterstützt. Arbeite währenddessen an
-  unabhängiger Bestandsaufnahme weiter; noch offene Asset-Entscheidungen sind
-  durch verstrichene Zeit nicht beantwortet.
-- Frage nicht erneut nach eindeutig angegebenen Werten. Wenn der Nutzer
-  ausdrücklich Defaults oder freie Gestaltung erlaubt, darfst du Vorschläge
-  selbst umsetzen und benennst diese Entscheidung im Ergebnis. Erfinde keine
-  echten Telefonnummern, Ansprechpartner oder Domains; unbekannte Betriebswerte
-  bleiben klar gekennzeichnete Platzhalter.
-- Ermittle, ob eine statische Beispieldemo, eine produktive API-Instanz oder
-  beides gewünscht ist. Eine reine Branding-Anfrage ändert den Betriebsmodus
-  und die Plugin-Auswahl nicht.
+Lies `AGENTS.md`, Git-Status/Remote, `README.md`, `package.json`,
+`portal.config.json`, `portal.demo.json`, `content.json`, die versionierten
+`.env*.example`-Dateien und `.github/workflows/deploy.yml`. Erhalte vorhandene
+Nutzeränderungen. Ändere die Marke der Acme-Vorlage selbst nur auf ausdrücklichen
+Auftrag; normalerweise wird eine Kundenkopie angepasst.
 
-Die konkrete Zuordnung steht in [Dateien und Einstellungen](references/branding-map.md).
+Ermittle Marke, Paketname, Portalname, Claim, Beschreibung, Farben, Logo/Icon,
+Avatar-Wünsche, Social-Vorschau und Betriebsart. Verwende bekannte Angaben sofort.
+Frage nach offenen visuellen Entscheidungen, bevor du sie umsetzt; siehe
+[Markenbrief](references/brand-interview.md). Arbeite währenddessen unabhängig
+weiter. Erfinde keine realen Kontakte, Personen-IDs, Hotline oder Domains.
+Unbekannte Betriebswerte bleiben gekennzeichnete Platzhalter. Eine Branding-
+Änderung ändert nicht automatisch Betriebsart, Plugin-Auswahl oder Paketversionen.
 
-## 2. Naming und öffentliche Defaults umsetzen
+## Profile und Naming
 
-1. Setze `package.json.name` auf einen gültigen npm-Paketnamen, beispielsweise
-   `csp-northwind`. Die Kundenversionsnummer bleibt unabhängig von den CSP-Paketen.
-   Benenne das entfernte GitHub-Repository nur bei einem entsprechenden Auftrag um.
-2. Aktualisiere in `.env.branding` `CSP_NAME`, `CSP_TAGLINE`, `CSP_DESCRIPTION`,
-   `CSP_COLOR`, `CSP_BACKGROUND`, `CSP_CONTACT_LABEL` und gegebenenfalls
-   `CSP_CONTACT_PHONE`. `CSP_NAME` steuert Portal-, HTML- und PWA-Namen.
-3. Verwende sechsstellige Hex-Farben und zitiere sie in dotenv-Dateien:
-   `CSP_COLOR="#2563eb"`. Prüfe Lesbarkeit, Kontrast und Fokusdarstellung.
-   Die Schriftfarbe oder beliebige CSS-Tokens sind keine dokumentierten
-   CSP-Konfigurationsvariablen; erfinde keine wirkungslosen Einstellungen.
-4. Passe Naming- und Hotline-Overrides in `.env.production.example` und
-   `.env.api.example` an dieselbe Marke an. Ein veraltetes `CSP_NAME` im
-   Produktionsbeispiel würde die neuen Defaults beim Build überschreiben.
-5. Lasse Paket-Scope, CSP-Versionen, Plugin-IDs und Plugin-Verträge unverändert,
-   soweit der Auftrag keine Änderung daran verlangt. Ändere weder installierte
-   `node_modules` noch den CSP-Produktkern für eine reine Markenanpassung.
+- Setze den technischen Namen in `package.json`; benenne das entfernte Repository
+  nur auf entsprechenden Auftrag um. Kunden- und CSP-Versionen sind unabhängig.
+- Aktualisiere in **beiden Profilen** `branding.name`, `tagline`, `description`,
+  `contact.label`, `phone`, `theme.tokens` und gegebenenfalls `darkTokens`.
+  Verwende sechsstellige Hex-Farben; prüfe Kontrast und Fokusdarstellung.
+- Setze `branding.logoFile` und `iconFile` auf lokale Assets. Core erzeugt daraus
+  Icons und löst referenzierte Assets passend zu `public.basePath` auf.
+- Passe Naming-/Hotline-/Domain-Overrides in den Produktions- und API-Beispielen
+  an. Overrides können Profilwerte überlagern; lies keine privaten dotenv-Dateien.
+- Erhalte `public.demo: false` im Standardprofil und `demo: true`,
+  `staticDemo: true` im Demo-Profil. Bei einer anderen ausdrücklich beauftragten
+  Betriebsart ändere beide konsistent. `CSP_API_URL` enthält kein `/api/v1`;
+  `CSP_ALLOWED_ORIGINS` enthält keine Repository-Unterpfade.
 
-## 3. Logo, Splash Screen und Favicon gemeinsam gestalten
+Details: [Dateien und Einstellungen](references/branding-map.md).
 
-- Frage nach dem vorhandenen Logo und gegebenenfalls einer kompakten Bildmarke.
-  Nutze die vom Nutzer ausgewählten Assets. Ein Beispiel-SVG ersetzt ein
-  Markenlogo nur, wenn der Nutzer eine vorläufige Gestaltung wünscht.
-- Lege die ausgewählte Logoquelle in `public/` ab. Verwende sie auch als Quelle
-  für Favicon und PWA-/Splash-Icons: `CSP_ICON_PATH` verweist auf das lokale Logo
-  oder eine daraus abgeleitete quadratische Variante derselben Marke. Belasse
-  keinen unabhängigen Acme- oder neutralen Icon-Fallback. Externe Logo-URLs
-  benötigen zusätzlich ein lokal bereitgestelltes Asset für den Icon-Build.
-- Frage bei einer breiten Wortmarke, ob die Bildmarke oder die vollständige
-  Wortmarke im kleinen Icon erscheinen soll. Leite die quadratische Variante
-  ohne Verzerrung ab, mit ausreichend Rand für das maskierbare Icon. Stimmen
-  Logo und Hintergrund nicht zusammen, kläre eine passende Variante.
-- Passe den Logo-Fallback in `customer.config.ts` auf das neue Asset an. Erhalte
-  die Ableitung aus `CSP_BASE_PATH`, damit `/` und ein Repository-Unterpfad
-  funktionieren. Ein hartes `/northwind-logo.svg` in `.env.branding` würde diese
-  automatische Ableitung umgehen. Aktualisiere explizite Logo-Overrides ebenso.
-- Der CSP-Build erzeugt aus `CSP_ICON_PATH` `icon-192.png`, `icon-512.png` und
-  `icon-maskable-512.png`. Das HTML-Favicon referenziert `icon-192.png`; das
-  Webmanifest referenziert die PWA-Icons. Prüfe diese Verbindung im tatsächlich
-  installierten Paket und passe beide auf die gewählte Logoquelle an.
-- Nutze für den installierten PWA-Splash Screen dasselbe Markenlogo über die
-  Manifest-Icons und setze `CSP_BACKGROUND` auf die gewünschte Splash-Farbe.
-  Ein Betriebssystem kann diese Darstellung selbst bestimmen. Das Template
-  besitzt derzeit keinen eigenen App-Ladebildschirm: Behaupte nicht, dass ein
-  Manifest-Icon automatisch einen solchen Bildschirm oder sämtliche iOS-
-  Startup-Bilder erzeugt. Prüfe die gewünschte Zielplattform. Wenn explizite
-  Apple-Touch-/Startup-Bilder oder ein eigener Ladebildschirm nötig sind,
-  ergänze passende Assets und Einbindungen im Kundenprojekt, etwa über die
-  Vite-HTML-Transformation; benutze ebenfalls dieselbe Logoquelle.
-- Aktualisiere SVG-Farben, Wortmarke und zugängliche Beschriftungen. Entferne
-  alte Acme-Assets erst, nachdem keine aktiven Referenzen mehr darauf zeigen.
+## Logo, Favicon und Splash
 
-## 4. Avatare interaktiv anpassen
+Nutze bereitgestellte oder ausdrücklich gewünschte Logo-Assets. Kläre bei einer
+breiten Wortmarke eine kompakte Icon-Variante. Verwende dieselbe Markenquelle für
+Portal und PWA-Icons, ohne Verzerrung und mit Rand für maskierbare Icons. Entferne
+alte Acme-Assets erst nach Prüfung aller Referenzen.
 
-- Frage, ob Provider-Avatare, eigene Fotos/Illustrationen oder Initialen verwendet
-  werden sollen. Kläre, ob das für alle Personen oder einzelne Personen gilt.
-  Frage bei eigenen Bildern nach den Assets und ihrer Zuordnung zu Personen-IDs.
-  Für die Demo heißen diese IDs aktuell `acme-lena`, `acme-noah`, `acme-mila`;
-  produktiv sind es die echten SIGNL4-Benutzer-IDs. Rate diese Zuordnung nicht.
-- Lege lokale Bilder unter `public/avatars/` ab. Erstelle eine JSON-Zuordnung
-  `avatars.json` und setze `CSP_AVATARS_PATH=avatars.json` in der öffentlichen
-  Konfiguration. Das Schema ist eine Zuordnung von Benutzer-ID zu Bild-URL,
-  beispielsweise `{ "acme-lena": "/csp-northwind/avatars/lena.png" }`.
-- Berücksichtige `CSP_BASE_PATH` für alle lokalen Avatar-URLs. Wenn Root-Hosting
-  und Pages-Unterpfad unterstützt werden, ergänze eine gemeinsame Auflösung
-  für den jeweiligen Build/API-Kontext oder passende Konfigurationsdateien.
-  Ein festes `/avatars/lena.png` funktioniert nicht automatisch unter Pages.
-- Bestehende Provider-Bilder bleiben erhalten, sofern keine Overrides gewünscht
-  sind. Initialen erscheinen als Fallback, wenn weder Override noch Provider-
-  Avatar vorhanden ist. Das Entfernen eines Overrides deaktiviert einen
-  vorhandenen Provider-Avatar nicht: Für ausdrücklich gewünschte Initialen
-  passe die betreffende Demo-/Kundenintegration entsprechend an.
-- Prüfe ID-Konsistenz, Bildausschnitt und Lesbarkeit auf Mobilgeräten. Lokale
-  Assets sind auch ohne Provider erreichbar. Fehlende oder fehlerhafte Bilder
-  dürfen nicht als erfolgreich umgesetzte Avatar-Anpassung gemeldet werden.
+Prüfe in `dist/` Favicon, `icon-192.png`, `icon-512.png`,
+`icon-maskable-512.png` und Webmanifest. `theme.tokens.hero` bestimmt die Hero-/PWA-
+Hintergrundfarbe. Der Betriebssystem-Splash verwendet die Manifest-Icons;
+behaupte keine verifizierte Splash-Darstellung ohne Plattformprüfung. Ein eigener
+Ladebildschirm oder Apple-Startup-Bilder erfordern eine ausdrücklich beauftragte
+Erweiterung; die CLI besitzt keine kundeneigene Vite-Konfiguration.
 
-## 5. Open-Graph-Bild erstellen und einbinden
+## Avatare
 
-- Erstelle für die neue Marke eine **echte Bilddatei** `public/og-image.png`
-  mit **1200 × 630 Pixeln**. Ein Dateipfad, ein Prompt oder Meta-Tags ohne
-  Bilddatei erfüllen diesen Schritt nicht. Verwende die gewählte Logoquelle,
-  Markenfarben und einen gut lesbaren Portalnamen; übernimm den Claim, wenn er
-  auf der Vorschau sinnvoll lesbar bleibt. Ersetze ein vorhandenes Acme-Bild.
-- Frage nur nach noch offenen Wünschen für die Social-Vorschau, beispielsweise
-  zusätzlichem Text oder einem Motiv. Ohne abweichenden Wunsch verwende die
-  bereits festgelegte Marke und den Portalnamen. Nutze verfügbare Bild-/Layout-
-  Werkzeuge für ein fertiges PNG, mit ausreichend Rand und ohne verzerrtes Logo.
-  Betrachte die resultierende Datei, auch als verkleinerte Link-Vorschau.
-- Binde das Bild im **gebauten HTML** ein, beispielsweise über einen lokalen
-  Vite-Plugin-Schritt in `vite.config.ts`. Der aktuelle CSP-Build erzeugt noch
-  keine OG-Metadaten automatisch. Erfinde keine vom Paket unbeachteten
-  `CSP_OG_*`-Variablen. JavaScript-Metadaten nach dem Laden reichen für
-  Social-Crawler nicht zuverlässig aus.
-- Setze `og:type=website`, `og:title`, `og:description`, `og:url`,
-  `og:image`, `og:image:type=image/png`, `og:image:width=1200`,
-  `og:image:height=630` und ein passendes `og:image:alt`. Ergänze für
-  Twitter/X `twitter:card=summary_large_image`, Titel, Beschreibung, Bild und Alttext.
-  Leite Titel und Beschreibung aus derselben öffentlichen Konfiguration ab.
-- Verwende für Bild und Seiten-URL absolute HTTPS-URLs aus der öffentlichen
-  Frontend-Origin und `CSP_BASE_PATH`, beispielsweise
-  `https://northwind.github.io/csp-northwind/og-image.png`. Verwende nicht die
-  API-Origin. Aktualisiere Produktionsbeispiele und den Pages-Build passend;
-  letzterer liefert die Origin bereits über `CSP_DOMAIN`. Ohne reale öffentliche
-  Origin kennzeichne die Live-Verifikation als offen, statt eine localhost-URL
-  als fertige Sharing-Konfiguration auszugeben.
-- Stelle sicher, dass `public/og-image.png` nach `dist/og-image.png` kopiert
-  wird. Eine optionale bearbeitbare Layoutquelle kann zusätzlich mitgeführt
-  werden; die ausgelieferte OG-Datei ist das fertige Rasterbild.
+Kläre Providerbilder, eigene Assets oder Initialen. Frage nach der Zuordnung,
+rate keine SIGNL4-IDs. Lege lokale Bilder unter `public/avatars/` ab und setze
+`avatarsFile: "avatars.json"` in beiden Profilen. Schema:
 
-## 6. Inhalte, Beispiele und Demo konsistent machen
+```json
+{"ids":{"provider-id":"public/avatars/person.webp"},"names":{}}
+```
 
-- Überarbeite markenbezogene Texte, FAQ-Antworten, Prozessbeschreibungen,
-  Ticketnamen und URLs in `content.json`. Erhalte das Schema und die Bedeutung
-  der Inhalte. Prozesse/FAQ unterstützen Markdown; Ticketvorlagen einfachen Text.
-- Passe Kunden-Domains, Statusseiten-Slug, Team-ID-Platzhalter und
-  `CSP_ALLOWED_ORIGINS` in den Konfigurationsbeispielen an. Eine Origin enthält
-  keinen Repository-Unterpfad. `CSP_API_URL` enthält kein `/api/v1`.
-  Fehlende echte Adressen erhalten reservierte Beispiel-Domains wie
-  `tickets.northwind.example`.
-- Aktualisiere die Markenbezüge in `pages-demo.ts`: Namen der Systeme,
-  Alert-Texte, Chat-Antwort und gegebenenfalls synthetische Personen-IDs.
-  Halte Team-, Schicht- und vCard-Referenzen konsistent. Demo-Daten bleiben
-  fiktiv; die feste Chat-Antwort ist weiterhin als Demo erkennbar.
-- Aktualisiere README-Titel, Markenbeispiele, Assetpfade, Repository- und
-  Demo-Links sowie Workflow-Anzeigenamen. Erhalte allgemeine CSP-Upstream-Links.
-  Die historische Herkunft aus der Acme-Vorlage darf erwähnt bleiben.
-- Der Pages-Workflow leitet Owner und Repository-Name bereits aus GitHub ab.
-  Erhalte diese Ausdrücke. Passe sie nur für ausdrücklich gewünschte Custom
-  Domains oder abweichendes Hosting an. Eine Domain-Variable richtet kein DNS ein.
-- Belasse `CSP_DEMO=true` und `VITE_CSP_STATIC_DEMO=true` ausschließlich für
-  die statische Pages-Demo. Produktionsbeispiele behalten `CSP_DEMO=false`.
-  Der API-Service lädt `.env.production` nicht automatisch.
-- Provider-Schlüssel gehören nur in die API-Runtime. Lies oder zeige keine
-  Secret-Werte und committe keine privaten dotenv-Dateien. Ändere bestehende
-  lokale Runtime-Konfigurationen nur im beauftragten Umfang; weise auf Overrides
-  hin, die die neue Marke überlagern könnten.
+IDs haben Vorrang; Namen werden normalisiert. Core erzeugt für referenzierte lokale
+Bilder basispfadabhängige URLs. Die statische Core-Demo verwendet `demo-lena` und
+`demo-noah`; produktiv gelten Provider-IDs. Entfernen eines Overrides deaktiviert
+keinen Provider-Avatar. Initialen sind der Fallback ohne Bild. Prüfe Assets,
+Mobilansicht und Zuordnung, ohne lokale API-Demodaten mit statischen Demodaten zu
+verwechseln.
 
-## 7. Ergebnis prüfen
+## Open Graph
 
-1. Suche nach alten Markenreferenzen, ohne private dotenv-Dateien oder
-   `node_modules` zu durchsuchen. Prüfe gezielt die oben genannten Quelldateien,
-   Beispielkonfigurationen und `public/`. Unterscheide historische Template-
-   Verweise von versehentlich übrig gebliebenen aktiven Markenwerten.
-2. Prüfe den Diff: Markenname, technische Namen, Logo/Icon, Avatar-Zuordnungen, Hotline und
-   Produktions-Overrides passen zusammen. Assetpfade existieren; Inhalte
-   bleiben valide. Eine reine Markenänderung aktualisiert keine CSP-Abhängigkeiten.
-3. Führe `pnpm install --frozen-lockfile` und `pnpm check` aus. Für einen
-   Pages-Build setze zusätzlich `CSP_DEMO=true`,
-   `VITE_CSP_STATIC_DEMO=true`, einen Repository-Unterpfad und eine API-Origin
-   **derselben Frontend-Origin**, deren Pfad auf `/demo-api` endet; baue mit
-   `pnpm exec vite build`.
-4. Prüfe `dist/index.html`, `dist/manifest.webmanifest`, generierte Icons und
-   kopiertes Logo: Titel, PWA-Name, Farben, Basispfad und Canonical-Link stimmen.
-   Stelle sicher, dass Favicon und PWA-/Splash-Icons aus dem ausgewählten Logo
-   erzeugt werden und dass alle referenzierten Avatarbilder existieren.
-   Prüfe `dist/og-image.png` als echtes PNG mit 1200 × 630 Pixeln und kontrolliere
-   OG-/Twitter-Metadaten im gebauten HTML auf Logo, Titel, Beschreibung, Bild-URL,
-   Alttext und Basispfad. Prüfe auch, dass keine API-Origin als Bild-URL dient.
-   Prüfe sowohl `/` als auch `/<repository-name>/`, wenn beide unterstützt werden.
-5. Nutze für Builds mit abweichenden Konfigurationen einen temporären separaten
-   Arbeitsstand mit den aktuellen Änderungen und ohne private dotenv-Dateien.
-   Überschreibe oder entferne nicht die lokale Konfiguration des Nutzers.
-6. Wenn eine Browserprüfung verfügbar ist, kontrolliere Desktop/Mobilansicht,
-   Logo, Favicon, Avatare, Open-Graph-Bild, Lesbarkeit, Navigation und den Demo-Modus. Wenn
-   möglich, installiere die PWA auf der Zielplattform und prüfe den Splash Screen;
-   andernfalls kennzeichne die tatsächliche Splash-Darstellung als ungeprüft. Prüfe die Pages-Demo ohne
-   laufenden API-Service. Melde fehlende Browser- oder Deployment-Prüfungen klar.
+Erstelle für die neue Marke ein tatsächliches PNG mit
+1200 × 630 Pixeln, Logo, Markenfarben und lesbarem Portalnamen. Frage nur nach
+noch offenen Motiven/Textwünschen. Prüfe das fertige Bild visuell.
 
-Veröffentlichung, Remote-Änderungen und Repository-Einstellungen folgen dem
-Auftrag des Nutzers und den geltenden Repository-Regeln. Nach Veröffentlichung
-prüfe den Workflow, sofern Zugriff besteht. Behaupte keine erfolgreiche Änderung
-an GitHub-Einstellungen oder kein Live-Deployment ohne entsprechende Bestätigung.
+CSP 0.4.0 stellt weder OG-Profilfelder noch einen eigenen Vite-Plugin-Hook bereit.
+Erfinde keine `CSP_OG_*`-Variablen. Ergänze bei beauftragter OG-Einbindung einen
+expliziten kundeneigenen Nachbearbeitungsschritt für **alle** relevanten Builds,
+auch im CI-/Pages-Workflow. Er muss das PNG nach `dist/og-image.png` kopieren und
+OG-/Twitter-Metadaten ins gebaute HTML schreiben. Die CLI liefert nur referenzierte
+Assets aus und kopiert nicht automatisch jedes Bild unter `public/`.
 
-## Ergebnis mitteilen
+Setze `og:type`, Titel, Beschreibung, URL, Bild, MIME-Typ, Breite, Höhe und Alttext
+sowie `twitter:card=summary_large_image`, Titel, Beschreibung, Bild und Alttext.
+Leite Titel/Beschreibung aus der aufgelösten öffentlichen Profilkonfiguration ab;
+absolute HTTPS-URLs verwenden Frontend-Origin plus Basispfad, niemals API-Origin.
+Ohne reale Frontend-Origin bleibt die Live-Verifikation offen. JavaScript-Metadaten
+nach Seitenstart genügen Social-Crawlern nicht zuverlässig.
 
-Nenne die umgesetzte Marke, gewählte Farben/Assets und Avatar-Zuordnungen,
-die erstellte OG-Bilddatei und ihre Einbindung, wesentliche Dateien, Prüfungen und noch offene echte
-Betriebswerte. Beschreibe kurz, ob die Instanz als Demo oder produktiv konfiguriert
-ist. Verlinke einen erstellten Commit/PR oder die verifizierte Veröffentlichung,
-wenn dies Teil des Auftrags war.
+## Inhalte, Demo und Workflow
+
+Passe Markenreferenzen in `content.json` an; erhalte Schema und Bedeutung der
+Prozesse, FAQ und Ticketvorlagen. Passe Beispiel-Domains, Statusseiten-Slug,
+Team-ID-Platzhalter und Origins an. Provider-Secrets gehören nur in die API-Runtime.
+
+Die statische Demo wird durch Core erzeugt: keine `pages-demo.ts` oder
+kundenspezifischen Demo-Personen/-Alerts vorhanden. Ändere keine Core-Demodaten im
+Kundenrepo; erkläre diese Grenze, wenn individuelle Demo-Inhalte verlangt werden.
+Der gemeinsame Workflow setzt Pages-Origin und Basispfad aus Owner/Repository.
+Erhalte diese Ausdrücke und die unveränderliche Workflow-Commit-SHA. DNS, Pages-
+Aktivierung und Template-Status sind Repository-Einstellungen, keine Profilwerte.
+
+## Validierung
+
+1. Prüfe Diff und Markenreferenzen in versionierten Quellen und Assets; historische
+   Template-Verweise dürfen bleiben. Erhalte Paketverträge und Profil-Schemas.
+2. Führe `pnpm install --frozen-lockfile` und `pnpm check` aus. Check validiert
+   und baut Standard- sowie Demo-Profil. Die letzten Build-Artefakte sind die Demo;
+   für ein produktives Deployment das Standardprofil ausdrücklich neu bauen.
+3. Prüfe beide Builds auf HTML-/PWA-Titel, Farben, Basispfad, Canonical-Link,
+   Logo, Icons und referenzierte Avatare. Bei OG auch PNG-Dimensionen und
+   Metadaten prüfen. Nutze frische temporäre Arbeitsstände ohne private dotenv-
+   Dateien, damit Nutzerkonfigurationen nicht überschrieben werden.
+4. Prüfe nach Möglichkeit Desktop/Mobilansicht, Navigation, Kontakt-Downloads,
+   Chat und statische Demo ohne API. Ungeprüfte Plattform-/Live-Eigenschaften
+   ausdrücklich benennen; keine erfolgreiche Veröffentlichung behaupten.
+5. Aktualisiere README und Konfigurationsbeispiele. Nenne umgesetzte Werte,
+   Assets, Prüfungen und offene echte Betriebswerte. Verlinke erstellte PRs.
+
+Veröffentlichung, Remote-Änderungen und Repository-Einstellungen richten sich
+nach dem Nutzerauftrag und geltenden Regeln.
