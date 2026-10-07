@@ -1,9 +1,9 @@
 node_modules/
 dist/
 dist-api/
+.csp/
 .env
 .env.*
-!.env.branding
 !.env.example
 !.env.production.example
 !.env.api.example

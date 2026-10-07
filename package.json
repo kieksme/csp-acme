@@ -3,45 +3,36 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite --host 127.0.0.1",
-    "dev:api": "tsx watch --env-file=.env server.ts",
-    "build": "vite build && tsup server.ts --format esm --platform node --out-dir dist-api --external sharp",
-    "start:api": "node dist-api/server.js",
-    "typecheck": "tsc --noEmit",
-    "check": "pnpm typecheck && pnpm build",
-    "preview": "vite preview --host 127.0.0.1"
+    "validate": "csp validate",
+    "dev": "csp dev",
+    "build": "csp build",
+    "start": "csp start",
+    "start:api": "csp start",
+    "build:demo": "csp build --config portal.demo.json --production",
+    "check": "csp validate && csp validate --config portal.demo.json --production && csp build && csp build --config portal.demo.json --production"
   },
   "dependencies": {
-    "@kieksme/csp-core": "0.3.0",
-    "@kieksme/csp-plugin-contact": "0.3.0",
-    "@kieksme/csp-plugin-content": "0.3.0",
-    "@kieksme/csp-plugin-chat": "0.3.0",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "dotenv": "^17.2.3",
-    "@kieksme/csp-sdk": "0.3.0",
-    "@kieksme/csp-plugin-signl4": "0.3.0",
-    "@kieksme/csp-plugin-kuma": "0.3.0"
+    "@kieksme/csp-core": "0.4.0",
+    "@kieksme/csp-plugin-contact": "0.4.0",
+    "@kieksme/csp-plugin-content": "0.4.0",
+    "@kieksme/csp-plugin-chat": "0.4.0",
+    "@kieksme/csp-sdk": "0.4.0",
+    "@kieksme/csp-plugin-signl4": "0.4.0",
+    "@kieksme/csp-plugin-kuma": "0.4.0"
   },
   "devDependencies": {
-    "vite": "^7.1.9",
-    "@vitejs/plugin-react": "^5.0.4",
-    "typescript": "^5.9.3",
-    "tsx": "^4.20.6",
-    "tsup": "^8.5.0",
-    "@types/node": "^22.18.0",
-    "@types/react": "^19.2.0",
-    "@types/react-dom": "^19.2.0",
-    "@kieksme/csp-cli": "0.3.0"
+    "@kieksme/csp-cli": "0.4.0"
   },
   "engines": {
     "node": ">=22.12"
   },
-  "packageManager": "pnpm@11.19.0",
+  "packageManager": "pnpm@12.8.1",
   "files": [
     "dist-api",
+    "portal.config.json",
+    "portal.demo.json",
     "content.json",
     "public"
   ],
-  "version": "1.0.0"
+  "version": "1.1.0"
 }

@@ -1,0 +1,34 @@
+name: Acme portal
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: csp-acme-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm check
+  portal:
+    needs: check
+    uses: kieksme/csp/.github/workflows/customer-build.yml@953c0f6b157753c54a3ce72cf5a276799fb709c5
+    with:
+      config: portal.demo.json
+      pages: true
+      public-overrides: >-
+        {"CSP_BASE_PATH":"/${{ github.event.repository.name }}/","CSP_DOMAIN":"https://${{ github.repository_owner }}.github.io","CSP_API_URL":"https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/demo-api"}
