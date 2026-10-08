@@ -12,16 +12,16 @@
     "check": "csp validate && csp validate --config portal.demo.json --production && csp build && csp build --config portal.demo.json --production"
   },
   "dependencies": {
-    "@kieksme/csp-core": "0.5.0",
-    "@kieksme/csp-plugin-contact": "0.5.0",
-    "@kieksme/csp-plugin-content": "0.5.0",
-    "@kieksme/csp-plugin-chat": "0.5.0",
-    "@kieksme/csp-sdk": "0.5.0",
-    "@kieksme/csp-plugin-signl4": "0.5.0",
-    "@kieksme/csp-plugin-kuma": "0.5.0"
+    "@kieksme/csp-core": "0.6.0",
+    "@kieksme/csp-plugin-contact": "0.6.0",
+    "@kieksme/csp-plugin-content": "0.6.0",
+    "@kieksme/csp-plugin-chat": "0.6.0",
+    "@kieksme/csp-sdk": "0.6.0",
+    "@kieksme/csp-plugin-signl4": "0.6.0",
+    "@kieksme/csp-plugin-kuma": "0.6.0"
   },
   "devDependencies": {
-    "@kieksme/csp-cli": "0.5.0"
+    "@kieksme/csp-cli": "0.6.0"
   },
   "engines": {
     "node": ">=22.12"
@@ -32,7 +32,12 @@
     "portal.config.json",
     "portal.demo.json",
     "content.json",
-    "public"
+    "public",
+    "avatars.json",
+    "design-system"
   ],
-  "version": "1.2.0"
+  "version": "1.2.0",
+  "csp": {
+    "stylesheet": "design-system/portal.css"
+  }
 }

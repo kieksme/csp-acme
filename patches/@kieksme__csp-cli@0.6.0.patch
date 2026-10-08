@@ -1,0 +1,52 @@
+diff --git a/dist/runtime-EZCP6ZEI.js b/dist/runtime-EZCP6ZEI.js
+index 8fe149b55bd9300bcae8efbf5acd5bd390b20554..c5ac856a40340cc81c9059687aae5b67222d8bcd 100644
+--- a/dist/runtime-EZCP6ZEI.js
++++ b/dist/runtime-EZCP6ZEI.js
+@@ -84,6 +84,7 @@ async function runPortal(command, file, mode = "production", production = false)
+     join(work, "main.tsx"),
+     `import { mountPortal } from '@kieksme/csp-core/browser';
+ import '@kieksme/csp-core/style.css';
++${pkg.csp?.stylesheet ? `import ${JSON.stringify(resolve(directory, pkg.csp.stylesheet))};` : ""}
+ import plugins from './portal.browser';
+ mountPortal(__CSP_CONFIG__,plugins);
+ `
+@@ -111,6 +112,20 @@ for(const signal of ['SIGTERM','SIGINT']) process.once(signal,()=>void app.close
+   );
+   const assetsPlugin = {
+     name: "csp-profile-assets",
++    configureServer(server) {
++      server.middlewares.use((req, res, next) => {
++        const asset = loaded.assets.find(
++          (a) => req.url?.split("?")[0] === loaded.config.basePath + a.fileName
++        );
++        if (!asset) return next();
++        const ext = asset.fileName.split(".").pop();
++        res.setHeader(
++          "Content-Type",
++          ext === "svg" ? "image/svg+xml" : ext === "jpg" || ext === "jpeg" ? "image/jpeg" : `image/${ext}`
++        );
++        res.end(readFileSync(asset.source));
++      });
++    },
+     generateBundle() {
+       for (const asset of loaded.assets)
+         this.emitFile({
+@@ -145,18 +160,6 @@ for(const signal of ['SIGTERM','SIGINT']) process.once(signal,()=>void app.close
+   };
+   if (command === "dev") {
+     const server = await createViteServer(options);
+-    server.middlewares.use((req, res, next) => {
+-      const asset = loaded.assets.find(
+-        (a) => req.url?.split("?")[0] === loaded.config.basePath + a.fileName
+-      );
+-      if (!asset) return next();
+-      const ext = asset.fileName.split(".").pop();
+-      res.setHeader(
+-        "Content-Type",
+-        ext === "svg" ? "image/svg+xml" : ext === "jpg" || ext === "jpeg" ? "image/jpeg" : `image/${ext}`
+-      );
+-      res.end(readFileSync(asset.source));
+-    });
+     await bundle({
+       entryPoints: [join(work, "server.ts")],
+       bundle: true,
