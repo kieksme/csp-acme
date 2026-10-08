@@ -1,0 +1,139 @@
+diff --git a/dist/browser.js b/dist/browser.js
+index fac5e0ea6e737877796fc80bcbb397eed32b4bc4..fe07e92f8dfa71b5faef5501a7db6af4bcfe5b52 100644
+--- a/dist/browser.js
++++ b/dist/browser.js
+@@ -98,85 +98,66 @@ function DutyHero(ctx) {
+   const person = confirmed ? current[0] : void 0;
+   const timezone = safeTimezone2(live.data?.timezone ?? "Europe/Berlin");
+   const profile = team.data?.find((p) => p.id === person?.userId);
+-  return /* @__PURE__ */ jsxs("div", { className: "duty-header col-span-full grid grid-cols-[minmax(0,0.9fr)_minmax(0,1.2fr)] items-center gap-8 px-15 pt-10 pb-8 contained:px-11.25 compact:grid-cols-[1fr] compact:gap-3 compact:px-7.5 compact:pt-8 narrow:px-6.25", children: [
+-    /* @__PURE__ */ jsxs("div", { className: "hero-copy duty-copy min-w-0", children: [
+-      /* @__PURE__ */ jsxs("p", { className: "eyebrow font-mono text-[0.6875rem] uppercase tracking-[2px] mb-4", children: [
++  return /* @__PURE__ */ jsxs(Fragment, { children: [
++    /* @__PURE__ */ jsxs("div", { className: "portal-identity col-span-full px-15 pt-7 pb-5 contained:px-11.25 compact:px-7.5 narrow:px-6.25", children: [
++      /* @__PURE__ */ jsx2("p", { className: "font-mono text-[0.6875rem] uppercase tracking-[2px] mt-0 mb-2 opacity-[0.85]", children: "Serviceportal" }),
++      /* @__PURE__ */ jsx2("h1", { className: "text-[1.25rem] leading-[1.4] font-semibold m-0", children: ctx.config.name })
++    ] }),
++    /* @__PURE__ */ jsxs("div", { className: "hero-copy pt-7 pb-9 px-15 z-[1] wide:[animation:arrive_0.6s_ease_both] contained:p-11.25 compact:pt-5 compact:pb-9 compact:pl-7.5 compact:pr-7.5 narrow:pt-5 narrow:pb-7.5 narrow:pl-6.25 narrow:pr-6.25 duty-copy", children: [
++      /* @__PURE__ */ jsxs("p", { className: "eyebrow font-mono text-[0.6875rem] uppercase tracking-[2px] m-[0_0_calc(var(--spacing)_*_4.25)]", children: [
+         /* @__PURE__ */ jsx2("span", { className: "signal-mark w-[6px] h-[6px] bg-accent-secondary rounded-full" }),
+         " ",
+-        "Ihr Kundenservice"
++        person ? "Jetzt im Dienst \xB7 F\xFCr Sie zust\xE4ndig" : confirmed ? "Au\xDFerhalb unserer Schichtzeiten" : "Ihr Service-Team"
++      ] }),
++      /* @__PURE__ */ jsxs("div", { "aria-live": "polite", "aria-atomic": "true", children: [
++        /* @__PURE__ */ jsx2("h2", { className: "duty-greeting text-[clamp(32px,4vw,56px)] tracking-[-2px] leading-[1.08] max-w-[680px] font-semibold my-5.5", children: person ? /* @__PURE__ */ jsxs(Fragment, { children: [
++          "Hallo, mein Name ist",
++          " ",
++          /* @__PURE__ */ jsxs("span", { className: "duty-name block", children: [
++            person.name,
++            "."
++          ] })
++        ] }) : live.loading ? "Wir pr\xFCfen, wer f\xFCr Sie da ist \u2026" : !confirmed ? "Erreichbarkeit derzeit nicht best\xE4tigt." : "Derzeit hat niemand Schicht." }),
++        person ? /* @__PURE__ */ jsxs(Fragment, { children: [
++          /* @__PURE__ */ jsx2("p", { className: "duty-question text-[clamp(22px,2.5vw,32px)] mt-6 mb-3 font-semibold", children: "Wie kann ich Ihnen helfen?" }),
++          /* @__PURE__ */ jsx2("p", { className: "hero-description text-[1rem] leading-[1.8] [color:color-mix(in_srgb,_var(--hero-ink)_85%,_var(--hero))] max-w-[475px] narrow:text-[0.875rem]", children: "Ich habe gerade Schicht und bin f\xFCr Sie zust\xE4ndig." }),
++          current.length > 1 && /* @__PURE__ */ jsxs("p", { className: "hero-description text-[1rem] leading-[1.8] [color:color-mix(in_srgb,_var(--hero-ink)_85%,_var(--hero))] max-w-[475px] narrow:text-[0.875rem]", children: [
++            "Ebenfalls im Dienst:",
++            " ",
++            current.slice(1).map((s) => s.name).join(", "),
++            "."
++          ] })
++        ] }) : confirmed ? /* @__PURE__ */ jsx2("p", { className: "hero-description text-[1rem] leading-[1.8] [color:color-mix(in_srgb,_var(--hero-ink)_85%,_var(--hero))] max-w-[475px] narrow:text-[0.875rem]", children: next ? nextShiftLabel(next.start, now, timezone) : "Der n\xE4chste Schichtbeginn ist noch nicht bekannt. Bitte nutzen Sie unsere Kontaktm\xF6glichkeiten." }) : /* @__PURE__ */ jsx2("p", { className: "hero-description text-[1rem] leading-[1.8] [color:color-mix(in_srgb,_var(--hero-ink)_85%,_var(--hero))] max-w-[475px] narrow:text-[0.875rem]", children: "Bitte nutzen Sie unsere Kontaktm\xF6glichkeiten. Wir k\xF6nnen die aktuelle Schicht derzeit nicht best\xE4tigen." })
++      ] }),
++      /* @__PURE__ */ jsxs("p", { className: "duty-timezone text-[0.75rem] text-hero-ink opacity-[0.85]", children: [
++        "Schichtzeiten: ",
++        timezone
+       ] }),
+-      /* @__PURE__ */ jsx2("h1", { className: "text-[clamp(30px,3.6vw,48px)] tracking-[-1.5px] leading-[1.1] font-semibold mt-0 mb-5 [overflow-wrap:anywhere]", children: ctx.config.name }),
+-      /* @__PURE__ */ jsx2("p", { className: "text-[1rem] leading-[1.7] m-0 [color:color-mix(in_srgb,_var(--hero-ink)_85%,_var(--hero))]", children: ctx.config.tagline })
++      (live.stale || live.loading) && /* @__PURE__ */ jsx2(DataState, { ...live })
+     ] }),
+-    /* @__PURE__ */ jsxs(
++    person && /* @__PURE__ */ jsxs(
+       "div",
+       {
+-        className: "duty-service grid grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] items-center gap-5 min-w-0 narrow:gap-3",
+-        "aria-live": "polite",
+-        "aria-atomic": "true",
++        className: "duty-portrait flex flex-col items-center justify-end pt-8 px-8 min-w-0 [&_.avatar]:w-full [&_.avatar]:h-[360px] [&_.avatar]:max-w-[400px] [&_.avatar]:object-contain [&_.avatar]:object-bottom [&_.avatar]:bg-transparent [&_.avatar]:border-0 [&_.avatar]:rounded-none [&_.avatar]:text-[100px] [&_.avatar]:flex [&_.avatar]:items-center [&_.avatar]:justify-center [&_.avatar]:text-hero-ink compact:pt-0 compact:[&_.avatar]:h-[240px] compact:[&_.avatar]:max-w-[280px]",
+         children: [
+-          /* @__PURE__ */ jsxs(
+-            "div",
++          /* @__PURE__ */ jsx2(
++            Avatar,
+             {
+-              className: `duty-message min-w-0 ${person ? "" : "col-span-full"}`,
+-              children: [
+-                /* @__PURE__ */ jsx2("p", { className: "duty-badge text-[0.6875rem] leading-[1.6] uppercase tracking-[1px] font-semibold mt-0 mb-3", children: person ? /* @__PURE__ */ jsxs(Fragment, { children: [
+-                  /* @__PURE__ */ jsx2("span", { className: "dot up inline-block w-[6px] h-[6px] rounded-full bg-accent-secondary" }),
+-                  " ",
+-                  "Jetzt im Dienst \xB7 F\xFCr Sie zust\xE4ndig"
+-                ] }) : "Ihr Service-Team" }),
+-                /* @__PURE__ */ jsx2("p", { className: "duty-greeting text-[1rem] leading-[1.6] mt-0 mb-3", children: person ? /* @__PURE__ */ jsxs(Fragment, { children: [
+-                  "Hallo, mein Name ist",
+-                  " ",
+-                  /* @__PURE__ */ jsxs("strong", { className: "duty-name", children: [
+-                    person.name,
+-                    "."
+-                  ] })
+-                ] }) : live.loading ? "Wir pr\xFCfen, wer f\xFCr Sie da ist \u2026" : !confirmed ? "Erreichbarkeit derzeit nicht best\xE4tigt." : "Derzeit hat niemand Schicht." }),
+-                person ? /* @__PURE__ */ jsxs(Fragment, { children: [
+-                  /* @__PURE__ */ jsx2("p", { className: "duty-question text-[1.125rem] leading-[1.45] mt-0 mb-3 font-semibold", children: "Wie kann ich Ihnen helfen?" }),
+-                  current.length > 1 && /* @__PURE__ */ jsxs("p", { className: "text-[0.8125rem] leading-[1.6]", children: [
+-                    "Ebenfalls im Dienst:",
+-                    " ",
+-                    current.slice(1).map((s) => s.name).join(", "),
+-                    "."
+-                  ] })
+-                ] }) : /* @__PURE__ */ jsx2("p", { className: "text-[0.9375rem] leading-[1.7]", children: confirmed ? next ? nextShiftLabel(next.start, now, timezone) : "Der n\xE4chste Schichtbeginn ist noch nicht bekannt. Bitte nutzen Sie unsere Kontaktm\xF6glichkeiten." : "Bitte nutzen Sie unsere Kontaktm\xF6glichkeiten. Wir k\xF6nnen die aktuelle Schicht derzeit nicht best\xE4tigen." }),
+-                /* @__PURE__ */ jsxs("p", { className: "duty-timezone text-[0.6875rem] leading-[1.6] opacity-[0.85] mt-4 mb-0", children: [
+-                  "Schichtzeiten: ",
+-                  timezone
+-                ] }),
+-                (live.stale || live.loading) && /* @__PURE__ */ jsx2(DataState, { ...live })
+-              ]
++              config: ctx.config,
++              id: person.userId,
++              name: person.name,
++              provider: profile?.avatar
+             }
+           ),
+-          person && /* @__PURE__ */ jsxs(
+-            "div",
+-            {
+-              className: "duty-portrait relative isolate aspect-[1/1.15] w-full max-w-[300px] justify-self-end",
+-              children: [
+-                /* @__PURE__ */ jsx2(
+-                  "div",
+-                  {
+-                    "aria-hidden": "true",
+-                    className: "absolute bottom-0 inset-x-0 aspect-square rounded-full border-solid border-[4px] [border-color:color-mix(in_srgb,_var(--hero-ink)_25%,_transparent)] [background:color-mix(in_srgb,_var(--accent)_18%,_var(--hero))]"
+-                  }
+-                ),
+-                /* @__PURE__ */ jsx2("div", { className: "absolute top-0 bottom-[4px] left-[4px] right-[4px] overflow-hidden [border-radius:0_0_50%_50%/0_0_43.5%_43.5%] [&_.avatar]:w-full [&_.avatar]:h-full [&_.avatar]:max-w-none [&_.avatar]:object-cover [&_.avatar]:object-bottom [&_.avatar]:bg-transparent [&_.avatar]:rounded-none [&_.avatar]:text-[64px] [&_.avatar]:flex [&_.avatar]:items-center [&_.avatar]:justify-center [&_.avatar]:text-hero-ink", children: /* @__PURE__ */ jsx2(
+-                  Avatar,
+-                  {
+-                    config: ctx.config,
+-                    id: person.userId,
+-                    name: person.name,
+-                    provider: profile?.avatar
+-                  }
+-                ) })
+-              ]
+-            },
+-            person.userId
+-          )
++          /* @__PURE__ */ jsxs("p", { className: "duty-badge text-[0.8125rem] py-3 m-0 text-center", children: [
++            /* @__PURE__ */ jsx2("span", { className: "dot up inline-block w-[6px] h-[6px] rounded-full bg-accent-secondary" }),
++            " ",
++            person.name,
++            " \xB7 Jetzt im Dienst"
++          ] })
+         ]
+-      }
++      },
++      person.userId
+     )
+   ] });
+ }

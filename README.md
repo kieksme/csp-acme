@@ -10,7 +10,7 @@ Die Demo verwendet erfundene Daten und Beispielkontakte. Kontakt-Downloads sind 
 
 ## Persönlicher Service-Header
 
-Das Portal verwendet CSP 0.6.1. Der Header behält „Acme Service Portal“ als große Überschrift und den Acme-Slogan bei. Daneben stehen die kleinere persönliche Begrüßung und der Hinweis „Jetzt im Dienst · Für Sie zuständig“. Das freigestellte Porträt hat einen runden unteren Ausschnitt; der Kopf ragt über den Kreisrahmen hinaus. Das Eingabefeld darunter gehört zum digitalen Assistenten. Persönlicher Kontakt ist über die Hotline möglich.
+Das Portal verwendet CSP 0.6.1. Über der persönlichen Begrüßung stehen die Kennzeichnung „Serviceportal“ und „Acme Service Portal“. Darunter zeigt der Header links die große Begrüßung und den Hinweis „Jetzt im Dienst · Für Sie zuständig“, rechts das freigestellte Porträt ohne Kreisrahmen. Unter dem Bild stehen Name und Dienststatus. Das Eingabefeld darunter gehört zum digitalen Assistenten. Persönlicher Kontakt ist über die Hotline möglich.
 
 Ohne aktive Schicht nennt der Header den nächsten bekannten Beginn als heute, morgen, übermorgen oder Datum in der Schicht-Zeitzone. Sind die Schichtdaten nicht erreichbar oder veraltet, wird die Erreichbarkeit nicht bestätigt.
 
@@ -19,3 +19,5 @@ Avatar-Zuordnungen stehen in `avatars.json` und werden in beiden Konfigurationsp
 Das lokale Stylesheet `design-system/portal.css` korrigiert den Textkontrast aktiver Schichten, ohne die Acme-Markenfarben zu ändern. Der CLI-Patch für 0.6.1 lädt dieses Stylesheet und referenzierte Bilder im lokalen Entwicklungsserver.
 
 Der CLI-Patch ergänzt außerdem das API-Dockerfile um die Patch-Dateien vor der Produktion-Installation. Dadurch kann die eingefrorene Lockdatei auch im API-Image unverändert verwendet werden.
+
+Die Header-Anordnung wird bis zur nächsten gemeinsamen CSP-Veröffentlichung durch die eingecheckten Patches für `@kieksme/csp-core@0.6.1` (Styles) und `@kieksme/csp-plugin-signl4@0.6.1` (Header) bereitgestellt. Sie werden mit der Lockdatei installiert und gelten für Entwicklung, Demo- und Produktionsbuild. Bei einem Paketupdate auf einen Release mit dieser Anordnung müssen diese beiden Übergangspatches entfernt werden; der CLI-Patch bleibt separat bestehen.
