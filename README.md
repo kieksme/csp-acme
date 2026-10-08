@@ -17,3 +17,5 @@ Ohne aktive Schicht nennt der Header den nächsten bekannten Beginn als heute, m
 Avatar-Zuordnungen stehen in `avatars.json` und werden in beiden Konfigurationsprofilen geladen. Die statische Demo verwendet fünf synthetische Personen.
 
 Das lokale Stylesheet `design-system/portal.css` korrigiert den Textkontrast aktiver Schichten, ohne die Acme-Markenfarben zu ändern. Der CLI-Patch für 0.6.0 lädt dieses Stylesheet und referenzierte Bilder im lokalen Entwicklungsserver.
+
+Der CLI-Patch ergänzt außerdem das API-Dockerfile um die Patch-Dateien vor der Produktion-Installation. Dadurch kann die eingefrorene Lockdatei auch im API-Image unverändert verwendet werden.
