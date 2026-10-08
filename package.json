@@ -12,16 +12,16 @@
     "check": "csp validate && csp validate --config portal.demo.json --production && csp build && csp build --config portal.demo.json --production"
   },
   "dependencies": {
-    "@kieksme/csp-core": "0.6.0",
-    "@kieksme/csp-plugin-contact": "0.6.0",
-    "@kieksme/csp-plugin-content": "0.6.0",
-    "@kieksme/csp-plugin-chat": "0.6.0",
-    "@kieksme/csp-sdk": "0.6.0",
-    "@kieksme/csp-plugin-signl4": "0.6.0",
-    "@kieksme/csp-plugin-kuma": "0.6.0"
+    "@kieksme/csp-core": "0.6.1",
+    "@kieksme/csp-plugin-contact": "0.6.1",
+    "@kieksme/csp-plugin-content": "0.6.1",
+    "@kieksme/csp-plugin-chat": "0.6.1",
+    "@kieksme/csp-sdk": "0.6.1",
+    "@kieksme/csp-plugin-signl4": "0.6.1",
+    "@kieksme/csp-plugin-kuma": "0.6.1"
   },
   "devDependencies": {
-    "@kieksme/csp-cli": "0.6.0"
+    "@kieksme/csp-cli": "0.6.1"
   },
   "engines": {
     "node": ">=22.12"
