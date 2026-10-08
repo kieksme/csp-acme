@@ -32,5 +32,6 @@
     "@kieksme/csp-plugin-kuma",
     "@kieksme/csp-plugin-content",
     "@kieksme/csp-plugin-chat"
-  ]
+  ],
+  "avatarsFile": "avatars.json"
 }

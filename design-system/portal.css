@@ -1,0 +1,5 @@
+/* Keep Acme orange accents; use readable text on active shifts. */
+.shift.active .shift-person,
+.shift.active > span:last-child {
+  color: var(--ink);
+}

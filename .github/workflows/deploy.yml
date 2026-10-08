@@ -20,13 +20,13 @@ jobs:
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: "22"
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm check
   portal:
     needs: check
-    uses: kieksme/csp/.github/workflows/customer-build.yml@3728ccaea4195ba025773fe59ed0b51024d7cebe
+    uses: kieksme/csp/.github/workflows/customer-build.yml@c1a2bad63169ed3712bb1848555023b4f066ecfa
     with:
       config: portal.demo.json
       pages: true

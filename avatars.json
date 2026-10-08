@@ -1,0 +1,10 @@
+{
+  "ids": {
+    "demo-lena": "public/team/lena-example.png",
+    "demo-noah": "public/team/noah-example.png",
+    "demo-mila": "public/team/mila-example.png",
+    "demo-sara": "public/team/sara-example.png",
+    "demo-jonas": "public/team/jonas-example.png"
+  },
+  "names": {}
+}
