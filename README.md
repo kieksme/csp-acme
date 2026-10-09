@@ -41,3 +41,5 @@ Die FAQ-Kategorie-Chips haben großzügigere Abstände, klare Konturen und eigen
 Der Porträtkreis übernimmt die Acme-Markenfarbe halbtransparent. Design-Schalter und FAQ-Chips nutzen einheitliche, dezente Schatten mit einem stärkeren Hover-Zustand.
 
 Das Acme-Logo passt seine Schriftfarbe an das aktive Farbschema an: dunkel im hellen Design, hell im dunklen Design. Das orange Bildzeichen bleibt erhalten.
+
+Das dunkle Acme-Design verwendet neutrale Anthrazit-Flächen für Hintergrund und Karten, abgestimmte Rahmen und helle Texte. Orange bleibt die Marken-Akzentfarbe.
