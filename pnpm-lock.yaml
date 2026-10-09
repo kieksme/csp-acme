@@ -164,7 +164,7 @@ settings:
 
 patchedDependencies:
   '@kieksme/csp-cli@0.6.1': d052582548c34e00fc017944457b9b5fe56c17e1fe6897dfa96e2c50e69e9887
-  '@kieksme/csp-core@0.6.1': 9caacc9a66238c4dc325f15ba81b0d7aea448c245fffa4752823007762f01573
+  '@kieksme/csp-core@0.6.1': 99ac14b614eab34a8f39a9663a98bf9c383d2b4d20917f23d5a289cb0908ffbe
   '@kieksme/csp-plugin-chat@0.6.1': d95d83b7e64c3ff8f6ca8adff7803f61000aaeaaeab1a47d2e6287bd57f01dbe
   '@kieksme/csp-plugin-signl4@0.6.1': 833b1934743882a58ddc7a7a5e21dc8308a6e4ba40a5253e6a3cf02f6daa6a88
 
@@ -174,7 +174,7 @@ importers:
     dependencies:
       '@kieksme/csp-core':
         specifier: 0.6.1
-        version: 0.6.1(patch_hash=9caacc9a66238c4dc325f15ba81b0d7aea448c245fffa4752823007762f01573)(vite@7.3.7(yaml@2.9.1))
+        version: 0.6.1(patch_hash=99ac14b614eab34a8f39a9663a98bf9c383d2b4d20917f23d5a289cb0908ffbe)(vite@7.3.7(yaml@2.9.1))
       '@kieksme/csp-plugin-chat':
         specifier: 0.6.1
         version: 0.6.1(patch_hash=d95d83b7e64c3ff8f6ca8adff7803f61000aaeaaeab1a47d2e6287bd57f01dbe)(fastify@5.12.5)(react@19.3.0)
@@ -2052,7 +2052,7 @@ snapshots:
 
   '@kieksme/csp-cli@0.6.1(patch_hash=d052582548c34e00fc017944457b9b5fe56c17e1fe6897dfa96e2c50e69e9887)(fastify@5.12.5)(react@19.3.0)':
     dependencies:
-      '@kieksme/csp-core': 0.6.1(patch_hash=9caacc9a66238c4dc325f15ba81b0d7aea448c245fffa4752823007762f01573)(vite@7.3.7(yaml@2.9.1))
+      '@kieksme/csp-core': 0.6.1(patch_hash=99ac14b614eab34a8f39a9663a98bf9c383d2b4d20917f23d5a289cb0908ffbe)(vite@7.3.7(yaml@2.9.1))
       '@kieksme/csp-sdk': 0.6.1(fastify@5.12.5)(react@19.3.0)
       '@vitejs/plugin-react': 5.2.0(vite@7.3.7(yaml@2.9.1))
       dotenv: 17.4.2
@@ -2076,7 +2076,7 @@ snapshots:
       - terser
       - tsx
 
-  '@kieksme/csp-core@0.6.1(patch_hash=9caacc9a66238c4dc325f15ba81b0d7aea448c245fffa4752823007762f01573)(vite@7.3.7(yaml@2.9.1))':
+  '@kieksme/csp-core@0.6.1(patch_hash=99ac14b614eab34a8f39a9663a98bf9c383d2b4d20917f23d5a289cb0908ffbe)(vite@7.3.7(yaml@2.9.1))':
     dependencies:
       '@fastify/cors': 11.3.0
       '@fontsource/ibm-plex-mono': 5.3.0

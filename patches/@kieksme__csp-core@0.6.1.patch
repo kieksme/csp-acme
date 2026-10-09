@@ -1,5 +1,5 @@
 diff --git a/dist/browser.css b/dist/browser.css
-index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..c296d6b1ba20805c917f2e0798c9410621824712 100644
+index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..ad943a96bf2dabac4870294b99bccc8726268e83 100644
 --- a/dist/browser.css
 +++ b/dist/browser.css
 @@ -124,6 +124,9 @@
@@ -236,7 +236,7 @@ index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..c296d6b1ba20805c917f2e0798c94106
  h3 {
    font-size: 1.125rem;
    line-height: 1.5;
-@@ -856,6 +855,86 @@ h3 {
+@@ -856,6 +855,92 @@ h3 {
      scroll-behavior: auto !important;
    }
  }
@@ -320,10 +320,16 @@ index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..c296d6b1ba20805c917f2e0798c94106
 +  outline: 2px solid var(--muted);
 +  outline-offset: 2px;
 +}
++.hero {
++  background-image: var(--hero-background-image, none);
++  background-size: cover;
++  background-position: center;
++  background-repeat: no-repeat;
++}
  .empty\:hidden:empty {
    display: none;
  }
-@@ -881,10 +960,6 @@ h3 {
+@@ -881,10 +966,6 @@ h3 {
    .contained\:p-11\.25 {
      padding: calc(var(--spacing) * 11.25);
    }
@@ -334,7 +340,7 @@ index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..c296d6b1ba20805c917f2e0798c94106
  }
  @media (max-width: 800px) {
    .compact\:mb-\[0\] {
-@@ -914,6 +989,9 @@ h3 {
+@@ -914,6 +995,9 @@ h3 {
    .compact\:min-h-\[0\] {
      min-height: 0;
    }
@@ -344,7 +350,7 @@ index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..c296d6b1ba20805c917f2e0798c94106
    .compact\:max-w-\[500px\] {
      max-width: 500px;
    }
-@@ -945,10 +1023,6 @@ h3 {
+@@ -945,10 +1029,6 @@ h3 {
      padding-left: calc(var(--spacing) * 6.25);
      padding-right: calc(var(--spacing) * 6.25);
    }
@@ -355,7 +361,7 @@ index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..c296d6b1ba20805c917f2e0798c94106
    .compact\:pb-5 {
      padding-bottom: calc(var(--spacing) * 5);
    }
-@@ -982,6 +1056,9 @@ h3 {
+@@ -982,6 +1062,9 @@ h3 {
    .compact\:pr-\[0\] {
      padding-right: 0;
    }
@@ -365,7 +371,7 @@ index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..c296d6b1ba20805c917f2e0798c94106
    .compact\:pt-5 {
      padding-top: calc(var(--spacing) * 5);
    }
-@@ -1026,16 +1103,9 @@ h3 {
+@@ -1026,16 +1109,9 @@ h3 {
    .narrow\:grid-cols-\[1fr\] {
      grid-template-columns: 1fr;
    }
@@ -382,7 +388,7 @@ index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..c296d6b1ba20805c917f2e0798c94106
    .narrow\:pb-7\.5 {
      padding-bottom: calc(var(--spacing) * 7.5);
    }
-@@ -1045,6 +1115,9 @@ h3 {
+@@ -1045,6 +1121,9 @@ h3 {
    .narrow\:pr-6\.25 {
      padding-right: calc(var(--spacing) * 6.25);
    }
@@ -392,7 +398,7 @@ index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..c296d6b1ba20805c917f2e0798c94106
    .narrow\:pt-7\.5 {
      padding-top: calc(var(--spacing) * 7.5);
    }
-@@ -1588,8 +1661,8 @@ h3 {
+@@ -1588,8 +1667,8 @@ h3 {
  .\[\&_textarea\]\:min-w-0 textarea {
    min-width: calc(var(--spacing) * 0);
  }

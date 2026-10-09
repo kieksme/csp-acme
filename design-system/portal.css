@@ -13,3 +13,8 @@
   --ink: #edf0f5;
   --muted: #aab3c1;
 }
+
+/* Replace this SVG to customize the full service-header background. */
+.hero {
+  --hero-background-image: url('../public/acme-header-waves.svg');
+}
