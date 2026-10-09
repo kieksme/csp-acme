@@ -8,7 +8,17 @@ Real customer providers and ticket destinations are not configured yet.
 
 Use the repository's private `ghcr.io/kieksme/csp-acme-api` image in Coolify.
 The workflow publishes an immutable full-commit tag and `latest` on main builds.
-Expose internal port 3001, configure HTTPS and a GET `/health` check expecting 200.
+Expose internal port 3001 and configure HTTPS. In Coolify, select the healthcheck
+type **Container command** and enter:
+
+```sh
+node -e "fetch('http://127.0.0.1:3001/health').then(function(r){process.exit(r.ok?0:1)}).catch(function(){process.exit(1)})"
+```
+
+The slim API image includes Node.js but neither `curl` nor `wget`, which Coolify's
+default HTTP check requires. This command checks `/health` inside the container
+and exits successfully only for a successful HTTP response.
+
 Use `.env.hosted.example` as runtime settings. Replace the dummy API key separately
 for each customer; never provide a real key to a frontend build. A dummy key allows
 API startup but OpenAI requests fail until replaced. Redeploy after key changes.
