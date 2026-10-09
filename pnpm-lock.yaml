@@ -163,7 +163,7 @@ settings:
   excludeLinksFromLockfile: false
 
 patchedDependencies:
-  '@kieksme/csp-cli@0.6.1': 8845553758cd539a3f78e4ed3a6a07f0f7ad8f213769bbd9dca3eeb7d24650e5
+  '@kieksme/csp-cli@0.6.1': 008dd0adbcbebd714f396eb0d9c6ae47e83561542782b62a4798d5b8b252b112
   '@kieksme/csp-core@0.6.1': 8a0df7af4a67849917cafdc63eb913b4ebfd052e804f405efe8bf19cb6699d8e
   '@kieksme/csp-plugin-chat@0.6.1': aa9287cc6fa7367ddcd9b0d7d64c35890c8f883d75ed8a7c96aac497a03cfb60
   '@kieksme/csp-plugin-signl4@0.6.1': b5cad3aa29633db66f23460c437120ab087b8fcbe2954c0dc58b4167b4014d69
@@ -197,7 +197,7 @@ importers:
     devDependencies:
       '@kieksme/csp-cli':
         specifier: 0.6.1
-        version: 0.6.1(patch_hash=8845553758cd539a3f78e4ed3a6a07f0f7ad8f213769bbd9dca3eeb7d24650e5)(fastify@5.12.5)(react@19.3.0)
+        version: 0.6.1(patch_hash=008dd0adbcbebd714f396eb0d9c6ae47e83561542782b62a4798d5b8b252b112)(fastify@5.12.5)(react@19.3.0)
 
 packages:
 
@@ -2051,7 +2051,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.6.0
 
-  '@kieksme/csp-cli@0.6.1(patch_hash=8845553758cd539a3f78e4ed3a6a07f0f7ad8f213769bbd9dca3eeb7d24650e5)(fastify@5.12.5)(react@19.3.0)':
+  '@kieksme/csp-cli@0.6.1(patch_hash=008dd0adbcbebd714f396eb0d9c6ae47e83561542782b62a4798d5b8b252b112)(fastify@5.12.5)(react@19.3.0)':
     dependencies:
       '@kieksme/csp-core': 0.6.1(patch_hash=8a0df7af4a67849917cafdc63eb913b4ebfd052e804f405efe8bf19cb6699d8e)(vite@7.3.7(yaml@2.9.1))
       '@kieksme/csp-sdk': 0.6.1(patch_hash=9380bfbb3a95e34f09c3cbcd2e3e2fac03260cfd30ea67bde12b0082eac2a2c9)(fastify@5.12.5)(react@19.3.0)
