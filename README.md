@@ -39,3 +39,5 @@ Das Chat-Feld hat einen dezenten Fokusrahmen in der sekundären Textfarbe des je
 Die FAQ-Kategorie-Chips haben großzügigere Abstände, klare Konturen und eigene Zustände für Auswahl, Hover und Tastaturfokus in beiden Designs.
 
 Der Porträtkreis übernimmt die Acme-Markenfarbe halbtransparent. Design-Schalter und FAQ-Chips nutzen einheitliche, dezente Schatten mit einem stärkeren Hover-Zustand.
+
+Das Acme-Logo passt seine Schriftfarbe an das aktive Farbschema an: dunkel im hellen Design, hell im dunklen Design. Das orange Bildzeichen bleibt erhalten.
