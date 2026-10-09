@@ -3,3 +3,18 @@
 .shift.active > span:last-child {
   color: var(--ink);
 }
+
+/* Neutral dark surfaces complement Acme orange and the navy service header. */
+:root[data-theme='dark'] {
+  --paper: #111318;
+  --card: #1b1f27;
+  --soft: #252b35;
+  --line: #343c49;
+  --ink: #edf0f5;
+  --muted: #aab3c1;
+}
+
+/* Replace this SVG to customize the full service-header background. */
+.hero {
+  --hero-background-image: url('../public/acme-header-waves.svg');
+}

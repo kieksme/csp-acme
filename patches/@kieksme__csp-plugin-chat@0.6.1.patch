@@ -1,0 +1,155 @@
+diff --git a/dist/browser.js b/dist/browser.js
+index 0ff660e51ce7fad843eb326a39674893d963944b..63aacb59da9a007988871ba086087b1a73b93421 100644
+--- a/dist/browser.js
++++ b/dist/browser.js
+@@ -5,10 +5,32 @@
+ // src/browser.tsx
+-import { useEffect, useRef, useState } from "react";
++import { useEffect, useLayoutEffect, useRef, useState } from "react";
+ import { jsx, jsxs } from "react/jsx-runtime";
++function resizeInput(field) {
++  if (!field) return;
++  field.style.height = "auto";
++  field.style.height = `${field.scrollHeight + field.offsetHeight - field.clientHeight}px`;
++}
+ function Chat(ctx) {
+   const [messages, setMessages] = useState([]);
+   const [input, setInput] = useState("");
++  const inputField = useRef(null);
++  useLayoutEffect(() => resizeInput(inputField.current), [input]);
++  useEffect(() => {
++    const field = inputField.current;
++    if (!field) return;
++    let width = field.clientWidth;
++    const observer = new ResizeObserver(() => {
++      if (field.clientWidth !== width) {
++        width = field.clientWidth;
++        resizeInput(field);
++      }
++    });
++    observer.observe(field);
++    return () => observer.disconnect();
++  }, []);
+   const [busy, setBusy] = useState(false);
++  const [isMac, setIsMac] = useState(false);
++  useEffect(() => setIsMac(/Mac/.test(navigator.platform)), []);
+   const [error, setError] = useState("");
+   const [sources, setSources] = useState([]);
+   const abort = useRef(null);
+@@ -141,22 +163,47 @@ function Chat(ctx) {
+           /* @__PURE__ */ jsxs(
+             "form",
+             {
+-              className: "chat-form flex gap-2.5 items-end [&_textarea]:resize-y [&_textarea]:min-h-[50px] [&_textarea]:[flex:1] [&_textarea]:min-w-0 [&_button]:bg-accent [&_button]:text-accent-ink [&_button]:[border:0] [&_button]:w-[50px] [&_button]:h-[50px] [&_button]:rounded-card [&_button]:text-[1.25rem] [&_button:disabled]:opacity-[0.5]",
++              className: "chat-form flex gap-2.5 items-end [&_textarea]:resize-none [&_textarea]:min-h-[50px] [&_textarea]:[flex:1] [&_textarea]:min-w-0 [&_button]:bg-accent [&_button]:text-accent-ink [&_button]:[border:0] [&_button]:w-[50px] [&_button]:h-[50px] [&_button]:rounded-card [&_button]:text-[1.25rem] [&_button:disabled]:opacity-[0.5]",
+               onSubmit: submit,
+               children: [
+                 /* @__PURE__ */ jsx("label", { className: "sr-only", htmlFor: "chat-input", children: "Ihre Frage" }),
+-                /* @__PURE__ */ jsx(
+-                  "textarea",
+-                  {
+-                    id: "chat-input",
+-                    className: "search bg-card border border-line rounded-card py-3.5 px-4.5 text-ink w-full",
+-                    value: input,
+-                    maxLength: 4e3,
+-                    onChange: (e) => setInput(e.target.value),
+-                    placeholder: "Ihre Frage an unser Team \u2026",
+-                    required: true
+-                  }
+-                ),
++                /* @__PURE__ */ jsxs("div", { className: "relative flex-1 min-w-0", children: [
++                  /* @__PURE__ */ jsx(
++                    "textarea",
++                    {
++                      id: "chat-input",
++                      ref: inputField,
++                      rows: 1,
++                      autoFocus: true,
++                      className: "search bg-card border border-line rounded-card pt-3.5 pb-7 px-4.5 text-ink w-full block overflow-hidden",
++                      value: input,
++                      maxLength: 4e3,
++                      onChange: (e) => setInput(e.target.value),
++                      onKeyDown: (e) => {
++                        if (e.key === "Enter" && (e.ctrlKey || e.metaKey) && !e.nativeEvent.isComposing && !e.repeat) {
++                          e.preventDefault();
++                          if (!busy && input.trim())
++                            e.currentTarget.form?.requestSubmit();
++                        }
++                      },
++                      "aria-keyshortcuts": "Control+Enter Meta+Enter",
++                      "aria-describedby": "chat-shortcut",
++                      placeholder: "Ihre Frage an unser Team \u2026",
++                      required: true
++                    }
++                  ),
++                  /* @__PURE__ */ jsxs(
++                    "span",
++                    {
++                      id: "chat-shortcut",
++                      className: "absolute right-4.5 bottom-2 text-[0.625rem] text-muted pointer-events-none",
++                      children: [
++                        isMac ? "\u2318" : "Strg",
++                        " + Enter zum Senden"
++                      ]
++                    }
++                  )
++                ] }),
+                 /* @__PURE__ */ jsx(
+                   "button",
+                   {
+diff --git a/dist/server.js b/dist/server.js
+index cd99595109fef3f3e49b195b21398c103c18cb59..c920368f368202513591b7c4cdd77bf739780254 100644
+--- a/dist/server.js
++++ b/dist/server.js
+@@ -88,6 +88,7 @@ function createProvider(env, fetcher = fetch) {
+ // src/server.ts
+ var configSchema = z.object({
+   CSP_DEMO: z.string().optional(),
++  CSP_CHAT_DEMO: z.enum(["true", "false"]).optional(),
+   CSP_CHAT_PROVIDER: z.enum(["openai", "azure", "ollama"]).default("ollama"),
+   CSP_CHAT_MODEL: z.string().optional(),
+   CSP_CHAT_OPENAI_API_KEY: z.string().optional(),
+@@ -98,9 +99,11 @@ var configSchema = z.object({
+   CSP_CHAT_RATE_LIMIT: z.coerce.number().int().min(1).max(1e3).default(10),
+   CSP_CHAT_CONCURRENCY: z.coerce.number().int().min(1).max(100).default(2),
+   CSP_CHAT_MAX_TOKENS: z.coerce.number().int().min(128).max(16384).default(1024),
++  CSP_CHAT_TIMEOUT_MS: z.coerce.number().int().min(1e3).max(3e5).default(6e4),
+   CSP_CHAT_CONTEXT_CHARS: z.coerce.number().int().min(1e3).max(1e5).default(16e3)
+ }).superRefine((c, ctx) => {
+-  if (c.CSP_DEMO === "true") return;
++  if (c.CSP_CHAT_DEMO === "true" || c.CSP_CHAT_DEMO !== "false" && c.CSP_DEMO === "true")
++    return;
+   if (!c.CSP_CHAT_MODEL)
+     ctx.addIssue({
+       code: "custom",
+@@ -173,7 +176,8 @@ var server_default = {
+   configSchema,
+   setup(ctx) {
+     const c = configSchema.parse(ctx.env);
+-    const provider = ctx.demo ? void 0 : createProvider(
++    const demo = c.CSP_CHAT_DEMO === "true" || c.CSP_CHAT_DEMO !== "false" && ctx.demo;
++    const provider = demo ? void 0 : createProvider(
+       {
+         ...ctx.env,
+         ...Object.fromEntries(
+@@ -203,7 +207,10 @@ var server_default = {
+       windows.set(request.ip, window);
+       active++;
+       const controller = new AbortController();
+-      const timeout = setTimeout(() => controller.abort(), 6e4);
++      const timeout = setTimeout(
++        () => controller.abort(),
++        c.CSP_CHAT_TIMEOUT_MS
++      );
+       const cancel = () => controller.abort();
+       reply.raw.on("close", cancel);
+       try {
+@@ -248,7 +255,7 @@ data: ${JSON.stringify(data)}
+           "sources",
+           sources.map(({ text: _text, ...source }) => source)
+         );
+-        if (ctx.demo) {
++        if (demo) {
+           send("delta", {
+             text: "Dies ist eine synthetische Demo-Antwort. Bei einer dringenden St\xF6rung rufen Sie bitte die Operations-Hotline an. Der Dienstplan und die aktuellen Meldungen stehen direkt im Portal. Die produktive KI-Anbindung wird pro Kundeninstanz konfiguriert."
+           });

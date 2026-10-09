@@ -1,0 +1,411 @@
+diff --git a/dist/browser.css b/dist/browser.css
+index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..ad943a96bf2dabac4870294b99bccc8726268e83 100644
+--- a/dist/browser.css
++++ b/dist/browser.css
+@@ -124,6 +124,9 @@
+   white-space: nowrap;
+   border-width: 0;
+ }
++.pointer-events-none {
++  pointer-events: none;
++}
+ .static {
+   position: static;
+ }
+@@ -140,12 +143,18 @@
+ .bottom-0 {
+   bottom: calc(var(--spacing) * 0);
+ }
++.bottom-2 {
++  bottom: calc(var(--spacing) * 2);
++}
+ .bottom-\[4px\] {
+   bottom: 4px;
+ }
+ .left-\[4px\] {
+   left: 4px;
+ }
++.right-4\.5 {
++  right: calc(var(--spacing) * 4.5);
++}
+ .right-\[4px\] {
+   right: 4px;
+ }
+@@ -164,9 +173,6 @@
+ .z-\[1\] {
+   z-index: 1;
+ }
+-.col-span-full {
+-  grid-column: 1 / -1;
+-}
+ .m-0 {
+   margin: calc(var(--spacing) * 0);
+ }
+@@ -204,9 +210,6 @@
+ .mb-4\.5 {
+   margin-bottom: calc(var(--spacing) * 4.5);
+ }
+-.mb-5 {
+-  margin-bottom: calc(var(--spacing) * 5);
+-}
+ .mb-6\.25 {
+   margin-bottom: calc(var(--spacing) * 6.25);
+ }
+@@ -216,9 +219,6 @@
+ .mr-\[0\] {
+   margin-right: 0;
+ }
+-.mt-0 {
+-  margin-top: calc(var(--spacing) * 0);
+-}
+ .mt-10 {
+   margin-top: calc(var(--spacing) * 10);
+ }
+@@ -294,8 +294,8 @@
+ .min-w-0 {
+   min-width: calc(var(--spacing) * 0);
+ }
+-.max-w-\[300px\] {
+-  max-width: 300px;
++.max-w-\[320px\] {
++  max-width: 320px;
+ }
+ .max-w-\[475px\] {
+   max-width: 475px;
+@@ -312,6 +312,9 @@
+ .max-w-hero {
+   max-width: var(--hero-width);
+ }
++.flex-1 {
++  flex: 1 1 0%;
++}
+ .shrink-0 {
+   flex-shrink: 0;
+ }
+@@ -339,18 +342,15 @@
+ .grid-cols-\[1fr_1fr\] {
+   grid-template-columns: 1fr 1fr;
+ }
+-.grid-cols-\[minmax\(0\,0\.9fr\)_minmax\(0\,1\.2fr\)\] {
+-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.2fr);
+-}
+ .grid-cols-\[minmax\(0\,1\.7fr\)_minmax\(0\,1fr\)\] {
+   grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+ }
+-.grid-cols-\[minmax\(0\,1fr\)_minmax\(0\,1\.15fr\)\] {
+-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+-}
+ .grid-cols-\[repeat\(3\,_1fr\)\] {
+   grid-template-columns: repeat(3, 1fr);
+ }
++.flex-col {
++  flex-direction: column;
++}
+ .flex-wrap {
+   flex-wrap: wrap;
+ }
+@@ -369,6 +369,9 @@
+ .items-stretch {
+   align-items: stretch;
+ }
++.justify-end {
++  justify-content: flex-end;
++}
+ .justify-between {
+   justify-content: space-between;
+ }
+@@ -411,9 +414,6 @@
+ .gap-\[0\] {
+   gap: 0;
+ }
+-.justify-self-end {
+-  justify-self: end;
+-}
+ .overflow-auto {
+   overflow: auto;
+ }
+@@ -532,6 +532,10 @@
+   padding-top: calc(var(--spacing) * 2.25);
+   padding-bottom: calc(var(--spacing) * 2.25);
+ }
++.py-3 {
++  padding-top: calc(var(--spacing) * 3);
++  padding-bottom: calc(var(--spacing) * 3);
++}
+ .py-3\.25 {
+   padding-top: calc(var(--spacing) * 3.25);
+   padding-bottom: calc(var(--spacing) * 3.25);
+@@ -562,18 +566,24 @@
+ .pb-17\.5 {
+   padding-bottom: calc(var(--spacing) * 17.5);
+ }
+-.pb-8 {
+-  padding-bottom: calc(var(--spacing) * 8);
++.pb-7 {
++  padding-bottom: calc(var(--spacing) * 7);
+ }
+ .pb-9 {
+   padding-bottom: calc(var(--spacing) * 9);
+ }
+-.pt-10 {
+-  padding-top: calc(var(--spacing) * 10);
+-}
+ .pt-12 {
+   padding-top: calc(var(--spacing) * 12);
+ }
++.pt-3\.5 {
++  padding-top: calc(var(--spacing) * 3.5);
++}
++.pt-7 {
++  padding-top: calc(var(--spacing) * 7);
++}
++.pt-8 {
++  padding-top: calc(var(--spacing) * 8);
++}
+ .pt-9 {
+   padding-top: calc(var(--spacing) * 9);
+ }
+@@ -598,12 +608,6 @@
+ .text-\[0\.875rem\] {
+   font-size: 0.875rem;
+ }
+-.text-\[0\.9375rem\] {
+-  font-size: 0.9375rem;
+-}
+-.text-\[1\.125rem\] {
+-  font-size: 1.125rem;
+-}
+ .text-\[1\.25rem\] {
+   font-size: 1.25rem;
+ }
+@@ -616,8 +620,11 @@
+ .text-\[1rem\] {
+   font-size: 1rem;
+ }
+-.text-\[clamp\(30px\,3\.6vw\,48px\)\] {
+-  font-size: clamp(30px, 3.6vw, 48px);
++.text-\[clamp\(22px\,2\.5vw\,32px\)\] {
++  font-size: clamp(22px, 2.5vw, 32px);
++}
++.text-\[clamp\(32px\,4vw\,56px\)\] {
++  font-size: clamp(32px, 4vw, 56px);
+ }
+ .text-\[clamp\(40px\,5vw\,70px\)\] {
+   font-size: clamp(40px, 5vw, 70px);
+@@ -637,21 +644,9 @@
+ .leading-\[1\.08\] {
+   line-height: 1.08;
+ }
+-.leading-\[1\.1\] {
+-  line-height: 1.1;
+-}
+ .leading-\[1\.2\] {
+   line-height: 1.2;
+ }
+-.leading-\[1\.45\] {
+-  line-height: 1.45;
+-}
+-.leading-\[1\.6\] {
+-  line-height: 1.6;
+-}
+-.leading-\[1\.7\] {
+-  line-height: 1.7;
+-}
+ .leading-\[1\.8\] {
+   line-height: 1.8;
+ }
+@@ -661,8 +656,8 @@
+ .tracking-\[-1\.1px\] {
+   letter-spacing: -1.1px;
+ }
+-.tracking-\[-1\.5px\] {
+-  letter-spacing: -1.5px;
++.tracking-\[-2px\] {
++  letter-spacing: -2px;
+ }
+ .tracking-\[-3px\] {
+   letter-spacing: -3px;
+@@ -834,6 +829,10 @@ textarea:focus-visible,
+ summary:focus-visible {
+   outline: 3px solid var(--ink);
+ }
++.chat-form textarea:focus-visible {
++  outline: 1px solid var(--muted);
++  outline-offset: 2px;
++}
+ h3 {
+   font-size: 1.125rem;
+   line-height: 1.5;
+@@ -856,6 +855,92 @@ h3 {
+     scroll-behavior: auto !important;
+   }
+ }
++.faq-controls {
++  gap: 8px;
++}
++section .faq-controls button {
++  min-height: 40px;
++  padding: 8px 16px;
++  border: 1px solid var(--line);
++  border-radius: 999px;
++  background: var(--card);
++  color: var(--ink);
++  font-size: 0.8125rem;
++  font-weight: 600;
++  line-height: 1.4;
++  transition:
++    background-color 150ms,
++    border-color 150ms,
++    color 150ms,
++    box-shadow 150ms;
++}
++section .faq-controls button:hover {
++  background: var(--soft);
++  border-color: var(--muted);
++}
++section .faq-controls button[aria-pressed=true] {
++  background: var(--accent);
++  border-color: var(--accent);
++  color: var(--accent-ink);
++}
++section .faq-controls button:focus-visible {
++  outline: 2px solid var(--muted);
++  outline-offset: 2px;
++}
++@media (prefers-reduced-motion: reduce) {
++  section .faq-controls button {
++    transition: none;
++  }
++}
++:root {
++  --control-shadow: 0 2px 6px rgb(17 29 25 / 8%), 0 1px 2px rgb(17 29 25 / 5%);
++  --control-shadow-hover: 0 3px 9px rgb(17 29 25 / 12%), 0 1px 2px rgb(17 29 25 / 6%);
++}
++:root[data-theme=dark] {
++  --control-shadow: 0 2px 6px rgb(0 0 0 / 24%), inset 0 1px 0 rgb(255 255 255 / 4%);
++  --control-shadow-hover: 0 3px 9px rgb(0 0 0 / 32%), inset 0 1px 0 rgb(255 255 255 / 6%);
++}
++.hero .duty-frame {
++  background: color-mix(in srgb, var(--accent) 35%, transparent);
++  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
++}
++.site-header .theme-button {
++  display: grid;
++  place-items: center;
++  width: 40px;
++  height: 40px;
++  padding: 0;
++  border: 1px solid var(--line);
++  background: var(--card);
++  color: var(--ink);
++  line-height: 1;
++  transition:
++    background-color 150ms,
++    border-color 150ms,
++    box-shadow 150ms;
++}
++.site-header .theme-button,
++section .faq-controls button {
++  box-shadow: var(--control-shadow);
++}
++.site-header .theme-button:hover,
++section .faq-controls button:hover {
++  box-shadow: var(--control-shadow-hover);
++}
++.site-header .theme-button:hover {
++  background: var(--soft);
++  border-color: var(--muted);
++}
++.site-header .theme-button:focus-visible {
++  outline: 2px solid var(--muted);
++  outline-offset: 2px;
++}
++.hero {
++  background-image: var(--hero-background-image, none);
++  background-size: cover;
++  background-position: center;
++  background-repeat: no-repeat;
++}
+ .empty\:hidden:empty {
+   display: none;
+ }
+@@ -881,10 +966,6 @@ h3 {
+   .contained\:p-11\.25 {
+     padding: calc(var(--spacing) * 11.25);
+   }
+-  .contained\:px-11\.25 {
+-    padding-left: calc(var(--spacing) * 11.25);
+-    padding-right: calc(var(--spacing) * 11.25);
+-  }
+ }
+ @media (max-width: 800px) {
+   .compact\:mb-\[0\] {
+@@ -914,6 +995,9 @@ h3 {
+   .compact\:min-h-\[0\] {
+     min-height: 0;
+   }
++  .compact\:max-w-\[240px\] {
++    max-width: 240px;
++  }
+   .compact\:max-w-\[500px\] {
+     max-width: 500px;
+   }
+@@ -945,10 +1029,6 @@ h3 {
+     padding-left: calc(var(--spacing) * 6.25);
+     padding-right: calc(var(--spacing) * 6.25);
+   }
+-  .compact\:px-7\.5 {
+-    padding-left: calc(var(--spacing) * 7.5);
+-    padding-right: calc(var(--spacing) * 7.5);
+-  }
+   .compact\:pb-5 {
+     padding-bottom: calc(var(--spacing) * 5);
+   }
+@@ -982,6 +1062,9 @@ h3 {
+   .compact\:pr-\[0\] {
+     padding-right: 0;
+   }
++  .compact\:pt-0 {
++    padding-top: calc(var(--spacing) * 0);
++  }
+   .compact\:pt-5 {
+     padding-top: calc(var(--spacing) * 5);
+   }
+@@ -1026,16 +1109,9 @@ h3 {
+   .narrow\:grid-cols-\[1fr\] {
+     grid-template-columns: 1fr;
+   }
+-  .narrow\:gap-3 {
+-    gap: calc(var(--spacing) * 3);
+-  }
+   .narrow\:p-5 {
+     padding: calc(var(--spacing) * 5);
+   }
+-  .narrow\:px-6\.25 {
+-    padding-left: calc(var(--spacing) * 6.25);
+-    padding-right: calc(var(--spacing) * 6.25);
+-  }
+   .narrow\:pb-7\.5 {
+     padding-bottom: calc(var(--spacing) * 7.5);
+   }
+@@ -1045,6 +1121,9 @@ h3 {
+   .narrow\:pr-6\.25 {
+     padding-right: calc(var(--spacing) * 6.25);
+   }
++  .narrow\:pt-5 {
++    padding-top: calc(var(--spacing) * 5);
++  }
+   .narrow\:pt-7\.5 {
+     padding-top: calc(var(--spacing) * 7.5);
+   }
+@@ -1588,8 +1667,8 @@ h3 {
+ .\[\&_textarea\]\:min-w-0 textarea {
+   min-width: calc(var(--spacing) * 0);
+ }
+-.\[\&_textarea\]\:resize-y textarea {
+-  resize: vertical;
++.\[\&_textarea\]\:resize-none textarea {
++  resize: none;
+ }
+ .\[\&_textarea\]\:\[flex\:1\] textarea {
+   flex: 1;

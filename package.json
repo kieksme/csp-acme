@@ -4,24 +4,25 @@
   "type": "module",
   "scripts": {
     "validate": "csp validate",
-    "dev": "csp dev",
+    "dev": "CSP_DEMO=true CSP_CHAT_DEMO=true CSP_ALLOWED_ORIGINS=http://127.0.0.1:5173,http://localhost:5173 csp dev",
     "build": "csp build",
     "start": "csp start",
     "start:api": "csp start",
     "build:demo": "csp build --config portal.demo.json --production",
-    "check": "csp validate && csp validate --config portal.demo.json --production && csp build && csp build --config portal.demo.json --production"
+    "check": "csp validate && csp validate --config portal.demo.json --production && csp build && csp build --config portal.demo.json --production",
+    "dev:ollama": "CSP_DEMO=true CSP_CHAT_DEMO=false CSP_CHAT_PROVIDER=ollama CSP_ALLOWED_ORIGINS=http://127.0.0.1:5173,http://localhost:5173 csp dev"
   },
   "dependencies": {
-    "@kieksme/csp-core": "0.6.0",
-    "@kieksme/csp-plugin-contact": "0.6.0",
-    "@kieksme/csp-plugin-content": "0.6.0",
-    "@kieksme/csp-plugin-chat": "0.6.0",
-    "@kieksme/csp-sdk": "0.6.0",
-    "@kieksme/csp-plugin-signl4": "0.6.0",
-    "@kieksme/csp-plugin-kuma": "0.6.0"
+    "@kieksme/csp-core": "0.6.1",
+    "@kieksme/csp-plugin-contact": "0.6.1",
+    "@kieksme/csp-plugin-content": "0.6.1",
+    "@kieksme/csp-plugin-chat": "0.6.1",
+    "@kieksme/csp-sdk": "0.6.1",
+    "@kieksme/csp-plugin-signl4": "0.6.1",
+    "@kieksme/csp-plugin-kuma": "0.6.1"
   },
   "devDependencies": {
-    "@kieksme/csp-cli": "0.6.0"
+    "@kieksme/csp-cli": "0.6.1"
   },
   "engines": {
     "node": ">=22.12"
