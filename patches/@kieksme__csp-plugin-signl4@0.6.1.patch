@@ -1,22 +1,65 @@
 diff --git a/dist/browser.js b/dist/browser.js
-index fac5e0ea6e737877796fc80bcbb397eed32b4bc4..454da8d9d3447514c4221af676052d7b215083f5 100644
+index fac5e0e..4d70b07 100644
 --- a/dist/browser.js
 +++ b/dist/browser.js
-@@ -98,85 +98,71 @@ function DutyHero(ctx) {
-   const person = confirmed ? current[0] : void 0;
-   const timezone = safeTimezone2(live.data?.timezone ?? "Europe/Berlin");
-   const profile = team.data?.find((p) => p.id === person?.userId);
+@@ -42 +42 @@ import {
+-  safeTimezone as safeTimezone2
++  safeTimezone
+@@ -46,39 +46 @@ import {
+-import { activeShifts, safeTimezone } from "@kieksme/csp-sdk";
+-function dutyState(shifts, now) {
+-  const valid = shifts.filter((s) => Date.parse(s.end) > Date.parse(s.start));
+-  const current = activeShifts(valid, now).sort(
+-    (a, b) => Date.parse(a.start) - Date.parse(b.start) || a.userId.localeCompare(b.userId)
+-  ).filter(
+-    (s, i, all) => all.findIndex((other) => other.userId === s.userId) === i
+-  );
+-  const next = valid.filter((s) => Date.parse(s.start) > now).sort((a, b) => Date.parse(a.start) - Date.parse(b.start))[0];
+-  return { current, next };
+-}
+-function nextShiftLabel(start, now, timezone) {
+-  const timeZone = safeTimezone(timezone);
+-  const date = new Date(start);
+-  const dayNumber = (value) => {
+-    const parts = new Intl.DateTimeFormat("en-US", {
+-      timeZone,
+-      year: "numeric",
+-      month: "numeric",
+-      day: "numeric"
+-    }).formatToParts(value);
+-    const part = (name) => Number(parts.find((p) => p.type === name).value);
+-    return Date.UTC(part("year"), part("month") - 1, part("day")) / 864e5;
+-  };
+-  const days = dayNumber(date) - dayNumber(new Date(now));
+-  const time = date.toLocaleTimeString("de-DE", {
+-    timeZone,
+-    hour: "numeric",
+-    minute: "2-digit"
+-  }).replace(":00", "");
+-  const day = days === 0 ? "heute" : days === 1 ? "morgen" : days === 2 ? "\xFCbermorgen" : date.toLocaleDateString("de-DE", {
+-    timeZone,
+-    weekday: "long",
+-    day: "numeric",
+-    month: "long",
+-    year: "numeric"
+-  });
+-  return `Ab ${day} um ${time} Uhr sind wir wieder f\xFCr Sie da.`;
+-}
++import { dutyState, nextShiftLabel } from "@kieksme/csp-sdk";
+@@ -99 +61 @@ function DutyHero(ctx) {
+-  const timezone = safeTimezone2(live.data?.timezone ?? "Europe/Berlin");
++  const timezone = safeTimezone(live.data?.timezone ?? "Europe/Berlin");
+@@ -101,3 +63,3 @@ function DutyHero(ctx) {
 -  return /* @__PURE__ */ jsxs("div", { className: "duty-header col-span-full grid grid-cols-[minmax(0,0.9fr)_minmax(0,1.2fr)] items-center gap-8 px-15 pt-10 pb-8 contained:px-11.25 compact:grid-cols-[1fr] compact:gap-3 compact:px-7.5 compact:pt-8 narrow:px-6.25", children: [
 -    /* @__PURE__ */ jsxs("div", { className: "hero-copy duty-copy min-w-0", children: [
 -      /* @__PURE__ */ jsxs("p", { className: "eyebrow font-mono text-[0.6875rem] uppercase tracking-[2px] mb-4", children: [
 +  return /* @__PURE__ */ jsxs(Fragment, { children: [
 +    /* @__PURE__ */ jsxs("div", { className: "hero-copy pt-7 pb-9 px-15 z-[1] wide:[animation:arrive_0.6s_ease_both] contained:p-11.25 compact:pt-5 compact:pb-9 compact:pl-7.5 compact:pr-7.5 narrow:pt-5 narrow:pb-7.5 narrow:pl-6.25 narrow:pr-6.25 duty-copy", children: [
 +      /* @__PURE__ */ jsxs("p", { className: "eyebrow font-mono text-[0.6875rem] uppercase tracking-[2px] m-[0_0_calc(var(--spacing)_*_4.25)]", children: [
-         /* @__PURE__ */ jsx2("span", { className: "signal-mark w-[6px] h-[6px] bg-accent-secondary rounded-full" }),
-         " ",
+@@ -106 +68 @@ function DutyHero(ctx) {
 -        "Ihr Kundenservice"
 +        person ? "Jetzt im Dienst \xB7 F\xFCr Sie zust\xE4ndig" : confirmed ? "Au\xDFerhalb unserer Schichtzeiten" : "Ihr Service-Team"
-       ] }),
+@@ -108,2 +70,25 @@ function DutyHero(ctx) {
 -      /* @__PURE__ */ jsx2("h1", { className: "text-[clamp(30px,3.6vw,48px)] tracking-[-1.5px] leading-[1.1] font-semibold mt-0 mb-5 [overflow-wrap:anywhere]", children: ctx.config.name }),
 -      /* @__PURE__ */ jsx2("p", { className: "text-[1rem] leading-[1.7] m-0 [color:color-mix(in_srgb,_var(--hero-ink)_85%,_var(--hero))]", children: ctx.config.tagline })
 +      /* @__PURE__ */ jsxs("div", { "aria-live": "polite", "aria-atomic": "true", children: [
@@ -44,16 +87,15 @@ index fac5e0ea6e737877796fc80bcbb397eed32b4bc4..454da8d9d3447514c4221af676052d7b
 +        timezone
 +      ] }),
 +      (live.stale || live.loading) && /* @__PURE__ */ jsx2(DataState, { ...live })
-     ] }),
+@@ -111 +96 @@ function DutyHero(ctx) {
 -    /* @__PURE__ */ jsxs(
 +    person && /* @__PURE__ */ jsxs(
-       "div",
-       {
+@@ -114,3 +99 @@ function DutyHero(ctx) {
 -        className: "duty-service grid grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] items-center gap-5 min-w-0 narrow:gap-3",
 -        "aria-live": "polite",
 -        "aria-atomic": "true",
 +        className: "duty-portrait flex flex-col items-center justify-end pt-8 px-8 min-w-0 compact:pt-0",
-         children: [
+@@ -118,60 +101,24 @@ function DutyHero(ctx) {
 -          /* @__PURE__ */ jsxs(
 -            "div",
 -            {
@@ -138,10 +180,23 @@ index fac5e0ea6e737877796fc80bcbb397eed32b4bc4..454da8d9d3447514c4221af676052d7b
 +            person.name,
 +            " \xB7 Jetzt im Dienst"
 +          ] })
-         ]
+@@ -179 +126,2 @@ function DutyHero(ctx) {
 -      }
 +      },
 +      person.userId
-     )
-   ] });
- }
+@@ -188,2 +136,2 @@ import {
+-  activeShifts as activeShifts2,
+-  safeTimezone as safeTimezone3
++  activeShifts,
++  safeTimezone as safeTimezone2
+@@ -199,2 +147,2 @@ function ScheduleView(ctx) {
+-  const current = activeShifts2(live.data?.shifts ?? [], now);
+-  const tz = safeTimezone3(live.data?.timezone ?? "Europe/Berlin");
++  const current = activeShifts(live.data?.shifts ?? [], now);
++  const tz = safeTimezone2(live.data?.timezone ?? "Europe/Berlin");
+@@ -230 +178 @@ function ScheduleView(ctx) {
+-        className: "shift grid grid-cols-[1fr_1.5fr_auto] gap-4.5 py-3.25 px-0 border-t border-line text-[0.75rem] [&.active]:text-accent [&.active]:font-bold dark:[&.active]:text-ink [&_time]:font-mono [&_time]:text-[0.6875rem] [&_time]:text-muted compact:grid-cols-[1fr_auto] compact:[&_time]:col-span-full " + (activeShifts2([s], now).length ? "active" : ""),
++        className: "shift grid grid-cols-[1fr_1.5fr_auto] gap-4.5 py-3.25 px-0 border-t border-line text-[0.75rem] [&.active]:text-accent [&.active]:font-bold dark:[&.active]:text-ink [&_time]:font-mono [&_time]:text-[0.6875rem] [&_time]:text-muted compact:grid-cols-[1fr_auto] compact:[&_time]:col-span-full " + (activeShifts([s], now).length ? "active" : ""),
+@@ -241 +189 @@ function ScheduleView(ctx) {
+-          /* @__PURE__ */ jsx3("span", { children: activeShifts2([s], now).length ? "Jetzt im Dienst" : "N\xE4chste Schicht" })
++          /* @__PURE__ */ jsx3("span", { children: activeShifts([s], now).length ? "Jetzt im Dienst" : "N\xE4chste Schicht" })
