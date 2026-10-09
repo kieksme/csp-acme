@@ -21,3 +21,9 @@ Das lokale Stylesheet `design-system/portal.css` korrigiert den Textkontrast akt
 Der CLI-Patch ergänzt außerdem das API-Dockerfile um die Patch-Dateien vor der Produktion-Installation. Dadurch kann die eingefrorene Lockdatei auch im API-Image unverändert verwendet werden.
 
 Die Header-Anordnung wird bis zur nächsten gemeinsamen CSP-Veröffentlichung durch die eingecheckten Patches für `@kieksme/csp-core@0.6.1` (Styles) und `@kieksme/csp-plugin-signl4@0.6.1` (Header) bereitgestellt. Sie werden mit der Lockdatei installiert und gelten für Entwicklung, Demo- und Produktionsbuild. Bei einem Paketupdate auf einen Release mit dieser Anordnung müssen diese beiden Übergangspatches entfernt werden; der CLI-Patch bleibt separat bestehen.
+
+## Lokal mit Ollama testen
+
+`pnpm dev:ollama` startet den Chat mit echten Ollama-Antworten; Schichten, Kontakte und Systemstatus bleiben Demo-Daten. Hinterlege `CSP_CHAT_OLLAMA_URL` (z. B. `http://localhost:11434`) und ein installiertes `CSP_CHAT_MODEL` in der ignorierten `.env.local`. `CSP_CHAT_TIMEOUT_MS` gibt langsamen Modellen bis zu fünf Minuten Antwortzeit (Standard 60 Sekunden). `pnpm dev` verwendet weiterhin den Demo-Chat.
+
+Der Übergangspatch für `@kieksme/csp-plugin-chat@0.6.1` ergänzt `CSP_CHAT_DEMO`, bis die nächste CSP-Version diese Einstellung enthält. Entferne ihn beim entsprechenden Paketupdate.

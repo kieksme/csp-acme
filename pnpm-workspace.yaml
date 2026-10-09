@@ -13,4 +13,5 @@ minimumReleaseAgeExclude:
 patchedDependencies:
   "@kieksme/csp-cli@0.6.1": patches/@kieksme__csp-cli@0.6.1.patch
   "@kieksme/csp-core@0.6.1": patches/@kieksme__csp-core@0.6.1.patch
+  '@kieksme/csp-plugin-chat@0.6.1': patches/@kieksme__csp-plugin-chat@0.6.1.patch
   "@kieksme/csp-plugin-signl4@0.6.1": patches/@kieksme__csp-plugin-signl4@0.6.1.patch
