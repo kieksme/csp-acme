@@ -165,7 +165,7 @@ settings:
 patchedDependencies:
   '@kieksme/csp-cli@0.6.1': d052582548c34e00fc017944457b9b5fe56c17e1fe6897dfa96e2c50e69e9887
   '@kieksme/csp-core@0.6.1': 08c872c16c057c80249b62087843451ab23645d0fc332e015166e28dfbd60a18
-  '@kieksme/csp-plugin-chat@0.6.1': 99de084a99b517c934529dd8605330030a8e6ac49d825c101d9155f32f399d35
+  '@kieksme/csp-plugin-chat@0.6.1': d95d83b7e64c3ff8f6ca8adff7803f61000aaeaaeab1a47d2e6287bd57f01dbe
   '@kieksme/csp-plugin-signl4@0.6.1': 833b1934743882a58ddc7a7a5e21dc8308a6e4ba40a5253e6a3cf02f6daa6a88
 
 importers:
@@ -177,7 +177,7 @@ importers:
         version: 0.6.1(patch_hash=08c872c16c057c80249b62087843451ab23645d0fc332e015166e28dfbd60a18)(vite@7.3.7(yaml@2.9.1))
       '@kieksme/csp-plugin-chat':
         specifier: 0.6.1
-        version: 0.6.1(patch_hash=99de084a99b517c934529dd8605330030a8e6ac49d825c101d9155f32f399d35)(fastify@5.12.5)(react@19.3.0)
+        version: 0.6.1(patch_hash=d95d83b7e64c3ff8f6ca8adff7803f61000aaeaaeab1a47d2e6287bd57f01dbe)(fastify@5.12.5)(react@19.3.0)
       '@kieksme/csp-plugin-contact':
         specifier: 0.6.1
         version: 0.6.1(fastify@5.12.5)(react@19.3.0)
@@ -2090,7 +2090,7 @@ snapshots:
       vite: 7.3.7(yaml@2.9.1)
       zod: 3.25.76
 
-  '@kieksme/csp-plugin-chat@0.6.1(patch_hash=99de084a99b517c934529dd8605330030a8e6ac49d825c101d9155f32f399d35)(fastify@5.12.5)(react@19.3.0)':
+  '@kieksme/csp-plugin-chat@0.6.1(patch_hash=d95d83b7e64c3ff8f6ca8adff7803f61000aaeaaeab1a47d2e6287bd57f01dbe)(fastify@5.12.5)(react@19.3.0)':
     dependencies:
       '@kieksme/csp-sdk': 0.6.1(fastify@5.12.5)(react@19.3.0)
       openai: 6.49.0(zod@3.25.76)

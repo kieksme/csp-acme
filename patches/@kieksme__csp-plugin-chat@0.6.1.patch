@@ -1,5 +1,5 @@
 diff --git a/dist/browser.js b/dist/browser.js
-index 0ff660e51ce7fad843eb326a39674893d963944b..60f4c3768e2be50ab741c8f32b18d3da67d1bf26 100644
+index 0ff660e51ce7fad843eb326a39674893d963944b..63aacb59da9a007988871ba086087b1a73b93421 100644
 --- a/dist/browser.js
 +++ b/dist/browser.js
 @@ -5,10 +5,32 @@
@@ -36,7 +36,7 @@ index 0ff660e51ce7fad843eb326a39674893d963944b..60f4c3768e2be50ab741c8f32b18d3da
    const [error, setError] = useState("");
    const [sources, setSources] = useState([]);
    const abort = useRef(null);
-@@ -141,22 +163,46 @@ function Chat(ctx) {
+@@ -141,22 +163,47 @@ function Chat(ctx) {
            /* @__PURE__ */ jsxs(
              "form",
              {
@@ -64,6 +64,7 @@ index 0ff660e51ce7fad843eb326a39674893d963944b..60f4c3768e2be50ab741c8f32b18d3da
 +                      id: "chat-input",
 +                      ref: inputField,
 +                      rows: 1,
++                      autoFocus: true,
 +                      className: "search bg-card border border-line rounded-card pt-3.5 pb-7 px-4.5 text-ink w-full block overflow-hidden",
 +                      value: input,
 +                      maxLength: 4e3,

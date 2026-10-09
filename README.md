@@ -31,3 +31,5 @@ Der Übergangspatch für `@kieksme/csp-plugin-chat@0.6.1` ergänzt `CSP_CHAT_DEM
 Im Chat sendet `⌘ + Enter` auf macOS bzw. `Strg + Enter` auf anderen Systemen die Nachricht. `Enter` allein fügt einen Zeilenumbruch ein. Ein dezenter Hinweis mit dem passenden Tastenkürzel steht unten rechts im Textfeld. Der Chat-Übergangspatch ergänzt auch dieses Tastenkürzel; der Core-Patch liefert die dazugehörigen Styles.
 
 Das Chat-Feld startet einzeilig, wächst automatisch mit dem Text und schrumpft beim Kürzen oder Absenden wieder.
+
+Beim Seitenaufruf ist das Chat-Textfeld automatisch fokussiert.
