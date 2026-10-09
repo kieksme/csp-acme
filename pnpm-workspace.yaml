@@ -15,3 +15,4 @@ patchedDependencies:
   "@kieksme/csp-core@0.6.1": patches/@kieksme__csp-core@0.6.1.patch
   '@kieksme/csp-plugin-chat@0.6.1': patches/@kieksme__csp-plugin-chat@0.6.1.patch
   "@kieksme/csp-plugin-signl4@0.6.1": patches/@kieksme__csp-plugin-signl4@0.6.1.patch
+  '@kieksme/csp-sdk@0.6.1': patches/@kieksme__csp-sdk@0.6.1.patch

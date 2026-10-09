@@ -47,3 +47,7 @@ Favicon und PWA-Icons verwenden das einzelne orange Acme-Bildzeichen ohne Schrif
 Das dunkle Acme-Design verwendet neutrale Anthrazit-Flächen für Hintergrund und Karten, abgestimmte Rahmen und helle Texte. Orange bleibt die Marken-Akzentfarbe.
 
 Die Hintergrundgrafik `public/acme-header-waves.svg` legt feine geschwungene Linien in Acme-Orange über die gesamte Header-Fläche. Sie ist transparent und über `--hero-background-image` in `design-system/portal.css` austauschbar. Lokale Bilder werden auch im statischen Demo-Build eingebunden.
+
+Chat-Antworten tragen den Namen der aktuellen Bereitschaftsperson und die Kennzeichnung „Digitaler Assistent“. Ohne bestätigte Bereitschaft antwortet das Service-Team. Dienststatus wird nur für passende Monitore bestätigt; Support-Tickets sind direkt in der Antwort verlinkt. Die E-Mail-Demo enthält weiterhin keinen eigenen E-Mail-Monitor und bestätigt deshalb keine E-Mail-Verfügbarkeit.
+
+Bis zur gemeinsamen CSP-Veröffentlichung liefern der SDK-Patch die gemeinsamen Bereitschaftshelfer und der Chat-Patch die persönliche Antwortrolle sowie Links pro Antwort. Beide bei einem Paketupdate auf eine Version mit diesem Verhalten entfernen.
