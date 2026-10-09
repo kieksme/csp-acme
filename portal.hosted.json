@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "acme",
+  "branding": {
+    "name": "Acme Service Portal",
+    "tagline": "Acme. Wir halten Ihren Betrieb am Laufen.",
+    "description": "Das zentrale Kundenportal für Acme: Support, Ansprechpartner, Systemstatus und Serviceinformationen.",
+    "logoFile": "public/acme-logo.svg",
+    "iconFile": "public/acme-icon.svg"
+  },
+  "theme": {
+    "mode": "system",
+    "tokens": {
+      "accent": "#f97316",
+      "hero": "#111827"
+    }
+  },
+  "contact": {
+    "phone": "+49 000 000000",
+    "label": "Acme Support-Hotline"
+  },
+  "public": {
+    "basePath": "/csp-acme/",
+    "apiUrl": "https://csp-acme.kieks.me",
+    "domain": "https://kieksme.github.io",
+    "pollMs": 60000,
+    "demo": true,
+    "staticDemo": false
+  },
+  "contentFile": "content.json",
+  "plugins": [
+    "@kieksme/csp-plugin-contact",
+    "@kieksme/csp-plugin-signl4",
+    "@kieksme/csp-plugin-kuma",
+    "@kieksme/csp-plugin-content",
+    "@kieksme/csp-plugin-chat"
+  ],
+  "avatarsFile": "avatars.json"
+}

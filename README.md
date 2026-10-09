@@ -51,3 +51,8 @@ Die Hintergrundgrafik `public/acme-header-waves.svg` legt feine geschwungene Lin
 Chat-Antworten tragen den Namen der aktuellen Bereitschaftsperson und die Kennzeichnung „Digitaler Assistent“. Ohne bestätigte Bereitschaft antwortet das Service-Team. Dienststatus wird nur für passende Monitore bestätigt; Support-Tickets sind direkt in der Antwort verlinkt. Die E-Mail-Demo enthält weiterhin keinen eigenen E-Mail-Monitor und bestätigt deshalb keine E-Mail-Verfügbarkeit.
 
 Bis zur gemeinsamen CSP-Veröffentlichung liefern der SDK-Patch die gemeinsamen Bereitschaftshelfer und die SIGNL4- und Chat-Patches deren gemeinsame Verwendung im Header und Chat sowie Links pro Antwort. Diese drei Patches bei einem Paketupdate auf eine Version mit diesem Verhalten entfernen.
+
+## Hosted OpenAI-Chat
+
+Das statische Frontend verwendet `portal.hosted.json` für die separate Coolify-API.
+[Konfiguration, Image und Betriebsgrenzen](docs/deployment.md).
