@@ -2,9 +2,7 @@ diff --git a/dist/browser.js b/dist/browser.js
 index 0ff660e51ce7fad843eb326a39674893d963944b..60f4c3768e2be50ab741c8f32b18d3da67d1bf26 100644
 --- a/dist/browser.js
 +++ b/dist/browser.js
-@@ -3,12 +3,34 @@ import {
- } from "./chunk-YS3KJ64Z.js";
- 
+@@ -5,10 +5,32 @@
  // src/browser.tsx
 -import { useEffect, useRef, useState } from "react";
 +import { useEffect, useLayoutEffect, useRef, useState } from "react";
