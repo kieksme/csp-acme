@@ -409,3 +409,25 @@ index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..ad943a96bf2dabac4870294b99bccc87
  }
  .\[\&_textarea\]\:\[flex\:1\] textarea {
    flex: 1;
+diff --git a/dist/build.js b/dist/build.js
+index 30e48e37ec05a61dc73d151cef15bc26f21a2c80..1d9528ae063ab1455a6a55c945f964bf8b5446e9 100644
+--- a/dist/build.js
++++ b/dist/build.js
+@@ -38,6 +38,17 @@ function portalBuild(config, cwd = process.cwd()) {
+   };
+   return {
+     name: "csp-portal",
++    async configureServer(server) {
++      const favicon = await sharp(icon).resize(192, 192, {
++        fit: "contain",
++        background: config.background
++      }).png().toBuffer();
++      server.middlewares.use((req, res, next) => {
++        if (req.url?.split("?")[0] !== config.basePath + "icon-192.png") return next();
++        res.setHeader("Content-Type", "image/png");
++        res.end(favicon);
++      });
++    },
+     config: () => ({
+       base: config.basePath,
+       define: { __CSP_CONFIG__: JSON.stringify(browserConfig) }

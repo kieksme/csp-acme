@@ -42,6 +42,8 @@ Der Porträtkreis übernimmt die Acme-Markenfarbe halbtransparent. Design-Schalt
 
 Das Acme-Logo passt seine Schriftfarbe an das aktive Farbschema an: dunkel im hellen Design, hell im dunklen Design. Das orange Bildzeichen bleibt erhalten.
 
+Favicon und PWA-Icons verwenden das einzelne orange Acme-Bildzeichen ohne Schriftzug aus `public/acme-icon.svg`. Der Core-Übergangspatch stellt das daraus erzeugte Favicon auch im lokalen Entwicklungsserver bereit. Produktions- und Demo-Builds erzeugen die Icons automatisch aus dem SVG.
+
 Das dunkle Acme-Design verwendet neutrale Anthrazit-Flächen für Hintergrund und Karten, abgestimmte Rahmen und helle Texte. Orange bleibt die Marken-Akzentfarbe.
 
 Die Hintergrundgrafik `public/acme-header-waves.svg` legt feine geschwungene Linien in Acme-Orange über die gesamte Header-Fläche. Sie ist transparent und über `--hero-background-image` in `design-system/portal.css` austauschbar. Lokale Bilder werden auch im statischen Demo-Build eingebunden.
