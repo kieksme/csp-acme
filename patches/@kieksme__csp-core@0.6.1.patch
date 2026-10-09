@@ -1,5 +1,5 @@
 diff --git a/dist/browser.css b/dist/browser.css
-index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..785399794f995909a48065038100c743de69cae8 100644
+index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..fb54d0bff344fda1123b5f8c1b3787dcd6a6a5d6 100644
 --- a/dist/browser.css
 +++ b/dist/browser.css
 @@ -124,6 +124,9 @@
@@ -294,3 +294,14 @@ index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..785399794f995909a48065038100c743
    .narrow\:pt-7\.5 {
      padding-top: calc(var(--spacing) * 7.5);
    }
+@@ -1588,8 +1577,8 @@ h3 {
+ .\[\&_textarea\]\:min-w-0 textarea {
+   min-width: calc(var(--spacing) * 0);
+ }
+-.\[\&_textarea\]\:resize-y textarea {
+-  resize: vertical;
++.\[\&_textarea\]\:resize-none textarea {
++  resize: none;
+ }
+ .\[\&_textarea\]\:\[flex\:1\] textarea {
+   flex: 1;

@@ -164,8 +164,8 @@ settings:
 
 patchedDependencies:
   '@kieksme/csp-cli@0.6.1': d052582548c34e00fc017944457b9b5fe56c17e1fe6897dfa96e2c50e69e9887
-  '@kieksme/csp-core@0.6.1': 37218fe4664e85a86ed1abbce2c75b87ca7e18172ef4043ab27f7d8618b82c7f
-  '@kieksme/csp-plugin-chat@0.6.1': d968dd31a79c4c1506f819ba9cc3a4fb6b42db6c46c8577faec8f341523e6e84
+  '@kieksme/csp-core@0.6.1': 08c872c16c057c80249b62087843451ab23645d0fc332e015166e28dfbd60a18
+  '@kieksme/csp-plugin-chat@0.6.1': d8b980468ee81b22fe92bc3e6c15b5df228308001823c3ac3898522f06345d15
   '@kieksme/csp-plugin-signl4@0.6.1': 833b1934743882a58ddc7a7a5e21dc8308a6e4ba40a5253e6a3cf02f6daa6a88
 
 importers:
@@ -174,10 +174,10 @@ importers:
     dependencies:
       '@kieksme/csp-core':
         specifier: 0.6.1
-        version: 0.6.1(patch_hash=37218fe4664e85a86ed1abbce2c75b87ca7e18172ef4043ab27f7d8618b82c7f)(vite@7.3.7(yaml@2.9.1))
+        version: 0.6.1(patch_hash=08c872c16c057c80249b62087843451ab23645d0fc332e015166e28dfbd60a18)(vite@7.3.7(yaml@2.9.1))
       '@kieksme/csp-plugin-chat':
         specifier: 0.6.1
-        version: 0.6.1(patch_hash=d968dd31a79c4c1506f819ba9cc3a4fb6b42db6c46c8577faec8f341523e6e84)(fastify@5.12.5)(react@19.3.0)
+        version: 0.6.1(patch_hash=d8b980468ee81b22fe92bc3e6c15b5df228308001823c3ac3898522f06345d15)(fastify@5.12.5)(react@19.3.0)
       '@kieksme/csp-plugin-contact':
         specifier: 0.6.1
         version: 0.6.1(fastify@5.12.5)(react@19.3.0)
@@ -2052,7 +2052,7 @@ snapshots:
 
   '@kieksme/csp-cli@0.6.1(patch_hash=d052582548c34e00fc017944457b9b5fe56c17e1fe6897dfa96e2c50e69e9887)(fastify@5.12.5)(react@19.3.0)':
     dependencies:
-      '@kieksme/csp-core': 0.6.1(patch_hash=37218fe4664e85a86ed1abbce2c75b87ca7e18172ef4043ab27f7d8618b82c7f)(vite@7.3.7(yaml@2.9.1))
+      '@kieksme/csp-core': 0.6.1(patch_hash=08c872c16c057c80249b62087843451ab23645d0fc332e015166e28dfbd60a18)(vite@7.3.7(yaml@2.9.1))
       '@kieksme/csp-sdk': 0.6.1(fastify@5.12.5)(react@19.3.0)
       '@vitejs/plugin-react': 5.2.0(vite@7.3.7(yaml@2.9.1))
       dotenv: 17.4.2
@@ -2076,7 +2076,7 @@ snapshots:
       - terser
       - tsx
 
-  '@kieksme/csp-core@0.6.1(patch_hash=37218fe4664e85a86ed1abbce2c75b87ca7e18172ef4043ab27f7d8618b82c7f)(vite@7.3.7(yaml@2.9.1))':
+  '@kieksme/csp-core@0.6.1(patch_hash=08c872c16c057c80249b62087843451ab23645d0fc332e015166e28dfbd60a18)(vite@7.3.7(yaml@2.9.1))':
     dependencies:
       '@fastify/cors': 11.3.0
       '@fontsource/ibm-plex-mono': 5.3.0
@@ -2090,7 +2090,7 @@ snapshots:
       vite: 7.3.7(yaml@2.9.1)
       zod: 3.25.76
 
-  '@kieksme/csp-plugin-chat@0.6.1(patch_hash=d968dd31a79c4c1506f819ba9cc3a4fb6b42db6c46c8577faec8f341523e6e84)(fastify@5.12.5)(react@19.3.0)':
+  '@kieksme/csp-plugin-chat@0.6.1(patch_hash=d8b980468ee81b22fe92bc3e6c15b5df228308001823c3ac3898522f06345d15)(fastify@5.12.5)(react@19.3.0)':
     dependencies:
       '@kieksme/csp-sdk': 0.6.1(fastify@5.12.5)(react@19.3.0)
       openai: 6.49.0(zod@3.25.76)
