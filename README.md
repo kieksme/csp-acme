@@ -33,3 +33,5 @@ Im Chat sendet `⌘ + Enter` auf macOS bzw. `Strg + Enter` auf anderen Systemen 
 Das Chat-Feld startet einzeilig, wächst automatisch mit dem Text und schrumpft beim Kürzen oder Absenden wieder.
 
 Beim Seitenaufruf ist das Chat-Textfeld automatisch fokussiert.
+
+Das Chat-Feld hat einen dezenten Fokusrahmen in der sekundären Textfarbe des jeweiligen Designs.
