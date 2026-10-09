@@ -1,3 +1,57 @@
+diff --git a/dist/browser.js b/dist/browser.js
+index 0ff660e51ce7fad843eb326a39674893d963944b..6f022839912bee2c206aac3d3de00ec1548f7c04 100644
+--- a/dist/browser.js
++++ b/dist/browser.js
+@@ -145,18 +145,37 @@ function Chat(ctx) {
+               onSubmit: submit,
+               children: [
+                 /* @__PURE__ */ jsx("label", { className: "sr-only", htmlFor: "chat-input", children: "Ihre Frage" }),
+-                /* @__PURE__ */ jsx(
+-                  "textarea",
+-                  {
+-                    id: "chat-input",
+-                    className: "search bg-card border border-line rounded-card py-3.5 px-4.5 text-ink w-full",
+-                    value: input,
+-                    maxLength: 4e3,
+-                    onChange: (e) => setInput(e.target.value),
+-                    placeholder: "Ihre Frage an unser Team \u2026",
+-                    required: true
+-                  }
+-                ),
++                /* @__PURE__ */ jsxs("div", { className: "relative flex-1 min-w-0", children: [
++                  /* @__PURE__ */ jsx(
++                    "textarea",
++                    {
++                      id: "chat-input",
++                      className: "search bg-card border border-line rounded-card pt-3.5 pb-7 px-4.5 text-ink w-full block",
++                      value: input,
++                      maxLength: 4e3,
++                      onChange: (e) => setInput(e.target.value),
++                      onKeyDown: (e) => {
++                        if (e.key === "Enter" && e.ctrlKey && !e.nativeEvent.isComposing && !e.repeat) {
++                          e.preventDefault();
++                          if (!busy && input.trim())
++                            e.currentTarget.form?.requestSubmit();
++                        }
++                      },
++                      "aria-keyshortcuts": "Control+Enter",
++                      "aria-describedby": "chat-shortcut",
++                      placeholder: "Ihre Frage an unser Team \u2026",
++                      required: true
++                    }
++                  ),
++                  /* @__PURE__ */ jsx(
++                    "span",
++                    {
++                      id: "chat-shortcut",
++                      className: "absolute right-4.5 bottom-2 text-[0.625rem] text-muted pointer-events-none",
++                      children: "Strg + Enter zum Senden"
++                    }
++                  )
++                ] }),
+                 /* @__PURE__ */ jsx(
+                   "button",
+                   {
 diff --git a/dist/server.js b/dist/server.js
 index cd99595109fef3f3e49b195b21398c103c18cb59..c920368f368202513591b7c4cdd77bf739780254 100644
 --- a/dist/server.js

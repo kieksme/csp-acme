@@ -27,3 +27,5 @@ Die Header-Anordnung wird bis zur nächsten gemeinsamen CSP-Veröffentlichung du
 `pnpm dev:ollama` startet den Chat mit echten Ollama-Antworten; Schichten, Kontakte und Systemstatus bleiben Demo-Daten. Hinterlege `CSP_CHAT_OLLAMA_URL` (z. B. `http://localhost:11434`) und ein installiertes `CSP_CHAT_MODEL` in der ignorierten `.env.local`. `CSP_CHAT_TIMEOUT_MS` gibt langsamen Modellen bis zu fünf Minuten Antwortzeit (Standard 60 Sekunden). `pnpm dev` verwendet weiterhin den Demo-Chat.
 
 Der Übergangspatch für `@kieksme/csp-plugin-chat@0.6.1` ergänzt `CSP_CHAT_DEMO`, bis die nächste CSP-Version diese Einstellung enthält. Entferne ihn beim entsprechenden Paketupdate.
+
+Im Chat sendet `Strg + Enter` die Nachricht. `Enter` allein fügt einen Zeilenumbruch ein. Ein dezenter Hinweis steht unten rechts im Textfeld. Der Chat-Übergangspatch ergänzt auch dieses Tastenkürzel; der Core-Patch liefert die dazugehörigen Styles.

@@ -1,8 +1,37 @@
 diff --git a/dist/browser.css b/dist/browser.css
-index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..4879efb2e76d853d7b3eb2b8d28add4ef2d81cdb 100644
+index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..785399794f995909a48065038100c743de69cae8 100644
 --- a/dist/browser.css
 +++ b/dist/browser.css
-@@ -164,9 +164,6 @@
+@@ -124,6 +124,9 @@
+   white-space: nowrap;
+   border-width: 0;
+ }
++.pointer-events-none {
++  pointer-events: none;
++}
+ .static {
+   position: static;
+ }
+@@ -140,12 +143,18 @@
+ .bottom-0 {
+   bottom: calc(var(--spacing) * 0);
+ }
++.bottom-2 {
++  bottom: calc(var(--spacing) * 2);
++}
+ .bottom-\[4px\] {
+   bottom: 4px;
+ }
+ .left-\[4px\] {
+   left: 4px;
+ }
++.right-4\.5 {
++  right: calc(var(--spacing) * 4.5);
++}
+ .right-\[4px\] {
+   right: 4px;
+ }
+@@ -164,9 +173,6 @@
  .z-\[1\] {
    z-index: 1;
  }
@@ -12,7 +41,7 @@ index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..4879efb2e76d853d7b3eb2b8d28add4e
  .m-0 {
    margin: calc(var(--spacing) * 0);
  }
-@@ -204,9 +201,6 @@
+@@ -204,9 +210,6 @@
  .mb-4\.5 {
    margin-bottom: calc(var(--spacing) * 4.5);
  }
@@ -22,7 +51,7 @@ index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..4879efb2e76d853d7b3eb2b8d28add4e
  .mb-6\.25 {
    margin-bottom: calc(var(--spacing) * 6.25);
  }
-@@ -216,9 +210,6 @@
+@@ -216,9 +219,6 @@
  .mr-\[0\] {
    margin-right: 0;
  }
@@ -32,7 +61,7 @@ index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..4879efb2e76d853d7b3eb2b8d28add4e
  .mt-10 {
    margin-top: calc(var(--spacing) * 10);
  }
-@@ -294,8 +285,8 @@
+@@ -294,8 +294,8 @@
  .min-w-0 {
    min-width: calc(var(--spacing) * 0);
  }
@@ -43,7 +72,17 @@ index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..4879efb2e76d853d7b3eb2b8d28add4e
  }
  .max-w-\[475px\] {
    max-width: 475px;
-@@ -339,18 +330,15 @@
+@@ -312,6 +312,9 @@
+ .max-w-hero {
+   max-width: var(--hero-width);
+ }
++.flex-1 {
++  flex: 1 1 0%;
++}
+ .shrink-0 {
+   flex-shrink: 0;
+ }
+@@ -339,18 +342,15 @@
  .grid-cols-\[1fr_1fr\] {
    grid-template-columns: 1fr 1fr;
  }
@@ -65,7 +104,7 @@ index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..4879efb2e76d853d7b3eb2b8d28add4e
  .flex-wrap {
    flex-wrap: wrap;
  }
-@@ -369,6 +357,9 @@
+@@ -369,6 +369,9 @@
  .items-stretch {
    align-items: stretch;
  }
@@ -75,7 +114,7 @@ index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..4879efb2e76d853d7b3eb2b8d28add4e
  .justify-between {
    justify-content: space-between;
  }
-@@ -411,9 +402,6 @@
+@@ -411,9 +414,6 @@
  .gap-\[0\] {
    gap: 0;
  }
@@ -85,7 +124,7 @@ index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..4879efb2e76d853d7b3eb2b8d28add4e
  .overflow-auto {
    overflow: auto;
  }
-@@ -532,6 +520,10 @@
+@@ -532,6 +532,10 @@
    padding-top: calc(var(--spacing) * 2.25);
    padding-bottom: calc(var(--spacing) * 2.25);
  }
@@ -96,13 +135,15 @@ index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..4879efb2e76d853d7b3eb2b8d28add4e
  .py-3\.25 {
    padding-top: calc(var(--spacing) * 3.25);
    padding-bottom: calc(var(--spacing) * 3.25);
-@@ -562,18 +554,18 @@
+@@ -562,18 +566,24 @@
  .pb-17\.5 {
    padding-bottom: calc(var(--spacing) * 17.5);
  }
 -.pb-8 {
 -  padding-bottom: calc(var(--spacing) * 8);
--}
++.pb-7 {
++  padding-bottom: calc(var(--spacing) * 7);
+ }
  .pb-9 {
    padding-bottom: calc(var(--spacing) * 9);
  }
@@ -112,6 +153,9 @@ index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..4879efb2e76d853d7b3eb2b8d28add4e
  .pt-12 {
    padding-top: calc(var(--spacing) * 12);
  }
++.pt-3\.5 {
++  padding-top: calc(var(--spacing) * 3.5);
++}
 +.pt-7 {
 +  padding-top: calc(var(--spacing) * 7);
 +}
@@ -121,7 +165,7 @@ index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..4879efb2e76d853d7b3eb2b8d28add4e
  .pt-9 {
    padding-top: calc(var(--spacing) * 9);
  }
-@@ -598,12 +590,6 @@
+@@ -598,12 +608,6 @@
  .text-\[0\.875rem\] {
    font-size: 0.875rem;
  }
@@ -134,7 +178,7 @@ index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..4879efb2e76d853d7b3eb2b8d28add4e
  .text-\[1\.25rem\] {
    font-size: 1.25rem;
  }
-@@ -616,8 +602,11 @@
+@@ -616,8 +620,11 @@
  .text-\[1rem\] {
    font-size: 1rem;
  }
@@ -148,7 +192,7 @@ index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..4879efb2e76d853d7b3eb2b8d28add4e
  }
  .text-\[clamp\(40px\,5vw\,70px\)\] {
    font-size: clamp(40px, 5vw, 70px);
-@@ -637,21 +626,9 @@
+@@ -637,21 +644,9 @@
  .leading-\[1\.08\] {
    line-height: 1.08;
  }
@@ -170,7 +214,7 @@ index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..4879efb2e76d853d7b3eb2b8d28add4e
  .leading-\[1\.8\] {
    line-height: 1.8;
  }
-@@ -661,8 +638,8 @@
+@@ -661,8 +656,8 @@
  .tracking-\[-1\.1px\] {
    letter-spacing: -1.1px;
  }
@@ -181,7 +225,7 @@ index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..4879efb2e76d853d7b3eb2b8d28add4e
  }
  .tracking-\[-3px\] {
    letter-spacing: -3px;
-@@ -881,10 +858,6 @@ h3 {
+@@ -881,10 +876,6 @@ h3 {
    .contained\:p-11\.25 {
      padding: calc(var(--spacing) * 11.25);
    }
@@ -192,7 +236,7 @@ index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..4879efb2e76d853d7b3eb2b8d28add4e
  }
  @media (max-width: 800px) {
    .compact\:mb-\[0\] {
-@@ -914,6 +887,9 @@ h3 {
+@@ -914,6 +905,9 @@ h3 {
    .compact\:min-h-\[0\] {
      min-height: 0;
    }
@@ -202,7 +246,7 @@ index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..4879efb2e76d853d7b3eb2b8d28add4e
    .compact\:max-w-\[500px\] {
      max-width: 500px;
    }
-@@ -945,10 +921,6 @@ h3 {
+@@ -945,10 +939,6 @@ h3 {
      padding-left: calc(var(--spacing) * 6.25);
      padding-right: calc(var(--spacing) * 6.25);
    }
@@ -213,7 +257,7 @@ index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..4879efb2e76d853d7b3eb2b8d28add4e
    .compact\:pb-5 {
      padding-bottom: calc(var(--spacing) * 5);
    }
-@@ -982,6 +954,9 @@ h3 {
+@@ -982,6 +972,9 @@ h3 {
    .compact\:pr-\[0\] {
      padding-right: 0;
    }
@@ -223,7 +267,7 @@ index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..4879efb2e76d853d7b3eb2b8d28add4e
    .compact\:pt-5 {
      padding-top: calc(var(--spacing) * 5);
    }
-@@ -1026,16 +1001,9 @@ h3 {
+@@ -1026,16 +1019,9 @@ h3 {
    .narrow\:grid-cols-\[1fr\] {
      grid-template-columns: 1fr;
    }
@@ -240,7 +284,7 @@ index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..4879efb2e76d853d7b3eb2b8d28add4e
    .narrow\:pb-7\.5 {
      padding-bottom: calc(var(--spacing) * 7.5);
    }
-@@ -1045,6 +1013,9 @@ h3 {
+@@ -1045,6 +1031,9 @@ h3 {
    .narrow\:pr-6\.25 {
      padding-right: calc(var(--spacing) * 6.25);
    }
