@@ -37,3 +37,5 @@ Beim Seitenaufruf ist das Chat-Textfeld automatisch fokussiert.
 Das Chat-Feld hat einen dezenten Fokusrahmen in der sekundären Textfarbe des jeweiligen Designs.
 
 Die FAQ-Kategorie-Chips haben großzügigere Abstände, klare Konturen und eigene Zustände für Auswahl, Hover und Tastaturfokus in beiden Designs.
+
+Der Porträtkreis übernimmt die Acme-Markenfarbe halbtransparent. Design-Schalter und FAQ-Chips nutzen einheitliche, dezente Schatten mit einem stärkeren Hover-Zustand.

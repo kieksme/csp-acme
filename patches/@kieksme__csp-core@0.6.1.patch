@@ -1,5 +1,5 @@
 diff --git a/dist/browser.css b/dist/browser.css
-index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..fb09936e8d6e6cd75a8dbf7994f8735551f7ee03 100644
+index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..c296d6b1ba20805c917f2e0798c9410621824712 100644
 --- a/dist/browser.css
 +++ b/dist/browser.css
 @@ -124,6 +124,9 @@
@@ -236,7 +236,7 @@ index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..fb09936e8d6e6cd75a8dbf7994f87355
  h3 {
    font-size: 1.125rem;
    line-height: 1.5;
-@@ -856,6 +855,42 @@ h3 {
+@@ -856,6 +855,86 @@ h3 {
      scroll-behavior: auto !important;
    }
  }
@@ -256,7 +256,8 @@ index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..fb09936e8d6e6cd75a8dbf7994f87355
 +  transition:
 +    background-color 150ms,
 +    border-color 150ms,
-+    color 150ms;
++    color 150ms,
++    box-shadow 150ms;
 +}
 +section .faq-controls button:hover {
 +  background: var(--soft);
@@ -276,10 +277,53 @@ index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..fb09936e8d6e6cd75a8dbf7994f87355
 +    transition: none;
 +  }
 +}
++:root {
++  --control-shadow: 0 2px 6px rgb(17 29 25 / 8%), 0 1px 2px rgb(17 29 25 / 5%);
++  --control-shadow-hover: 0 3px 9px rgb(17 29 25 / 12%), 0 1px 2px rgb(17 29 25 / 6%);
++}
++:root[data-theme=dark] {
++  --control-shadow: 0 2px 6px rgb(0 0 0 / 24%), inset 0 1px 0 rgb(255 255 255 / 4%);
++  --control-shadow-hover: 0 3px 9px rgb(0 0 0 / 32%), inset 0 1px 0 rgb(255 255 255 / 6%);
++}
++.hero .duty-frame {
++  background: color-mix(in srgb, var(--accent) 35%, transparent);
++  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
++}
++.site-header .theme-button {
++  display: grid;
++  place-items: center;
++  width: 40px;
++  height: 40px;
++  padding: 0;
++  border: 1px solid var(--line);
++  background: var(--card);
++  color: var(--ink);
++  line-height: 1;
++  transition:
++    background-color 150ms,
++    border-color 150ms,
++    box-shadow 150ms;
++}
++.site-header .theme-button,
++section .faq-controls button {
++  box-shadow: var(--control-shadow);
++}
++.site-header .theme-button:hover,
++section .faq-controls button:hover {
++  box-shadow: var(--control-shadow-hover);
++}
++.site-header .theme-button:hover {
++  background: var(--soft);
++  border-color: var(--muted);
++}
++.site-header .theme-button:focus-visible {
++  outline: 2px solid var(--muted);
++  outline-offset: 2px;
++}
  .empty\:hidden:empty {
    display: none;
  }
-@@ -881,10 +916,6 @@ h3 {
+@@ -881,10 +960,6 @@ h3 {
    .contained\:p-11\.25 {
      padding: calc(var(--spacing) * 11.25);
    }
@@ -290,7 +334,7 @@ index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..fb09936e8d6e6cd75a8dbf7994f87355
  }
  @media (max-width: 800px) {
    .compact\:mb-\[0\] {
-@@ -914,6 +945,9 @@ h3 {
+@@ -914,6 +989,9 @@ h3 {
    .compact\:min-h-\[0\] {
      min-height: 0;
    }
@@ -300,7 +344,7 @@ index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..fb09936e8d6e6cd75a8dbf7994f87355
    .compact\:max-w-\[500px\] {
      max-width: 500px;
    }
-@@ -945,10 +979,6 @@ h3 {
+@@ -945,10 +1023,6 @@ h3 {
      padding-left: calc(var(--spacing) * 6.25);
      padding-right: calc(var(--spacing) * 6.25);
    }
@@ -311,7 +355,7 @@ index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..fb09936e8d6e6cd75a8dbf7994f87355
    .compact\:pb-5 {
      padding-bottom: calc(var(--spacing) * 5);
    }
-@@ -982,6 +1012,9 @@ h3 {
+@@ -982,6 +1056,9 @@ h3 {
    .compact\:pr-\[0\] {
      padding-right: 0;
    }
@@ -321,7 +365,7 @@ index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..fb09936e8d6e6cd75a8dbf7994f87355
    .compact\:pt-5 {
      padding-top: calc(var(--spacing) * 5);
    }
-@@ -1026,16 +1059,9 @@ h3 {
+@@ -1026,16 +1103,9 @@ h3 {
    .narrow\:grid-cols-\[1fr\] {
      grid-template-columns: 1fr;
    }
@@ -338,7 +382,7 @@ index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..fb09936e8d6e6cd75a8dbf7994f87355
    .narrow\:pb-7\.5 {
      padding-bottom: calc(var(--spacing) * 7.5);
    }
-@@ -1045,6 +1071,9 @@ h3 {
+@@ -1045,6 +1115,9 @@ h3 {
    .narrow\:pr-6\.25 {
      padding-right: calc(var(--spacing) * 6.25);
    }
@@ -348,7 +392,7 @@ index e6039ec60f5a2c8b3eda6404a67fbca321a3ffeb..fb09936e8d6e6cd75a8dbf7994f87355
    .narrow\:pt-7\.5 {
      padding-top: calc(var(--spacing) * 7.5);
    }
-@@ -1588,8 +1617,8 @@ h3 {
+@@ -1588,8 +1661,8 @@ h3 {
  .\[\&_textarea\]\:min-w-0 textarea {
    min-width: calc(var(--spacing) * 0);
  }
