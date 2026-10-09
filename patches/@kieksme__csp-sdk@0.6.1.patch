@@ -1,0 +1,65 @@
+diff --git a/dist/index.js b/dist/index.js
+index 99bdecc..09a8d23 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -167,0 +168,38 @@ async function jsonRequest(fetcher, url, init = {}) {
++function dutyState(shifts, now) {
++  const valid = shifts.filter((s) => Date.parse(s.end) > Date.parse(s.start));
++  const current = activeShifts(valid, now).sort(
++    (a, b) => Date.parse(a.start) - Date.parse(b.start) || a.userId.localeCompare(b.userId)
++  ).filter(
++    (s, i, all) => all.findIndex((other) => other.userId === s.userId) === i
++  );
++  const next = valid.filter((s) => Date.parse(s.start) > now).sort((a, b) => Date.parse(a.start) - Date.parse(b.start))[0];
++  return { current, next };
++}
++function nextShiftLabel(start, now, timezone) {
++  const timeZone = safeTimezone(timezone);
++  const date = new Date(start);
++  const dayNumber = (value) => {
++    const parts = new Intl.DateTimeFormat("en-US", {
++      timeZone,
++      year: "numeric",
++      month: "numeric",
++      day: "numeric"
++    }).formatToParts(value);
++    const part = (name) => Number(parts.find((p) => p.type === name).value);
++    return Date.UTC(part("year"), part("month") - 1, part("day")) / 864e5;
++  };
++  const days = dayNumber(date) - dayNumber(new Date(now));
++  const time = date.toLocaleTimeString("de-DE", {
++    timeZone,
++    hour: "numeric",
++    minute: "2-digit"
++  }).replace(":00", "");
++  const day = days === 0 ? "heute" : days === 1 ? "morgen" : days === 2 ? "\xFCbermorgen" : date.toLocaleDateString("de-DE", {
++    timeZone,
++    weekday: "long",
++    day: "numeric",
++    month: "long",
++    year: "numeric"
++  });
++  return `Ab ${day} um ${time} Uhr sind wir wieder f\xFCr Sie da.`;
++}
+@@ -172,0 +211 @@ export {
++  dutyState,
+@@ -173,0 +213 @@ export {
++  nextShiftLabel,
+diff --git a/dist/index.d.ts b/dist/index.d.ts
+index 6a32d2a..41ff1a3 100644
+--- a/dist/index.d.ts
++++ b/dist/index.d.ts
+@@ -6,0 +7,4 @@ type Env = Record<string, string | undefined>;
++interface ChatResponder {
++    name: string | null;
++    role: 'on-duty' | 'service-team';
++}
+@@ -248,0 +253,5 @@ declare function jsonRequest<T>(fetcher: typeof fetch, url: string, init?: Reque
++declare function dutyState(shifts: Shift[], now: number): {
++    current: Shift[];
++    next: Shift;
++};
++declare function nextShiftLabel(start: string, now: number, timezone: string): string;
+@@ -250 +259 @@ declare function jsonRequest<T>(fetcher: typeof fetch, url: string, init?: Reque
+-export { type Alert, type BrowserContext, type BrowserPlugin, type Content, type Env, LiveCache, type LiveData, type Monitor, type Person, type PluginMeta, type PublicConfig, SDK_VERSION, type Schedule, type Section, type ServerContext, type ServerPlugin, type Shift, type Source, type Status, type ThemeTokens, activeShifts, contentSchema, jsonRequest, safeTimezone, safeUrl, vCard, validatePlugins };
++export { type Alert, type BrowserContext, type BrowserPlugin, type ChatResponder, type Content, type Env, LiveCache, type LiveData, type Monitor, type Person, type PluginMeta, type PublicConfig, SDK_VERSION, type Schedule, type Section, type ServerContext, type ServerPlugin, type Shift, type Source, type Status, type ThemeTokens, activeShifts, contentSchema, dutyState, jsonRequest, nextShiftLabel, safeTimezone, safeUrl, vCard, validatePlugins };
