@@ -1,8 +1,17 @@
 diff --git a/dist/browser.js b/dist/browser.js
-index 0ff660e51ce7fad843eb326a39674893d963944b..6f022839912bee2c206aac3d3de00ec1548f7c04 100644
+index 0ff660e51ce7fad843eb326a39674893d963944b..1dd0cb689f4fb4bcbf72a71f7275408dee52f86b 100644
 --- a/dist/browser.js
 +++ b/dist/browser.js
-@@ -145,18 +145,37 @@ function Chat(ctx) {
+@@ -9,6 +9,8 @@ function Chat(ctx) {
+   const [messages, setMessages] = useState([]);
+   const [input, setInput] = useState("");
+   const [busy, setBusy] = useState(false);
++  const [isMac, setIsMac] = useState(false);
++  useEffect(() => setIsMac(/Mac/.test(navigator.platform)), []);
+   const [error, setError] = useState("");
+   const [sources, setSources] = useState([]);
+   const abort = useRef(null);
+@@ -145,18 +147,40 @@ function Chat(ctx) {
                onSubmit: submit,
                children: [
                  /* @__PURE__ */ jsx("label", { className: "sr-only", htmlFor: "chat-input", children: "Ihre Frage" }),
@@ -28,24 +37,27 @@ index 0ff660e51ce7fad843eb326a39674893d963944b..6f022839912bee2c206aac3d3de00ec1
 +                      maxLength: 4e3,
 +                      onChange: (e) => setInput(e.target.value),
 +                      onKeyDown: (e) => {
-+                        if (e.key === "Enter" && e.ctrlKey && !e.nativeEvent.isComposing && !e.repeat) {
++                        if (e.key === "Enter" && (e.ctrlKey || e.metaKey) && !e.nativeEvent.isComposing && !e.repeat) {
 +                          e.preventDefault();
 +                          if (!busy && input.trim())
 +                            e.currentTarget.form?.requestSubmit();
 +                        }
 +                      },
-+                      "aria-keyshortcuts": "Control+Enter",
++                      "aria-keyshortcuts": "Control+Enter Meta+Enter",
 +                      "aria-describedby": "chat-shortcut",
 +                      placeholder: "Ihre Frage an unser Team \u2026",
 +                      required: true
 +                    }
 +                  ),
-+                  /* @__PURE__ */ jsx(
++                  /* @__PURE__ */ jsxs(
 +                    "span",
 +                    {
 +                      id: "chat-shortcut",
 +                      className: "absolute right-4.5 bottom-2 text-[0.625rem] text-muted pointer-events-none",
-+                      children: "Strg + Enter zum Senden"
++                      children: [
++                        isMac ? "\u2318" : "Strg",
++                        " + Enter zum Senden"
++                      ]
 +                    }
 +                  )
 +                ] }),
