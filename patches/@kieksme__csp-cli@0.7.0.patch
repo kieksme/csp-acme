@@ -1,0 +1,20 @@
+diff --git a/runtime/Dockerfile b/runtime/Dockerfile
+index 6a08cec92367e6a6f8e51d480801a9f18f9f3ec2..dab384d2ccc10a1cb5dda6bb66c08599f0a3dd65 100644
+--- a/runtime/Dockerfile
++++ b/runtime/Dockerfile
+@@ -1,9 +1,13 @@
+-FROM node:22-bookworm-slim AS dependencies
++FROM public.ecr.aws/docker/library/node:22-bookworm-slim@sha256:c3de60bf2f9dd0ac6370e6117950ff62d6e339527e7472301c9c78a017978392 AS dependencies
+ WORKDIR /app
+ RUN corepack enable
+ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
++COPY patches ./patches
+ RUN pnpm install --prod --frozen-lockfile
+-FROM node:22-bookworm-slim
++FROM public.ecr.aws/docker/library/node:22-bookworm-slim@sha256:c3de60bf2f9dd0ac6370e6117950ff62d6e339527e7472301c9c78a017978392
++RUN apt-get update \
++    && apt-get install -y --no-install-recommends curl \
++    && rm -rf /var/lib/apt/lists/*
+ WORKDIR /app
+ ARG PORTAL_CONFIG=portal.config.json
+ ENV CSP_CONFIG_PATH=$PORTAL_CONFIG
