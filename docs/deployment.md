@@ -34,4 +34,4 @@ demo. Each container loads only its own customer configuration and sources.
 ## CSP 0.7.0
 
 Die Instanz verwendet CSP 0.7.0. Kunden-Stylesheets, Profil-Assets und die Chat-/Bereitschaftsdarstellung kommen aus den veröffentlichten Paketen; die bisherigen Produkt-Patches entfallen.
-Der verbleibende CLI-Patch betrifft ausschließlich den API-Docker-Build: `curl` für den bestehenden HTTP-Healthcheck und die Patch-Datei vor der Produktionsinstallation bleiben enthalten.
+Der verbleibende CLI-Patch betrifft ausschließlich den API-Docker-Build: Node 22 Bookworm slim wird von ECR Public per Digest gezogen, `curl` für den bestehenden HTTP-Healthcheck und die Patch-Datei vor der Produktionsinstallation bleiben enthalten.
