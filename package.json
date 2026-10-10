@@ -14,16 +14,16 @@
     "build:hosted": "csp build --config portal.hosted.json --production"
   },
   "dependencies": {
-    "@kieksme/csp-core": "0.6.1",
-    "@kieksme/csp-plugin-contact": "0.6.1",
-    "@kieksme/csp-plugin-content": "0.6.1",
-    "@kieksme/csp-plugin-chat": "0.6.1",
-    "@kieksme/csp-sdk": "0.6.1",
-    "@kieksme/csp-plugin-signl4": "0.6.1",
-    "@kieksme/csp-plugin-kuma": "0.6.1"
+    "@kieksme/csp-core": "0.7.0",
+    "@kieksme/csp-plugin-contact": "0.7.0",
+    "@kieksme/csp-plugin-content": "0.7.0",
+    "@kieksme/csp-plugin-chat": "0.7.0",
+    "@kieksme/csp-sdk": "0.7.0",
+    "@kieksme/csp-plugin-signl4": "0.7.0",
+    "@kieksme/csp-plugin-kuma": "0.7.0"
   },
   "devDependencies": {
-    "@kieksme/csp-cli": "0.6.1"
+    "@kieksme/csp-cli": "0.7.0"
   },
   "engines": {
     "node": ">=22.12"
