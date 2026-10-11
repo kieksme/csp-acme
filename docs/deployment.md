@@ -31,7 +31,11 @@ Adding an allowed browser origin does not authenticate API callers.
 and contacts must be supplied separately. `portal.demo.json` remains a fully static
 demo. Each container loads only its own customer configuration and sources.
 
-## CSP 0.7.0
+## CSP 0.9.0
 
-Die Instanz verwendet CSP 0.7.0. Kunden-Stylesheets, Profil-Assets und die Chat-/Bereitschaftsdarstellung kommen aus den veröffentlichten Paketen; die bisherigen Produkt-Patches entfallen.
-Der verbleibende CLI-Patch betrifft ausschließlich den API-Docker-Build: `curl` für den bestehenden HTTP-Healthcheck und die Patch-Datei vor der Produktionsinstallation bleiben enthalten.
+Die Instanz verwendet CSP 0.9.0. Kunden-Stylesheets, Profil-Assets und die Chat-/Bereitschaftsdarstellung kommen aus den veröffentlichten Paketen; die bisherigen Produkt-Patches entfallen.
+CSP 0.9.0 liefert `curl` bereits im API-Dockerfile. Der bisherige CLI-Patch entfällt; die Instanz verwendet wieder ausschließlich veröffentlichte Pakete.
+
+## Optionaler Slack-Support
+
+Das Slack-Paket ist in allen Profilen registriert. Die bestehenden Profile aktivieren keine Übertragung; `portal.support-demo.json` bietet die lokale Übernahme-Demo. Die reale Anbindung wird über ein zusätzliches `portal.support.json` vorbereitet. [Profil-Erzeugung, Runtime und Live-Abnahme](slack-support.md). Die Hosted-API verwendet weiterhin `portal.hosted.json`, solange Ziel-Workspace, Channel und Zugangsdaten nicht festgelegt sind.
