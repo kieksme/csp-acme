@@ -10,7 +10,7 @@ Die Demo verwendet erfundene Daten und Beispielkontakte. Kontakt-Downloads sind 
 
 ## Persönlicher Service-Header
 
-Das Portal verwendet CSP 0.9.0. Der Header zeigt links die große persönliche Begrüßung und den Hinweis „Jetzt im Dienst · Für Sie zuständig“, rechts das freigestellte Porträt mit rundem unteren Ausschnitt und Kreisrahmen; der Kopf ragt darüber hinaus. Zusätzliche Überschriften „Serviceportal“ und „Acme Service Portal“ entfallen im Header. Unter dem Bild stehen Name und Dienststatus. Das Eingabefeld darunter gehört zum digitalen Assistenten. Persönlicher Kontakt ist über die Hotline möglich.
+Das Portal verwendet CSP 0.10.0. Der Header zeigt links die große persönliche Begrüßung und den Hinweis „Jetzt im Dienst · Für Sie zuständig“, rechts das freigestellte Porträt mit rundem unteren Ausschnitt und Kreisrahmen; der Kopf ragt darüber hinaus. Zusätzliche Überschriften „Serviceportal“ und „Acme Service Portal“ entfallen im Header. Unter dem Bild stehen Name und Dienststatus. Das Eingabefeld darunter gehört zum digitalen Assistenten. Persönlicher Kontakt ist über die Hotline möglich.
 
 Ohne aktive Schicht nennt der Header den nächsten bekannten Beginn als heute, morgen, übermorgen oder Datum in der Schicht-Zeitzone. Sind die Schichtdaten nicht erreichbar oder veraltet, wird die Erreichbarkeit nicht bestätigt.
 
@@ -46,9 +46,9 @@ Chat-Antworten tragen den Namen der aktuellen Bereitschaftsperson und die Kennze
 
 ## Hosted OpenAI-Chat
 
-Das statische Frontend verwendet `portal.hosted.json` für die separate Coolify-API.
+Das veröffentlichte Frontend verwendet `portal.support.json` für die separate Coolify-API; `portal.hosted.json` bleibt das Profil für reinen KI-Chat.
 [Konfiguration, Image und Betriebsgrenzen](docs/deployment.md).
 
 ## Slack-Support
 
-Das separate Slack-Plugin ist installiert. `pnpm dev:support` startet die lokale Übernahme-Demo ohne Slack-Zugriff. Die Live-Anbindung ist noch nicht eingerichtet; [Acme-Einrichtung und Abnahme](docs/slack-support.md) beschreiben App „Support“, Channel, Entra-Login und Runtime-Konfiguration.
+Das separate Slack-Plugin ist installiert. `pnpm dev:support` startet die lokale Übernahme-Demo ohne Slack-Zugriff. Acme bleibt eine offene Webseite ohne Login. Besucher erhalten automatisch eine eigene Chat-Sitzung. Die App „Support“ ist im privaten Slack-Channel „acme-support“ installiert; die vollständige Weiterleitung ist noch nicht live abgenommen. [Acme-Einrichtung und Abnahme](docs/slack-support.md).

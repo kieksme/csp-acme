@@ -167,33 +167,33 @@ importers:
   .:
     dependencies:
       '@kieksme/csp-core':
-        specifier: 0.9.0
-        version: 0.9.0(vite@7.3.7(@types/node@26.6.5)(yaml@2.9.1))
+        specifier: 0.10.0
+        version: 0.10.0(vite@7.3.7(@types/node@26.6.5)(yaml@2.9.1))
       '@kieksme/csp-plugin-chat':
-        specifier: 0.9.0
-        version: 0.9.0(fastify@5.12.5)(react@19.3.0)
+        specifier: 0.10.0
+        version: 0.10.0(fastify@5.12.5)(react@19.3.0)
       '@kieksme/csp-plugin-contact':
-        specifier: 0.9.0
-        version: 0.9.0(fastify@5.12.5)(react@19.3.0)
+        specifier: 0.10.0
+        version: 0.10.0(fastify@5.12.5)(react@19.3.0)
       '@kieksme/csp-plugin-content':
-        specifier: 0.9.0
-        version: 0.9.0(@types/react@19.3.0)(fastify@5.12.5)(react@19.3.0)
+        specifier: 0.10.0
+        version: 0.10.0(@types/react@19.3.0)(fastify@5.12.5)(react@19.3.0)
       '@kieksme/csp-plugin-kuma':
-        specifier: 0.9.0
-        version: 0.9.0(fastify@5.12.5)(react@19.3.0)
+        specifier: 0.10.0
+        version: 0.10.0(fastify@5.12.5)(react@19.3.0)
       '@kieksme/csp-plugin-signl4':
-        specifier: 0.9.0
-        version: 0.9.0(fastify@5.12.5)(react@19.3.0)
+        specifier: 0.10.0
+        version: 0.10.0(fastify@5.12.5)(react@19.3.0)
       '@kieksme/csp-plugin-slack':
-        specifier: 0.9.0
-        version: 0.9.0(react@19.3.0)(vite@7.3.7(@types/node@26.6.5)(yaml@2.9.1))
+        specifier: 0.10.0
+        version: 0.10.0(react@19.3.0)(vite@7.3.7(@types/node@26.6.5)(yaml@2.9.1))
       '@kieksme/csp-sdk':
-        specifier: 0.9.0
-        version: 0.9.0(fastify@5.12.5)(react@19.3.0)
+        specifier: 0.10.0
+        version: 0.10.0(fastify@5.12.5)(react@19.3.0)
     devDependencies:
       '@kieksme/csp-cli':
-        specifier: 0.9.0
-        version: 0.9.0(@types/node@26.6.5)(fastify@5.12.5)(react@19.3.0)
+        specifier: 0.10.0
+        version: 0.10.0(@types/node@26.6.5)(fastify@5.12.5)(react@19.3.0)
 
 packages:
 
@@ -802,53 +802,53 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@kieksme/csp-cli@0.9.0':
-    resolution: {integrity: sha512-Lr/4TMsnyOIO2FlCitnlANpMG73JCKOjsybkMoUCysklZL2JXLDhmHgQf1aFmoUWw7zme5VZZuxP/Cs2p8U1TQ==}
+  '@kieksme/csp-cli@0.10.0':
+    resolution: {integrity: sha512-+Ahf3PcUk3axut8Hgny4r+J5XSRAM1adXefr3YmRiow2yVxJv5W38t/ncTYPjJnStdmIvd23+ogUlCy3BDmn+A==}
     engines: {node: '>=22.12'}
     hasBin: true
 
-  '@kieksme/csp-core@0.9.0':
-    resolution: {integrity: sha512-Ut8fcB3lxYtC5UXeGBVuW0cKVXcoE+ZSzF1jB7bQxrCE6Ee7bJZek7+m1wQSFqGnyqQxBtFBTrGTlJA29lTnoA==}
+  '@kieksme/csp-core@0.10.0':
+    resolution: {integrity: sha512-Y8rDSZruifY5uXbg5dLlr14PHXcnV2T/DhetMzWv37CLIBKj/8ZvIzdsglprkT4LREP7yzBGdFOtlfd3zid43g==}
     engines: {node: '>=22.12'}
     peerDependencies:
       vite: ^7.0.0
 
-  '@kieksme/csp-plugin-chat@0.9.0':
-    resolution: {integrity: sha512-gerrNMwY7IDeX/pJpnc6ljol5xmui1qN2k8nCv2yN66NaVz0lOYzl0AyGe79IbxANSNUio0S4tjSpaCncFA+iQ==}
+  '@kieksme/csp-plugin-chat@0.10.0':
+    resolution: {integrity: sha512-VQVeSZH4OlcGYhwPYEDo3NT2EPxIxFPb8Fu4QvlDQCs4ymVLV+y7x2Xa55qqiWoPlVck6bMjf7A/6nQ26yaIKg==}
     engines: {node: '>=22.12'}
     peerDependencies:
       react: ^19.0.0
 
-  '@kieksme/csp-plugin-contact@0.9.0':
-    resolution: {integrity: sha512-hrbh4qxKYAVucxwJx4WWmLkZz6HjMLSCwLA0GwxaXR8UCScGI4eBIDWMmYPw0LNRWLB/PIQXb+AtlbkMsR2Rlg==}
+  '@kieksme/csp-plugin-contact@0.10.0':
+    resolution: {integrity: sha512-qu6dCE8Nx1Q0XdaogKn83jOroTQVgY29vPkfPuItgaTuuKU0jBS0kzpuked+SJu3OsgEk1v6RlUvCHrcL0YCLQ==}
     engines: {node: '>=22.12'}
     peerDependencies:
       react: ^19.0.0
 
-  '@kieksme/csp-plugin-content@0.9.0':
-    resolution: {integrity: sha512-2Rin3HvgfOGjv1CKo49B5pttCY/lISaGViibrK2OIIe72IIGk1F/QZiezlLAvNoLQ4uElS7B5ZI2JQ3O/mbZkQ==}
+  '@kieksme/csp-plugin-content@0.10.0':
+    resolution: {integrity: sha512-bn204FarZ93LZ8bIGISJyGMIOmJgHkmQMWFXuQ6VfEZKL5LztKggNZdR8gJBv1d2Mqw0O6hcYTqTm6zDPSqOfQ==}
     engines: {node: '>=22.12'}
     peerDependencies:
       react: ^19.0.0
 
-  '@kieksme/csp-plugin-kuma@0.9.0':
-    resolution: {integrity: sha512-0JzUi+HM1/igzGxw7gd5dA/Z3bI8yXAAMfw//OlD40US+t4KgHAawnWvN3SHa/tI0jeBNOcX4XqRlzRmXK8XXQ==}
+  '@kieksme/csp-plugin-kuma@0.10.0':
+    resolution: {integrity: sha512-vXjzBIGWTNDybj2nQz7s42cgeIyGVwz1TZEdjqv5CRqE6J7cC44OAKPDXuqQkhf7FaI8tyBCPsLv82JvdIYmRw==}
     engines: {node: '>=22.12'}
     peerDependencies:
       react: ^19.0.0
 
-  '@kieksme/csp-plugin-signl4@0.9.0':
-    resolution: {integrity: sha512-d8z2xQF2VaakAF7RNORuMR06XS01vywWjT0/0XKzRCh9kJ0d2J4GhO5iFe3S9fvAURSMPumrvKMpka9JKJTSDQ==}
+  '@kieksme/csp-plugin-signl4@0.10.0':
+    resolution: {integrity: sha512-Lz3QYXwsTNg5cP+Niye3Pq/Pv11hwwspnKa8bEQzmqg8aJKV2z66gbXjIy4UdqWFdVaDE94JFroV0+ofAl40sw==}
     engines: {node: '>=22.12'}
     peerDependencies:
       react: ^19.0.0
 
-  '@kieksme/csp-plugin-slack@0.9.0':
-    resolution: {integrity: sha512-FC73Es4vv/+7fkgEC2ZnYDm4+L+2jCy16Ym8NI/h0AFGbQBtQAEyKw4LRRakDgkHbJ9JJ4GEo2AHCsEOezpUcQ==}
+  '@kieksme/csp-plugin-slack@0.10.0':
+    resolution: {integrity: sha512-8gM9yLhIAa91tXVu9PHpk4CCO4p5hKvA3M1wz19d/VLjZE9oIhvK/skTUSGufEtVwHLkZJHbOzo0Ob56amL5BA==}
     engines: {node: '>=22.12'}
 
-  '@kieksme/csp-sdk@0.9.0':
-    resolution: {integrity: sha512-OiS+0wxOrVQNn6ThcN/PQPja7E+4O4p+5zqop6M+51qmEFVv6e6QbwVjQ440PkvNN8plJqiUTJ3jtUJIAzPF7w==}
+  '@kieksme/csp-sdk@0.10.0':
+    resolution: {integrity: sha512-SkRZA+HcVVe8ZGS9lRdwzUDAh8NQ5lmLjx4RqRGjmOaQgSlSQOaoKxIigLH604RoIJ48An3zuGkaIi0gKsqhjA==}
     engines: {node: '>=22.12'}
     peerDependencies:
       fastify: ^5.0.0
@@ -2133,10 +2133,10 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.6.0
 
-  '@kieksme/csp-cli@0.9.0(@types/node@26.6.5)(fastify@5.12.5)(react@19.3.0)':
+  '@kieksme/csp-cli@0.10.0(@types/node@26.6.5)(fastify@5.12.5)(react@19.3.0)':
     dependencies:
-      '@kieksme/csp-core': 0.9.0(vite@7.3.7(@types/node@26.6.5)(yaml@2.9.1))
-      '@kieksme/csp-sdk': 0.9.0(fastify@5.12.5)(react@19.3.0)
+      '@kieksme/csp-core': 0.10.0(vite@7.3.7(@types/node@26.6.5)(yaml@2.9.1))
+      '@kieksme/csp-sdk': 0.10.0(fastify@5.12.5)(react@19.3.0)
       '@vitejs/plugin-react': 5.2.0(vite@7.3.7(@types/node@26.6.5)(yaml@2.9.1))
       dotenv: 17.4.2
       esbuild: 0.25.12
@@ -2160,12 +2160,12 @@ snapshots:
       - terser
       - tsx
 
-  '@kieksme/csp-core@0.9.0(vite@7.3.7(@types/node@26.6.5)(yaml@2.9.1))':
+  '@kieksme/csp-core@0.10.0(vite@7.3.7(@types/node@26.6.5)(yaml@2.9.1))':
     dependencies:
       '@fastify/cors': 11.3.1
       '@fontsource/ibm-plex-mono': 5.3.0
       '@fontsource/manrope': 5.3.0
-      '@kieksme/csp-sdk': 0.9.0(fastify@5.12.5)(react@19.3.0)
+      '@kieksme/csp-sdk': 0.10.0(fastify@5.12.5)(react@19.3.0)
       '@types/pg': 8.23.1
       dotenv: 17.4.2
       fastify: 5.12.5
@@ -2179,10 +2179,10 @@ snapshots:
     transitivePeerDependencies:
       - pg-native
 
-  '@kieksme/csp-plugin-chat@0.9.0(fastify@5.12.5)(react@19.3.0)':
+  '@kieksme/csp-plugin-chat@0.10.0(fastify@5.12.5)(react@19.3.0)':
     dependencies:
       '@azure/msal-browser': 5.25.0
-      '@kieksme/csp-sdk': 0.9.0(fastify@5.12.5)(react@19.3.0)
+      '@kieksme/csp-sdk': 0.10.0(fastify@5.12.5)(react@19.3.0)
       openai: 6.49.0(zod@3.25.76)
       react: 19.3.0
       zod: 3.25.76
@@ -2193,17 +2193,17 @@ snapshots:
       - fastify
       - ws
 
-  '@kieksme/csp-plugin-contact@0.9.0(fastify@5.12.5)(react@19.3.0)':
+  '@kieksme/csp-plugin-contact@0.10.0(fastify@5.12.5)(react@19.3.0)':
     dependencies:
-      '@kieksme/csp-sdk': 0.9.0(fastify@5.12.5)(react@19.3.0)
+      '@kieksme/csp-sdk': 0.10.0(fastify@5.12.5)(react@19.3.0)
       react: 19.3.0
       zod: 3.25.76
     transitivePeerDependencies:
       - fastify
 
-  '@kieksme/csp-plugin-content@0.9.0(@types/react@19.3.0)(fastify@5.12.5)(react@19.3.0)':
+  '@kieksme/csp-plugin-content@0.10.0(@types/react@19.3.0)(fastify@5.12.5)(react@19.3.0)':
     dependencies:
-      '@kieksme/csp-sdk': 0.9.0(fastify@5.12.5)(react@19.3.0)
+      '@kieksme/csp-sdk': 0.10.0(fastify@5.12.5)(react@19.3.0)
       react: 19.3.0
       react-markdown: 10.1.0(@types/react@19.3.0)(react@19.3.0)
       zod: 3.25.76
@@ -2212,26 +2212,26 @@ snapshots:
       - fastify
       - supports-color
 
-  '@kieksme/csp-plugin-kuma@0.9.0(fastify@5.12.5)(react@19.3.0)':
+  '@kieksme/csp-plugin-kuma@0.10.0(fastify@5.12.5)(react@19.3.0)':
     dependencies:
-      '@kieksme/csp-sdk': 0.9.0(fastify@5.12.5)(react@19.3.0)
+      '@kieksme/csp-sdk': 0.10.0(fastify@5.12.5)(react@19.3.0)
       react: 19.3.0
       zod: 3.25.76
     transitivePeerDependencies:
       - fastify
 
-  '@kieksme/csp-plugin-signl4@0.9.0(fastify@5.12.5)(react@19.3.0)':
+  '@kieksme/csp-plugin-signl4@0.10.0(fastify@5.12.5)(react@19.3.0)':
     dependencies:
-      '@kieksme/csp-sdk': 0.9.0(fastify@5.12.5)(react@19.3.0)
+      '@kieksme/csp-sdk': 0.10.0(fastify@5.12.5)(react@19.3.0)
       react: 19.3.0
       zod: 3.25.76
     transitivePeerDependencies:
       - fastify
 
-  '@kieksme/csp-plugin-slack@0.9.0(react@19.3.0)(vite@7.3.7(@types/node@26.6.5)(yaml@2.9.1))':
+  '@kieksme/csp-plugin-slack@0.10.0(react@19.3.0)(vite@7.3.7(@types/node@26.6.5)(yaml@2.9.1))':
     dependencies:
-      '@kieksme/csp-core': 0.9.0(vite@7.3.7(@types/node@26.6.5)(yaml@2.9.1))
-      '@kieksme/csp-sdk': 0.9.0(fastify@5.12.5)(react@19.3.0)
+      '@kieksme/csp-core': 0.10.0(vite@7.3.7(@types/node@26.6.5)(yaml@2.9.1))
+      '@kieksme/csp-sdk': 0.10.0(fastify@5.12.5)(react@19.3.0)
       fastify: 5.12.5
       zod: 3.25.76
     transitivePeerDependencies:
@@ -2239,7 +2239,7 @@ snapshots:
       - react
       - vite
 
-  '@kieksme/csp-sdk@0.9.0(fastify@5.12.5)(react@19.3.0)':
+  '@kieksme/csp-sdk@0.10.0(fastify@5.12.5)(react@19.3.0)':
     dependencies:
       fastify: 5.12.5
       react: 19.3.0
