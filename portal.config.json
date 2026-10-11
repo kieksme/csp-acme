@@ -31,7 +31,8 @@
     "@kieksme/csp-plugin-signl4",
     "@kieksme/csp-plugin-kuma",
     "@kieksme/csp-plugin-content",
-    "@kieksme/csp-plugin-chat"
+    "@kieksme/csp-plugin-chat",
+    "@kieksme/csp-plugin-slack"
   ],
   "avatarsFile": "avatars.json"
 }
