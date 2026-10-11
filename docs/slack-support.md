@@ -33,8 +33,20 @@ Am API-Host die vorhandenen Provider-Werte beibehalten und `.env.slack.example` 
 
 Die App **Support** ist installiert und dem privaten Channel hinzugefügt. Öffentliche Zuordnung: Workspace `T0C8FU76EBT`, Channel `C0C88MBSZV3`, App `A0C8DSXUQ3C`, berechtigter Supportnutzer André `U0C87P9DU83`. PostgreSQL **acme-support-db** läuft intern auf **nze-two** unter Coolify, ohne öffentlichen Datenbankport, mit 384 MiB Speicherlimit. Azure-Datenbank und Entra-Apps sind nicht erforderlich.
 
-Nach dem API-Start Events `/api/slack/events` und Interaktivität `/api/slack/actions` im Slack-App-Portal konfigurieren. Genau ein API-Replikat pro Support-Datenbank betreiben und Rollouts ohne überlappende Supportprozesse durchführen. Anleitung und Scopes: [CSP-Slack-Dokumentation](https://github.com/kieksme/csp/wiki/slack-support).
+Events `/api/slack/events` sind verifiziert und mit `message.groups` sowie `message.channels` aktiviert; Interaktivität `/api/slack/actions` ist gespeichert. Genau ein API-Replikat pro Support-Datenbank betreiben und Rollouts ohne überlappende Supportprozesse durchführen. Anleitung und Scopes: [CSP-Slack-Dokumentation](https://github.com/kieksme/csp/wiki/slack-support).
 
 ## Live-Abnahme
 
-Die vollständige Portal-Weiterleitung ist **noch nicht live abgenommen**. Prüfen: Besuchersitzung ohne Login, Nutzerfrage und fertige KI-Antwort im Slack-Thread, Übernahme während Streaming, Supportantwort im Portal, Rückgabe, erneute Übernahme, Abschluss und Neustart. In einem zweiten Browser-Tab mit neuer Sitzung müssen die ersten Chats unzugänglich bleiben. `/health` bestätigt nur den API-Prozess. Synthetische Kontakte und Schichten bleiben synthetisch, auch wenn Slack und KI-Provider live sind.
+**Live geprüft am 11.10.2026 mit CSP 0.10.1.** Die laufende API verwendet das Image `ghcr.io/kieksme/csp-acme-api:1a29e1bf1c1533f0ab98c4a4ea53da36aca6643f` auf nze-two.
+
+| Prüfung                         | Beobachtetes Ergebnis                                                             |
+| ------------------------------- | --------------------------------------------------------------------------------- |
+| Offene Webseite                 | Besuchersitzung automatisch, ohne Microsoft-Login                                 |
+| Weiterleitung                   | Besucherfrage und fertige KI-Antwort im echten Slack-Thread                       |
+| Menschlicher Support            | André übernimmt per Button; seine Thread-Antwort erscheint im Portal              |
+| Laufende KI-Antwort             | Übernahme stoppt die Generierung; Verlauf zeigt „Antwort unterbrochen“            |
+| Gesprächssteuerung              | Besucherantwort, Rückgabe, erneute Übernahme und Abschluss funktionieren          |
+| API-Neustart und Browser-Reload | Gleiche Besuchersitzung, Verlauf und aktive Supportübernahme bleiben erhalten     |
+| Separate Besuchersitzung        | Chat fehlt in der Liste; Lesen, Schreiben und SSE liefern 404, ohne Identität 401 |
+
+Der Test-Chat ist abgeschlossen. Der Neustart betrifft nur den einzelnen API-Container; PostgreSQL und VPS wurden nicht neu gestartet. `/health` bestätigt nur den API-Prozess. Synthetische Kontakte und Schichten bleiben synthetisch, auch wenn Slack und KI-Provider live sind.

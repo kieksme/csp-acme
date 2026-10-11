@@ -51,4 +51,4 @@ Das veröffentlichte Frontend verwendet `portal.support.json` für die separate 
 
 ## Slack-Support
 
-Das separate Slack-Plugin ist installiert. `pnpm dev:support` startet die lokale Übernahme-Demo ohne Slack-Zugriff. Acme bleibt eine offene Webseite ohne Login. Besucher erhalten automatisch eine eigene Chat-Sitzung. Die App „Support“ ist im privaten Slack-Channel „acme-support“ installiert; die vollständige Weiterleitung ist noch nicht live abgenommen. [Acme-Einrichtung und Abnahme](docs/slack-support.md).
+Das separate Slack-Plugin ist installiert. `pnpm dev:support` startet die lokale Übernahme-Demo ohne Slack-Zugriff. Acme bleibt eine offene Webseite ohne Login. Besucher erhalten automatisch eine eigene Chat-Sitzung. Die App „Support“ ist im privaten Slack-Channel „acme-support“ installiert; die Weiterleitung, Übernahme und Supportantwort wurden am 11.10.2026 live geprüft. [Acme-Einrichtung und Abnahme](docs/slack-support.md).
