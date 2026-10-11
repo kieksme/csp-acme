@@ -1,6 +1,20 @@
 # Slack-Support in Acme
 
-Acme installiert `@kieksme/csp-plugin-slack` mit derselben CSP-Version wie Core, SDK und die übrigen Plugins. Der Live-Channel ist **noch nicht eingerichtet oder getestet**. Die bestehenden Hosted- und statischen Profile registrieren das Paket, aktivieren aber keine Slack-Übertragung. Das verhindert einen Start mit fehlenden Zugangsdaten.
+Acme ist eine offene Webseite. Besucher benötigen keinen Login und keinen Microsoft-Tenant. Das Profil `portal.support.json` verwendet `chatSupport.mode: "slack"` mit `auth: "anonymous"`. Das Backend vergibt automatisch eine signierte Besuchersitzung; jeder Besucher kann nur seine eigenen Chats lesen. Supportpersonen übernehmen und beantworten Gespräche im privaten Channel **acme-support** im Workspace **kieks.me GbR**.
+
+```mermaid
+flowchart LR
+  Besucher[Offene Acme-Webseite] -->|Besuchersitzung und Nachrichten| API[Acme API auf nze-two]
+  API <-->|Gespräch und Zustand| DB[(acme-support-db)]
+  API -->|Ein Thread je Chat| Slack[Privater Slack-Channel acme-support]
+  Support[Freigegebene Supportperson] -->|Übernehmen und antworten| Slack
+  Slack -->|Signierte Aktionen und Events| API
+  API -->|Antwort und Supportname| Besucher
+```
+
+## Besuchersitzungen
+
+Sitzungen bleiben 24 Stunden im Browser-Tab erhalten, auch beim Neuladen. Nach Ablauf oder Schließen des Tabs sind alte Chats ohne Token nicht erreichbar. „Chat neu verbinden“ startet eine neue Sitzung. Die Besuchernamen sind pseudonym und nicht verifiziert. Gesprächsaufbewahrung standardmäßig 30 Tage; Slack-Kopien und Backups haben eigene Fristen. Die API begrenzt neue Sitzungen und Nachrichten; Supportrechte werden weiterhin über Slack-Nutzerliste und aktuelle Channel-Mitgliedschaft geprüft.
 
 ## Lokale Übernahme-Demo
 
@@ -9,27 +23,18 @@ pnpm install --frozen-lockfile
 pnpm dev:support
 ```
 
-Das Profil `portal.support-demo.json` verwendet fiktive Personen und speichert Gespräche nur im Arbeitsspeicher. Der Chat bietet Übernahme durch Lena Demo, Antwort, Rückgabe und Abschluss. Es wird keine Slack-Anfrage gesendet. `pnpm build:support-demo` baut dieses Profil; `pnpm check` validiert und baut es zusätzlich zu den bisherigen Profilen.
+Das Profil `portal.support-demo.json` verwendet fiktive Personen und Gespräche im Arbeitsspeicher. Lena Demo kann übernehmen, antworten, zurückgeben und abschließen. Es wird keine Slack-Anfrage gesendet. Die lokale Demo bestätigt keine echte Zustellung.
 
-## Echte Slack-Anbindung vorbereiten
+## Runtime und Veröffentlichung
 
-1. Im Ziel-Workspace die App **Support** aus `node_modules/@kieksme/csp-plugin-slack/slack-app/manifest.example.json` anlegen. HTTPS-URLs auf die Acme-API setzen: Events `/api/slack/events`, Interaktivität `/api/slack/actions`. Bot in den dedizierten internen Support-Channel einladen. Anleitung, Scopes und Reihenfolge der URL-Verifizierung: [CSP-Slack-Dokumentation](https://github.com/kieksme/csp/wiki/slack-support).
-2. Für das Portal Entra-API und SPA-App mit delegiertem `Chat.Access` konfigurieren. Die SPA-Redirect-URI muss `https://kieksme.github.io/csp-acme/` beziehungsweise die tatsächlich verwendete Portal-Adresse enthalten. Slack-Supportrechte sind eine separate Nutzerliste mit aktueller Channel-Mitgliedschaft.
-3. Aus den **öffentlichen** Entra-IDs das Live-Profil erzeugen:
+`pnpm setup:slack` erzeugt das öffentliche Profil ohne Zugangsdaten; ein vorhandenes Profil wird nur mit `--force` überschrieben. Der gemeinsame Workflow baut Frontend und API mit `portal.support.json`. Alle CSP-Pakete verwenden dieselbe veröffentlichte Version.
 
-```sh
-pnpm setup:slack --tenant-id <Tenant-GUID> --portal-client-id <SPA-App-GUID> --api-audience <API-App-GUID>
-```
+Am API-Host die vorhandenen Provider-Werte beibehalten und `.env.slack.example` ergänzen: `CSP_CONFIG_PATH=portal.support.json`, `CSP_SLACK_ENABLED=true`, `CSP_SLACK_DEMO=false`, `CSP_SLACK_AUTH=anonymous`. Mit `openssl rand -hex 32` einmalig `CSP_CHAT_SESSION_SECRET` erzeugen. Schlüssel, PostgreSQL-Zugang, Bot-Token und Signing Secret ausschließlich als Runtime-Secrets speichern; keine Secrets in Profil, Git oder Frontend.
 
-Das schreibt `portal.support.json` mit `chatSupport.mode: "slack"` und übernimmt Acme-Branding, Assets, API-Adresse und Provider-Demo aus `portal.hosted.json`. Ein vorhandenes Profil wird nur mit `--force` überschrieben; ein abweichender delegierter Scope kann mit `--scope-name` angegeben werden. Es werden keine Tokens erzeugt oder gespeichert. Dieses Profil darf mit den öffentlichen IDs eingecheckt werden, damit das API-Image dieselbe Datei enthält.
+Die App **Support** ist installiert und dem privaten Channel hinzugefügt. Öffentliche Zuordnung: Workspace `T0C8FU76EBT`, Channel `C0C88MBSZV3`, App `A0C8DSXUQ3C`, berechtigter Supportnutzer André `U0C87P9DU83`. PostgreSQL **acme-support-db** läuft intern auf **nze-two** unter Coolify, ohne öffentlichen Datenbankport, mit 384 MiB Speicherlimit. Azure-Datenbank und Entra-Apps sind nicht erforderlich.
 
-4. Am API-Host die bestehenden Werte aus `.env.hosted.example` beibehalten und die Werte aus `.env.slack.example` ergänzen. `CSP_CONFIG_PATH=portal.support.json` setzen. Pflicht: eigene PostgreSQL-Datenbank, Slack Bot-Token und Signing Secret, App-/Workspace-/Channel-ID, erlaubte Support-Nutzer-IDs und passende Entra-Werte. `CSP_SLACK_ENABLED=true`, `CSP_SLACK_DEMO=false`; `CSP_CHAT_DEMO=false` verwendet weiterhin den realen KI-Provider. Tokens und Datenbankzugang gehören ausschließlich in Runtime-Secrets.
-5. `pnpm build:support` prüfen und die Konfiguration des gemeinsamen Workflows in `.github/workflows/deploy.yml` von `portal.hosted.json` auf `portal.support.json` umstellen. Frontend und API mit demselben Profil veröffentlichen, anschließend das passende API-Image in Coolify ausrollen. Die Runtime allein zu ändern reicht nicht: Der Browser muss den Supportmodus ebenfalls enthalten.
-
-Genau ein API-Replikat pro eigener Support-Datenbank betreiben. Aufbewahrung standardmäßig 30 Tage ohne Gesprächsaktivität; Slack-Kopien und Backups haben eine eigene Frist. Die synthetischen Schichten und Kontakte bleiben synthetisch, auch wenn Login, Slack und KI-Provider live sind.
+Nach dem API-Start Events `/api/slack/events` und Interaktivität `/api/slack/actions` im Slack-App-Portal konfigurieren. Genau ein API-Replikat pro Support-Datenbank betreiben und Rollouts ohne überlappende Supportprozesse durchführen. Anleitung und Scopes: [CSP-Slack-Dokumentation](https://github.com/kieksme/csp/wiki/slack-support).
 
 ## Live-Abnahme
 
-Echten Login, Channel-Thread, Nutzerfrage und abgeschlossene KI-Antwort prüfen. Übernahme während KI-Streaming muss den Bot stoppen und den aus Slack geprüften Supportnamen im Portal zeigen. Nur neue Textantworten der zuständigen Person dürfen ins Portal gelangen. Antworten anderer Personen bleiben intern. Rückgabe, erneute Übernahme, Abschluss, fehlende Berechtigung und Neustart im Supportmodus separat prüfen. `/health` bestätigt nur den API-Prozess.
-
-Ein Live-Rollout ist erst mit festgelegtem Workspace/Channel, Supportpersonen und bereitgestellten Entra-/Slack-/PostgreSQL-Werten möglich. Die lokale Demo bestätigt keine echte Slack-Zustellung.
+Die vollständige Portal-Weiterleitung ist **noch nicht live abgenommen**. Prüfen: Besuchersitzung ohne Login, Nutzerfrage und fertige KI-Antwort im Slack-Thread, Übernahme während Streaming, Supportantwort im Portal, Rückgabe, erneute Übernahme, Abschluss und Neustart. In einem zweiten Browser-Tab mit neuer Sitzung müssen die ersten Chats unzugänglich bleiben. `/health` bestätigt nur den API-Prozess. Synthetische Kontakte und Schichten bleiben synthetisch, auch wenn Slack und KI-Provider live sind.

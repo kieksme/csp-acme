@@ -39,3 +39,7 @@ CSP 0.9.0 liefert `curl` bereits im API-Dockerfile. Der bisherige CLI-Patch entf
 ## Optionaler Slack-Support
 
 Das Slack-Paket ist in allen Profilen registriert. Die bestehenden Profile aktivieren keine Übertragung; `portal.support-demo.json` bietet die lokale Übernahme-Demo. Die reale Anbindung wird über ein zusätzliches `portal.support.json` vorbereitet. [Profil-Erzeugung, Runtime und Live-Abnahme](slack-support.md). Die Hosted-API verwendet weiterhin `portal.hosted.json`, solange Ziel-Workspace, Channel und Zugangsdaten nicht festgelegt sind.
+
+## Offene Slack-Support-Webseite
+
+Der Veröffentlichungsworkflow baut jetzt `portal.support.json` mit anonymen Besuchersitzungen, ohne Microsoft-Login. Die passende API-Runtime steht in `.env.slack.example`; siehe [Slack-Support](slack-support.md). Das bisherige `portal.hosted.json` bleibt als eigenständiges Profil für reinen KI-Chat verfügbar.

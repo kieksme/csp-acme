@@ -26,9 +26,9 @@ jobs:
       - run: pnpm check
   portal:
     needs: check
-    uses: kieksme/csp/.github/workflows/customer-build.yml@v0.9.0
+    uses: kieksme/csp/.github/workflows/customer-build.yml@v0.10.0
     with:
-      config: portal.hosted.json
+      config: portal.support.json
       pages: true
       public-overrides: >-
         {"CSP_BASE_PATH":"/${{ github.event.repository.name }}/","CSP_DOMAIN":"https://${{ github.repository_owner }}.github.io"}
