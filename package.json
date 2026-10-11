@@ -18,17 +18,17 @@
     "build:support": "csp build --config portal.support.json --production"
   },
   "dependencies": {
-    "@kieksme/csp-core": "0.10.0",
-    "@kieksme/csp-plugin-contact": "0.10.0",
-    "@kieksme/csp-plugin-content": "0.10.0",
-    "@kieksme/csp-plugin-chat": "0.10.0",
-    "@kieksme/csp-sdk": "0.10.0",
-    "@kieksme/csp-plugin-signl4": "0.10.0",
-    "@kieksme/csp-plugin-kuma": "0.10.0",
-    "@kieksme/csp-plugin-slack": "0.10.0"
+    "@kieksme/csp-core": "0.10.1",
+    "@kieksme/csp-plugin-contact": "0.10.1",
+    "@kieksme/csp-plugin-content": "0.10.1",
+    "@kieksme/csp-plugin-chat": "0.10.1",
+    "@kieksme/csp-sdk": "0.10.1",
+    "@kieksme/csp-plugin-signl4": "0.10.1",
+    "@kieksme/csp-plugin-kuma": "0.10.1",
+    "@kieksme/csp-plugin-slack": "0.10.1"
   },
   "devDependencies": {
-    "@kieksme/csp-cli": "0.10.0"
+    "@kieksme/csp-cli": "0.10.1"
   },
   "engines": {
     "node": ">=22.12"
