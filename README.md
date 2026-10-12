@@ -10,7 +10,7 @@ Die Demo verwendet erfundene Daten und Beispielkontakte. Kontakt-Downloads sind 
 
 ## Persönlicher Service-Header
 
-Das Portal verwendet CSP 0.12.1. Der Header zeigt links die große persönliche Begrüßung und den Hinweis „Jetzt im Dienst · Für Sie zuständig“, rechts das freigestellte Porträt mit rundem unteren Ausschnitt und Kreisrahmen; der Kopf ragt darüber hinaus. Zusätzliche Überschriften „Serviceportal“ und „Acme Service Portal“ entfallen im Header. Unter dem Bild stehen Name und Dienststatus. Das Eingabefeld darunter gehört zum digitalen Assistenten. Persönlicher Kontakt ist über die Hotline möglich.
+Das Portal verwendet CSP 0.13.0. Der Header zeigt links die große persönliche Begrüßung und den Hinweis „Jetzt im Dienst · Für Sie zuständig“, rechts das freigestellte Porträt mit rundem unteren Ausschnitt und Kreisrahmen; der Kopf ragt darüber hinaus. Zusätzliche Überschriften „Serviceportal“ und „Acme Service Portal“ entfallen im Header. Unter dem Bild stehen Name und Dienststatus. Das Eingabefeld darunter gehört zum digitalen Assistenten. Persönlicher Kontakt ist über die Hotline möglich.
 
 Ohne aktive Schicht nennt der Header den nächsten bekannten Beginn als heute, morgen, übermorgen oder Datum in der Schicht-Zeitzone. Sind die Schichtdaten nicht erreichbar oder veraltet, wird die Erreichbarkeit nicht bestätigt.
 
@@ -54,6 +54,8 @@ Das veröffentlichte Frontend verwendet `portal.support.json` für die separate 
 Das separate Slack-Plugin ist installiert. `pnpm dev:support` startet die lokale Übernahme-Demo ohne Slack-Zugriff. Acme bleibt eine offene Webseite ohne Login. Besucher erhalten automatisch eine eigene Chat-Sitzung. Die App „Support“ ist im privaten Slack-Channel „acme-support“ installiert; die Weiterleitung, Übernahme und Supportantwort wurden am 11.10.2026 live geprüft. [Acme-Einrichtung und Abnahme](docs/slack-support.md).
 
 ## Chat und persönliche Unterstützung
+
+Der Service-Chat zeigt Status und Absender deutlich: eigene Nachrichten rechts, Antworten von Assistent und Support links. Eingabe, Senden, Tastenkürzel und Diktieren bilden einen gemeinsamen Bereich. Die Darstellung übernimmt Acmes Farben, unterstützt das dunkle Design und bleibt auf dem Handy bedienbar. Der Verlauf lässt sich auch per Tastatur scrollen.
 
 Lange Chats scrollen bei neuen Antworten mit, solange Sie am Ende lesen. Beim Hochscrollen bleibt die Leseposition erhalten; **Neue Nachrichten ↓** führt zurück ans Ende. Mit **Nachricht diktieren** ergänzt die OpenAI-Spracheingabe einen bearbeitbaren Entwurf, der erst durch Sie gesendet wird.
 
