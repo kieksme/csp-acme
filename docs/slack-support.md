@@ -71,5 +71,6 @@ Die API läuft mit dem unveränderlichen Acme-Image `ghcr.io/kieksme/csp-acme-ap
 | Laufende KI unterbrechen | Besucher klickte während einer neuen Antwort auf „Problem gelöst“; der Verlauf zeigte „(Antwort unterbrochen)“ und blieb gelöst. |
 | Fremde Sitzung | Listen/Lesen/Schreiben/SSE sowie `POST /resolve` für den fremden Test-Chat wurden mit 404 abgewiesen. Ohne Identität lieferten Lesen und Lösen 401. |
 | Avatar | Das neue Support-Headset-Avatar ist nach Slack-Neuladen im echten Channel sichtbar. |
+| Neuladen | Besuchersitzung, unterbrochene Antwort und Lösungsstatus wurden nach Browser-Neuladen wiederhergestellt. |
 
-Alle Tests verwendeten eine getrennte Besuchersitzung; vorhandene Nutzer-Gespräche wurden nicht übernommen oder geschlossen. Bereits vorhandene Slack-Karten erhalten neue Aktionen bei ihrer nächsten Statusaktualisierung; neu angelegte Gespräche haben den Lösungs-Button sofort. Das alte „Abschließen“ bleibt von „Problem gelöst“ getrennt. Die frühere Abnahme vom 11.10.2026 ist ein historischer Nachweis für CSP 0.10.1.
+Alle Tests verwendeten eine getrennte Besuchersitzung; vorhandene Nutzer-Gespräche wurden nicht übernommen oder geschlossen. Die bereits vorhandene offene Slack-Karte wurde zusätzlich mit dem Lösungs-Button aktualisiert, ohne den Chat zu übernehmen oder zu schließen. Neu angelegte Gespräche haben den Lösungs-Button sofort. Das alte „Abschließen“ bleibt von „Problem gelöst“ getrennt. Die frühere Abnahme vom 11.10.2026 ist ein historischer Nachweis für CSP 0.10.1.
