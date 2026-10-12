@@ -74,3 +74,15 @@ Die API läuft mit dem unveränderlichen Acme-Image `ghcr.io/kieksme/csp-acme-ap
 | Neuladen | Besuchersitzung, unterbrochene Antwort und Lösungsstatus wurden nach Browser-Neuladen wiederhergestellt. |
 
 Alle Tests verwendeten eine getrennte Besuchersitzung; vorhandene Nutzer-Gespräche wurden nicht übernommen oder geschlossen. Die bereits vorhandene offene Slack-Karte wurde zusätzlich mit dem Lösungs-Button aktualisiert, ohne den Chat zu übernehmen oder zu schließen. Neu angelegte Gespräche haben den Lösungs-Button sofort. Das alte „Abschließen“ bleibt von „Problem gelöst“ getrennt. Die frühere Abnahme vom 11.10.2026 ist ein historischer Nachweis für CSP 0.10.1.
+
+## Chat-Verbesserungen mit CSP 0.12.0
+
+Der Chat zeigt wieder **⌘ Enter zum Senden** beziehungsweise **Strg Enter zum Senden**. Lange Verläufe folgen neuen Antworten am Ende; beim Hochscrollen bleibt die Leseposition erhalten, **Neue Nachrichten ↓** führt zurück ans Ende. Das Eingabefeld bleibt außerhalb des scrollbaren Verlaufs.
+
+**Nachricht diktieren** nimmt nach Mikrofonfreigabe maximal 60 Sekunden auf. Der vorhandene OpenAI-Schlüssel wird ausschließlich im Backend verwendet; `gpt-4o-mini-transcribe` erstellt einen bearbeitbaren Zusatz zum Entwurf. Der Benutzer sendet selbst. Audiodateien werden nicht in PostgreSQL gespeichert. Fehler erhalten den Entwurf.
+
+**Ich möchte mit einer echten Person sprechen** pausiert die KI sofort, auch während einer Antwort oder vor der ersten Nachricht. Die gespeicherte Anfrage benachrichtigt **André als feste Vertretung** über seinen berechtigten Slack-Account; Acmes fiktive Dienstpersonen lösen keine gezielten Benachrichtigungen aus. Runtime-Zuordnung: `CSP_SUPPORT_FALLBACK_USER_IDS=U0C87P9DU83`. Ohne gültige Zuordnung bleibt die Anfrage im Support-Channel sichtbar. Das Portal unterscheidet Anfrage, verzögerte Zustellung und tatsächliche Übernahme. Weitere Besuchernachrichten im Wartezustand lösen keine KI-Antwort aus; nur der zuständige Support kann nach Übernahme antworten und den Bot ausdrücklich wieder freigeben.
+
+Besuchernachrichten erscheinen in Slack als Zitat mit **Besucher · Name**; die KI bleibt als **Digitaler Assistent** bezeichnet. Diese Änderung betrifft neue weitergeleitete Nachrichten. Acme bleibt öffentlich ohne Microsoft-Login. Teams und Telegram werden durch dieses Update nicht installiert.
+
+[Gemeinsamer Chat-Vertrag und API](https://github.com/kieksme/csp/wiki/chat).

@@ -2,12 +2,12 @@ allowBuilds:
   esbuild: true
   sharp: false
 minimumReleaseAgeExclude:
-  - "@kieksme/csp-core@0.9.0 || 0.10.0 || 0.10.1 || 0.11.0"
-  - "@kieksme/csp-plugin-contact@0.9.0 || 0.10.0 || 0.10.1 || 0.11.0"
-  - "@kieksme/csp-plugin-content@0.9.0 || 0.10.0 || 0.10.1 || 0.11.0"
-  - "@kieksme/csp-plugin-chat@0.9.0 || 0.10.0 || 0.10.1 || 0.11.0"
-  - "@kieksme/csp-sdk@0.9.0 || 0.10.0 || 0.10.1 || 0.11.0"
-  - "@kieksme/csp-plugin-signl4@0.9.0 || 0.10.0 || 0.10.1 || 0.11.0"
-  - "@kieksme/csp-plugin-kuma@0.9.0 || 0.10.0 || 0.10.1 || 0.11.0"
-  - "@kieksme/csp-cli@0.9.0 || 0.10.0 || 0.10.1 || 0.11.0"
-  - "@kieksme/csp-plugin-slack@0.9.0 || 0.10.0 || 0.10.1 || 0.11.0"
+  - "@kieksme/csp-core@0.9.0 || 0.10.0 || 0.10.1 || 0.11.0 || 0.12.0"
+  - "@kieksme/csp-plugin-contact@0.9.0 || 0.10.0 || 0.10.1 || 0.11.0 || 0.12.0"
+  - "@kieksme/csp-plugin-content@0.9.0 || 0.10.0 || 0.10.1 || 0.11.0 || 0.12.0"
+  - "@kieksme/csp-plugin-chat@0.9.0 || 0.10.0 || 0.10.1 || 0.11.0 || 0.12.0"
+  - "@kieksme/csp-sdk@0.9.0 || 0.10.0 || 0.10.1 || 0.11.0 || 0.12.0"
+  - "@kieksme/csp-plugin-signl4@0.9.0 || 0.10.0 || 0.10.1 || 0.11.0 || 0.12.0"
+  - "@kieksme/csp-plugin-kuma@0.9.0 || 0.10.0 || 0.10.1 || 0.11.0 || 0.12.0"
+  - "@kieksme/csp-cli@0.9.0 || 0.10.0 || 0.10.1 || 0.11.0 || 0.12.0"
+  - "@kieksme/csp-plugin-slack@0.9.0 || 0.10.0 || 0.10.1 || 0.11.0 || 0.12.0"
