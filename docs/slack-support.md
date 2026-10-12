@@ -56,4 +56,21 @@ Der Test-Chat ist abgeschlossen. Der Neustart betrifft nur den einzelnen API-Con
 
 Besucher können ihren eigenen Chat mit **Problem gelöst** beenden, auch während einer KI-Antwort oder Support-Übernahme. Die Lösung wird gespeichert, unterbricht die KI-Ausgabe und aktualisiert Verlauf und Statuskarte in Slack. Berechtigter Support kann im Botmodus ebenfalls lösen; nach Übernahme darf das nur die zuständige Person. **Abschließen** bleibt ohne Behauptung einer Lösung verfügbar.
 
-Bei unklaren Erstfragen wie „Hallo, meine Email“ soll der Assistent zunächst kurz nach dem konkreten Problem fragen. Ticketlinks folgen erst bei erforderlicher Eskalation oder ausdrücklichem Ticketwunsch. Das gemeinsame Headset-Avatar wurde in der vorhandenen Slack-App gespeichert. Die Abnahme der neuen Chat-Funktionen ist bis zum tatsächlichen Rollout separat offen.
+Bei unklaren Erstfragen wie „Hallo, meine Email“ soll der Assistent zunächst kurz nach dem konkreten Problem fragen. Ticketlinks folgen erst bei erforderlicher Eskalation oder ausdrücklichem Ticketwunsch. Das gemeinsame Headset-Avatar wurde in der vorhandenen Slack-App gespeichert. Die neuen Chat-Funktionen wurden am 12.10.2026 in Acme live abgenommen (Nachweise unten).
+
+
+## Live-Abnahme CSP 0.11.0 am 12.10.2026
+
+Die API läuft mit dem unveränderlichen Acme-Image `ghcr.io/kieksme/csp-acme-api:866183f80c8d1baaf63b266f9308d096980a75a8`. GitHub Pages, Image-Publishing und Coolify-Rollout waren erfolgreich; der Container ist gesund und das externe `/health` liefert 200. Die Besuchersitzungen und interne PostgreSQL-Datenbank bleiben erhalten.
+
+| Prüfung | Tatsächlicher Nachweis |
+| --- | --- |
+| Unklare Erstfrage | Auf „Hallo, meine Email“ antwortete der echte KI-Provider: „Was funktioniert bei Ihrer E-Mail gerade nicht – das Senden, das Empfangen oder die Anmeldung?“ Kein Ticketlink in dieser Antwort. |
+| Besucher löst | Portal wurde geschlossen; Systemmeldung „Der Besucher hat das Problem als gelöst markiert.“ und Slack-Status „Problem gelöst“. |
+| Support löst ohne Übernahme | André Lademann klickte im Slack-Test-Thread auf „Problem gelöst“; das Portal zeigte den Lösungsstatus und die Support-Systemmeldung. |
+| Laufende KI unterbrechen | Besucher klickte während einer neuen Antwort auf „Problem gelöst“; der Verlauf zeigte „(Antwort unterbrochen)“ und blieb gelöst. |
+| Fremde Sitzung | Listen/Lesen/Schreiben/SSE sowie `POST /resolve` für den fremden Test-Chat wurden mit 404 abgewiesen. Ohne Identität lieferten Lesen und Lösen 401. |
+| Avatar | Das neue Support-Headset-Avatar ist nach Slack-Neuladen im echten Channel sichtbar. |
+| Neuladen | Besuchersitzung, unterbrochene Antwort und Lösungsstatus wurden nach Browser-Neuladen wiederhergestellt. |
+
+Alle Tests verwendeten eine getrennte Besuchersitzung; vorhandene Nutzer-Gespräche wurden nicht übernommen oder geschlossen. Die bereits vorhandene offene Slack-Karte wurde zusätzlich mit dem Lösungs-Button aktualisiert, ohne den Chat zu übernehmen oder zu schließen. Neu angelegte Gespräche haben den Lösungs-Button sofort. Das alte „Abschließen“ bleibt von „Problem gelöst“ getrennt. Die frühere Abnahme vom 11.10.2026 ist ein historischer Nachweis für CSP 0.10.1.
