@@ -99,6 +99,7 @@ GitHub Pages und Image-Publishing wurden im Lauf [38245376352](https://github.co
 | Schreiben während des Wartens | Mehrzeilige Testnachricht per Command-Enter gesendet; sie erschien als Besucher-Zitat in Slack und erzeugte keine KI-Antwort. |
 | Übernahme aus Benachrichtigung | Der Button auf der zusätzlichen Benachrichtigungskarte `1791806426.006469` übernahm das Gespräch; das Portal nannte danach André Lademann als Support. |
 | Rückkanal | Klar markierte Testantwort vom angemeldeten Slack-Support-Account erschien im Portal unter **André Lademann · Support**. |
+| Browser-Neuladen | Dieselbe Besuchersitzung, Support-Zuordnung und Slack-Testantwort wurden nach vollständigem Neuladen wiederhergestellt. |
 | OpenAI-Transkription | Eine synthetisch erzeugte WAV-Testaufnahme wurde über die authentifizierte API korrekt als „Dies ist ein Test der Spracheingabe. Meine E-Mail funktioniert nicht.“ erkannt. Die Transkriptionsroute sendete keine Chatnachricht. |
 | Sitzungsschutz | Fremde Sitzung: Lesen, Schreiben, Support-Anfrage und Lösen jeweils 404; Support-Anfrage ohne Sitzung 401. |
 
