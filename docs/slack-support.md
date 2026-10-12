@@ -50,3 +50,10 @@ Events `/api/slack/events` sind verifiziert und mit `message.groups` sowie `mess
 | Separate Besuchersitzung        | Chat fehlt in der Liste; Lesen, Schreiben und SSE liefern 404, ohne Identität 401 |
 
 Der Test-Chat ist abgeschlossen. Der Neustart betrifft nur den einzelnen API-Container; PostgreSQL und VPS wurden nicht neu gestartet. `/health` bestätigt nur den API-Prozess. Synthetische Kontakte und Schichten bleiben synthetisch, auch wenn Slack und KI-Provider live sind.
+
+
+## Problem gelöst und Klärungsfragen (CSP 0.11.0)
+
+Besucher können ihren eigenen Chat mit **Problem gelöst** beenden, auch während einer KI-Antwort oder Support-Übernahme. Die Lösung wird gespeichert, unterbricht die KI-Ausgabe und aktualisiert Verlauf und Statuskarte in Slack. Berechtigter Support kann im Botmodus ebenfalls lösen; nach Übernahme darf das nur die zuständige Person. **Abschließen** bleibt ohne Behauptung einer Lösung verfügbar.
+
+Bei unklaren Erstfragen wie „Hallo, meine Email“ soll der Assistent zunächst kurz nach dem konkreten Problem fragen. Ticketlinks folgen erst bei erforderlicher Eskalation oder ausdrücklichem Ticketwunsch. Das gemeinsame Headset-Avatar wurde in der vorhandenen Slack-App gespeichert. Die Abnahme der neuen Chat-Funktionen ist bis zum tatsächlichen Rollout separat offen.
