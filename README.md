@@ -60,3 +60,7 @@ Der Service-Chat zeigt Status und Absender deutlich: eigene Nachrichten rechts, 
 Lange Chats scrollen bei neuen Antworten mit, solange Sie am Ende lesen. Beim Hochscrollen bleibt die Leseposition erhalten; **Neue Nachrichten ↓** führt zurück ans Ende. Die Eingabe ist kompakt: Das **Mikrofon-Symbol** sitzt direkt neben **Senden** in einer Zeile, und beide Buttons sind gleich hoch (44 px). Der Tastaturhinweis steht im Textfeld unten rechts und überdeckt keinen Entwurf. Auch Aufnahme stoppen und Abbrechen bleiben als beschriftete Symbole in derselben Buttonzeile. Darüber ergänzt die OpenAI-Spracheingabe einen bearbeitbaren Entwurf, der erst durch Sie gesendet wird.
 
 **Ich möchte mit einer echten Person sprechen** pausiert die KI und fragt den Support an. Acme benachrichtigt André als feste Vertretung in Slack; die Dienstpersonen im Demo-Header sind fiktiv. Besuchernachrichten werden in Slack als Zitat gekennzeichnet. KI-Antworten im Channel beginnen kompakt mit **🤖**; echte Support-Antworten tragen den Namen. Im Portal bleibt „Digitaler Assistent“ sichtbar. [Einrichtung und Abnahme](docs/slack-support.md).
+
+## Datadog-Demo
+
+`pnpm dev:datadog` startet ein separates Profil mit Datadog Cases, Monitoren, SLOs und Bereitschaften. Es nutzt nur Beispieldaten. Einmalig die lokalen CSP-Pakete über `pnpm setup:datadog --source <CSP-Worktree>` vorbereiten. [Setup, Build und Grenzen](docs/datadog-demo.md).

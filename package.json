@@ -15,7 +15,11 @@
     "dev:support": "CSP_DEMO=true CSP_CHAT_DEMO=true CSP_SLACK_DEMO=true CSP_SLACK_ENABLED=false CSP_ALLOWED_ORIGINS=http://127.0.0.1:5173,http://localhost:5173 csp dev --config portal.support-demo.json",
     "build:support-demo": "csp build --config portal.support-demo.json",
     "setup:slack": "node scripts/setup-slack.mjs",
-    "build:support": "csp build --config portal.support.json --production"
+    "build:support": "csp build --config portal.support.json --production",
+    "setup:datadog": "node scripts/datadog-demo.mjs setup",
+    "dev:datadog": "node scripts/datadog-demo.mjs dev",
+    "build:datadog-demo": "node scripts/datadog-demo.mjs build",
+    "check:datadog": "node scripts/datadog-demo.mjs check"
   },
   "dependencies": {
     "@kieksme/csp-core": "0.13.4",
