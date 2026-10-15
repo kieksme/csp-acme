@@ -16,6 +16,18 @@ Coolify 4.4.6 rejects inline JavaScript in custom container commands, so a
 `node -e` check cannot be saved there. Healthchecks confirm API readiness; they do
 not confirm OpenAI authentication.
 
+For `portal.support.json`, enable **Consistent Container Names** in Coolify's
+advanced application settings. The support runtime holds an exclusive PostgreSQL
+lock: only one API instance may use its database. This setting makes Coolify stop
+the previous container before starting its replacement. Expect a short API
+interruption during deployment; the static frontend remains available. A rolling
+update starts both instances together and fails with
+`Only one CSP support runtime may use this database`.
+
+After deployment, verify `/health`, the running image's immutable commit tag and
+digest, and the installed `@kieksme/csp-core` version. If startup fails, redeploy
+the previous immutable image tag and check readiness again.
+
 Use `.env.hosted.example` as runtime settings. Replace the dummy API key separately
 for each customer; never provide a real key to a frontend build. A dummy key allows
 API startup but OpenAI requests fail until replaced. Redeploy after key changes.
