@@ -9,3 +9,4 @@ dist-api/
 !.env.api.example
 !.env.hosted.example
 !.env.slack.example
+!.env.datadog.example
