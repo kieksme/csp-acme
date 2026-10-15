@@ -31,9 +31,9 @@ Adding an allowed browser origin does not authenticate API callers.
 and contacts must be supplied separately. `portal.demo.json` remains a fully static
 demo. Each container loads only its own customer configuration and sources.
 
-## CSP 0.9.0
+## Historisch: Umstellung auf CSP 0.9.0
 
-Die Instanz verwendet CSP 0.9.0. Kunden-Stylesheets, Profil-Assets und die Chat-/Bereitschaftsdarstellung kommen aus den veröffentlichten Paketen; die bisherigen Produkt-Patches entfallen.
+Mit CSP 0.9.0 wurden die zuvor lokalen Patches abgelöst. Kunden-Stylesheets, Profil-Assets und die Chat-/Bereitschaftsdarstellung kommen aus den veröffentlichten Paketen; die bisherigen Produkt-Patches entfallen.
 CSP 0.9.0 liefert `curl` bereits im API-Dockerfile. Der bisherige CLI-Patch entfällt; die Instanz verwendet wieder ausschließlich veröffentlichte Pakete.
 
 ## Optionaler Slack-Support
@@ -43,3 +43,7 @@ Das Slack-Paket ist in allen Profilen registriert. Die Demo- und KI-Profile akti
 ## Offene Slack-Support-Webseite
 
 Der Veröffentlichungsworkflow baut jetzt `portal.support.json` mit anonymen Besuchersitzungen, ohne Microsoft-Login. Die passende API-Runtime steht in `.env.slack.example`; siehe [Slack-Support](slack-support.md). Das bisherige `portal.hosted.json` bleibt als eigenständiges Profil für reinen KI-Chat verfügbar.
+
+## Datadog-Demo und CSP 0.14.0
+
+Alle CSP-Pakete und der wiederverwendbare Kundenworkflow verwenden Version 0.14.0. Die zusätzliche statische Datadog-Demo wird vom Check-Job separat gebaut und beim Pages-Deployment unter `datadog/` in das bestehende Supportportal eingefügt. Beide Frontends werden gemeinsam als ein Pages-Artefakt veröffentlicht. Das API-Image verwendet weiterhin ausschließlich `portal.support.json`; die statische Datadog-Demo aktiviert keine zusätzlichen Provider-Routen im produktiven Support-API-Prozess. [Demo, Konto-Status und lokale Befehle](datadog-demo.md).
