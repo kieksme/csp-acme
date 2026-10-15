@@ -10,7 +10,7 @@ Die Demo verwendet erfundene Daten und Beispielkontakte. Kontakt-Downloads sind 
 
 ## Persönlicher Service-Header
 
-Das Portal verwendet CSP 0.13.4. Der Header zeigt links die große persönliche Begrüßung und den Hinweis „Jetzt im Dienst · Für Sie zuständig“, rechts das freigestellte Porträt mit rundem unteren Ausschnitt und Kreisrahmen; der Kopf ragt darüber hinaus. Zusätzliche Überschriften „Serviceportal“ und „Acme Service Portal“ entfallen im Header. Unter dem Bild stehen Name und Dienststatus. Das Eingabefeld darunter gehört zum digitalen Assistenten. Persönlicher Kontakt ist über die Hotline möglich.
+Das Portal verwendet CSP 0.14.0. Der Header zeigt links die große persönliche Begrüßung und den Hinweis „Jetzt im Dienst · Für Sie zuständig“, rechts das freigestellte Porträt mit rundem unteren Ausschnitt und Kreisrahmen; der Kopf ragt darüber hinaus. Zusätzliche Überschriften „Serviceportal“ und „Acme Service Portal“ entfallen im Header. Unter dem Bild stehen Name und Dienststatus. Das Eingabefeld darunter gehört zum digitalen Assistenten. Persönlicher Kontakt ist über die Hotline möglich.
 
 Ohne aktive Schicht nennt der Header den nächsten bekannten Beginn als heute, morgen, übermorgen oder Datum in der Schicht-Zeitzone. Sind die Schichtdaten nicht erreichbar oder veraltet, wird die Erreichbarkeit nicht bestätigt.
 
@@ -63,4 +63,4 @@ Lange Chats scrollen bei neuen Antworten mit, solange Sie am Ende lesen. Beim Ho
 
 ## Datadog-Demo
 
-`pnpm dev:datadog` startet ein separates Profil mit Datadog Cases, Monitoren, SLOs und Bereitschaften. Es nutzt nur Beispieldaten. Einmalig die lokalen CSP-Pakete über `pnpm setup:datadog --source <CSP-Worktree>` vorbereiten. [Setup, Build und Grenzen](docs/datadog-demo.md).
+`pnpm dev:datadog` startet ein separates Profil mit Datadog Cases, Monitoren, SLOs und Bereitschaften. Es nutzt nur Beispieldaten. Die [öffentliche Datadog-Demo](https://kieksme.github.io/csp-acme/datadog/) verwendet CSP 0.14.0. [Setup, Build und Grenzen](docs/datadog-demo.md).

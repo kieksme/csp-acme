@@ -9,7 +9,7 @@
     "start": "csp start",
     "start:api": "csp start",
     "build:demo": "csp build --config portal.demo.json --production",
-    "check": "csp validate && csp validate --config portal.demo.json --production && csp build && csp build --config portal.demo.json --production && csp validate --config portal.hosted.json --production && csp build --config portal.hosted.json --production && csp validate --config portal.support-demo.json && csp build --config portal.support-demo.json && csp validate --config portal.support.json --production && csp build --config portal.support.json --production",
+    "check": "csp validate && csp validate --config portal.demo.json --production && csp build && csp build --config portal.demo.json --production && csp validate --config portal.hosted.json --production && csp build --config portal.hosted.json --production && csp validate --config portal.support-demo.json && csp build --config portal.support-demo.json && csp validate --config portal.support.json --production && csp build --config portal.support.json --production && pnpm check:datadog",
     "dev:ollama": "CSP_DEMO=true CSP_CHAT_DEMO=false CSP_CHAT_PROVIDER=ollama CSP_ALLOWED_ORIGINS=http://127.0.0.1:5173,http://localhost:5173 csp dev",
     "build:hosted": "csp build --config portal.hosted.json --production",
     "dev:support": "CSP_DEMO=true CSP_CHAT_DEMO=true CSP_SLACK_DEMO=true CSP_SLACK_ENABLED=false CSP_ALLOWED_ORIGINS=http://127.0.0.1:5173,http://localhost:5173 csp dev --config portal.support-demo.json",
@@ -22,17 +22,18 @@
     "check:datadog": "node scripts/datadog-demo.mjs check"
   },
   "dependencies": {
-    "@kieksme/csp-core": "0.13.4",
-    "@kieksme/csp-plugin-contact": "0.13.4",
-    "@kieksme/csp-plugin-content": "0.13.4",
-    "@kieksme/csp-plugin-chat": "0.13.4",
-    "@kieksme/csp-sdk": "0.13.4",
-    "@kieksme/csp-plugin-signl4": "0.13.4",
-    "@kieksme/csp-plugin-kuma": "0.13.4",
-    "@kieksme/csp-plugin-slack": "0.13.4"
+    "@kieksme/csp-core": "0.14.0",
+    "@kieksme/csp-plugin-contact": "0.14.0",
+    "@kieksme/csp-plugin-content": "0.14.0",
+    "@kieksme/csp-plugin-chat": "0.14.0",
+    "@kieksme/csp-sdk": "0.14.0",
+    "@kieksme/csp-plugin-signl4": "0.14.0",
+    "@kieksme/csp-plugin-kuma": "0.14.0",
+    "@kieksme/csp-plugin-slack": "0.14.0",
+    "@kieksme/csp-plugin-datadog": "0.14.0"
   },
   "devDependencies": {
-    "@kieksme/csp-cli": "0.13.4"
+    "@kieksme/csp-cli": "0.14.0"
   },
   "engines": {
     "node": ">=22.12"

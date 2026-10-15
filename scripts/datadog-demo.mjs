@@ -2,21 +2,15 @@ import { cp, mkdir, readFile, writeFile, access } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { spawn } from "node:child_process";
-import { createHash } from "node:crypto";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const work = join(root, ".csp/datadog-demo");
-const sourceFile = join(root, ".csp/datadog-source.json");
 const command = process.argv[2] ?? "build";
-const args = process.argv.slice(3).filter((v) => v !== "--");
 if (
   !["setup", "dev", "build", "check"].includes(command) ||
-  (args.length && (args[0] !== "--source" || args.length !== 2))
-) {
-  throw new Error(
-    "Usage: node scripts/datadog-demo.mjs setup|dev|build|check [--source <CSP checkout>]",
-  );
-}
+  process.argv.length > 3
+)
+  throw new Error("Usage: node scripts/datadog-demo.mjs setup|dev|build|check");
 const readJson = async (path) => JSON.parse(await readFile(path, "utf8"));
 async function run(bin, argv, cwd, env = process.env) {
   await new Promise((done, fail) => {
@@ -26,30 +20,24 @@ async function run(bin, argv, cwd, env = process.env) {
       stdio: "inherit",
       shell: false,
     });
-    const stop = (signal) => child.kill(signal);
-    const onInt = () => stop("SIGINT"),
-      onTerm = () => stop("SIGTERM");
+    const onInt = () => child.kill("SIGINT"),
+      onTerm = () => child.kill("SIGTERM");
     process.once("SIGINT", onInt);
     process.once("SIGTERM", onTerm);
-    child.once("error", fail);
-    child.once("exit", (code, signal) => {
+    const cleanup = () => {
       process.removeListener("SIGINT", onInt);
       process.removeListener("SIGTERM", onTerm);
+    };
+    child.once("error", (error) => {
+      cleanup();
+      fail(error);
+    });
+    child.once("exit", (code, signal) => {
+      cleanup();
       if (code === 0 || signal === "SIGINT" || signal === "SIGTERM") done();
       else fail(new Error(`${bin} exited ${code}`));
     });
   });
-}
-async function sourcePath() {
-  if (args[0] === "--source") return resolve(args[1]);
-  if (process.env.CSP_DATADOG_SOURCE)
-    return resolve(process.env.CSP_DATADOG_SOURCE);
-  try {
-    return (await readJson(sourceFile)).path;
-  } catch (e) {
-    if (e.code !== "ENOENT") throw e;
-  }
-  return resolve(root, "../csp");
 }
 async function syncAssets() {
   for (const file of [
@@ -58,66 +46,39 @@ async function syncAssets() {
     "avatars.json",
     "public",
     "design-system",
-  ]) {
+  ])
     await cp(join(root, file), join(work, file), { recursive: true });
-  }
 }
+const manifest = await readJson(join(root, "package.json"));
+const profile = await readJson(join(root, "portal.datadog-demo.json"));
+const names = [
+  ...new Set(["@kieksme/csp-core", "@kieksme/csp-sdk", ...profile.plugins]),
+];
+const dependencies = Object.fromEntries(
+  names.map((name) => [name, manifest.dependencies[name]]),
+);
+const devDependencies = {
+  "@kieksme/csp-cli": manifest.devDependencies["@kieksme/csp-cli"],
+};
+if (
+  Object.values({ ...dependencies, ...devDependencies }).some(
+    (v) => !/^\d+\.\d+\.\d+$/.test(v ?? ""),
+  )
+)
+  throw new Error("Datadog demo requires exact published CSP versions");
+await mkdir(work, { recursive: true });
 async function setup() {
-  const source = await sourcePath();
-  await access(join(source, "packages/plugin-datadog/package.json")).catch(
-    () => {
-      throw new Error(
-        "Datadog-Quellpaket fehlt. Einmal pnpm setup:datadog --source <CSP-Worktree> ausführen.",
-      );
-    },
-  );
-  console.log(
-    "Datadog-Demo: lokale CSP-Pakete bauen und isoliert installieren.",
-  );
-  await run("pnpm", ["-r", "--filter", "./packages/**", "build"], source);
-  const archives = join(work, "packages");
-  await mkdir(archives, { recursive: true });
-  const overrides = {};
-  for (const folder of [
-    "sdk",
-    "core",
-    "cli",
-    "plugin-datadog",
-    "plugin-contact",
-    "plugin-content",
-    "plugin-chat",
-  ]) {
-    const path = join(source, "packages", folder);
-    const pkg = await readJson(join(path, "package.json"));
-    await run("pnpm", ["pack", "--pack-destination", archives], path);
-    const archive =
-      pkg.name.replace("@", "").replace("/", "-") + "-" + pkg.version + ".tgz";
-    const hash = createHash("sha256")
-      .update(await readFile(join(archives, archive)))
-      .digest("hex")
-      .slice(0, 12);
-    const pinnedArchive = archive.replace(".tgz", "-" + hash + ".tgz");
-    await cp(join(archives, archive), join(archives, pinnedArchive));
-    overrides[pkg.name] = "file:packages/" + pinnedArchive;
-  }
-  await syncAssets();
-  const profile = await readJson(join(work, "portal.datadog-demo.json"));
-  const dependencies = Object.fromEntries(
-    [
-      ...new Set(["@kieksme/csp-core", "@kieksme/csp-sdk", ...profile.plugins]),
-    ].map((name) => [name, overrides[name]]),
-  );
   await writeFile(
     join(work, "package.json"),
     JSON.stringify(
       {
-        name: "acme-datadog-local-demo",
+        name: "acme-datadog-demo",
         private: true,
         type: "module",
         dependencies,
-        devDependencies: { "@kieksme/csp-cli": overrides["@kieksme/csp-cli"] },
+        devDependencies,
         csp: { stylesheet: "design-system/portal.css" },
-        packageManager: "pnpm@12.8.1",
+        packageManager: manifest.packageManager,
       },
       null,
       2,
@@ -126,23 +87,36 @@ async function setup() {
   await writeFile(
     join(work, "pnpm-workspace.yaml"),
     JSON.stringify(
-      { overrides, allowBuilds: { esbuild: true, sharp: false } },
+      {
+        allowBuilds: { esbuild: true, sharp: false },
+        minimumReleaseAgeExclude: Object.entries({
+          ...dependencies,
+          ...devDependencies,
+        }).map(([name, version]) => `${name}@${version}`),
+      },
       null,
       2,
     ) + "\n",
   );
   await run("pnpm", ["install", "--no-frozen-lockfile"], work);
-  await writeFile(sourceFile, JSON.stringify({ path: source }, null, 2) + "\n");
 }
-await mkdir(work, { recursive: true });
-if (command === "setup") await setup();
-else {
+let needsSetup = command === "setup";
+if (!needsSetup) {
   try {
+    const existing = await readJson(join(work, "package.json"));
     await access(join(work, "node_modules/@kieksme/csp-cli/dist/index.js"));
-  } catch {
-    await setup();
+    needsSetup =
+      JSON.stringify(existing.dependencies) !== JSON.stringify(dependencies) ||
+      JSON.stringify(existing.devDependencies) !==
+        JSON.stringify(devDependencies);
+  } catch (error) {
+    if (error.code !== "ENOENT") throw error;
+    needsSetup = true;
   }
-  await syncAssets();
+}
+if (needsSetup) await setup();
+await syncAssets();
+if (command !== "setup") {
   const cli = join(work, "node_modules/@kieksme/csp-cli/dist/index.js");
   const env = {
     ...process.env,
