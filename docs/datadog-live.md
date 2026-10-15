@@ -52,6 +52,11 @@ versandt und keine Eskalationsbenachrichtigungen konfiguriert.
 
 ## Portal-Anbindung vorbereiten
 
+Das leere Work-Management-Projekt **Acme Test**, Schlüssel `ACME`, ist angelegt.
+Seine Case-Projekt-ID lautet `dbca84fb-e14c-4936-b6ed-4987cf61f60d`.
+Die Datadog-Oberfläche bezeichnet Case Management inzwischen als Work Management.
+Die tatsächliche Lesbarkeit über die Cases-API muss bei der Live-Abnahme geprüft werden.
+
 `portal.datadog-live.json` ist ein separates Profil für echte Datadog-Abfragen.
 Es verwendet die veröffentlichten CSP-Pakete 0.14.0 und lädt Kontakt, Datadog und
 Hilfethemen. Die lokale API ist auf Port 3039 vorgesehen. Die Datei
@@ -61,8 +66,8 @@ ausgewählten Ressourcen-IDs, keine Schlüssel.
 In einer eigenen Instanz die Werte aus der Vorlage als ignorierte `.env.local`
 hinterlegen. API- und Application-Key müssen serverseitig verfügbar sein.
 Der Application-Key benötigt `cases_read`, `monitors_read`, `slos_read` und
-`on_call_read`. Außerdem fehlt noch die echte Case-Projekt-ID;
-CSP 0.14.0 verlangt alle vier Ressourcen-Auswahlen außerhalb der Demo.
+`on_call_read`. Alle vier Ressourcen-Auswahlen sind in der Vorlage eingetragen;
+die tatsächliche API-Lesbarkeit muss noch geprüft werden.
 Mit den noch leeren Werten startet das Live-Profil absichtlich nicht.
 
 `pnpm check:datadog-live` validiert und baut das zusätzliche Profil; der Aufruf
