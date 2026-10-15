@@ -26,6 +26,6 @@ Der statische Build steht unter `.csp/datadog-demo/dist`. `pnpm check` prüft au
 
 ## Datadog-Account und spätere Live-Anbindung
 
-Für Acme ist ein separates EU1-Testkonto angefragt; die Registrierung ist noch offen. Eine abgeschlossene Registrierung muss durch den sichtbaren Organisationszugang und die bestätigte Eigentümeradresse belegt werden; ein vorbereiteter Signup allein genügt nicht. Keine Zahlungsdaten sind für die geplante Testeinrichtung vorgesehen.
+Für die Acme-Einrichtung besteht seit dem 15. Oktober 2026 ein eigenständiges EU1-Testkonto. Der Browser-Login, die bestätigte Eigentümeradresse und der Admin-Zugriff auf die vom Eigentümer benannte Organisation „kieks.me GbR“ wurden geprüft. Das Konto gehört nicht zur bestehenden NULLzuEINS-Organisation. Datadog zeigte bei der Abnahme eine 14-tägige Testlaufzeit; ein kostenpflichtiges Upgrade wurde nicht durchgeführt.
 
 Die echte Provider-Verbindung bleibt **noch ungetestet und deaktiviert**, bis Konto und Ressourcen eingerichtet sowie die lesenden API-Abfragen geprüft sind. API-/Application-Key und Projekt-, Monitor-, SLO- und Schedule-Auswahl werden ausschließlich am API-Host konfiguriert. [Einrichtung und erforderliche Rechte im CSP-Wiki](https://github.com/kieksme/csp/wiki/datadog).
