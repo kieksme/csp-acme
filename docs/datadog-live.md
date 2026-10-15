@@ -26,15 +26,29 @@ Eine Anzeige von 100 % ist keine Bestätigung einer rückwirkenden 30-Tage-Verf�
 
 ## Bereitschaften und Testnutzer
 
-Der Plan „Acme – Werktage (Test)“ ist für Montag bis Freitag, 08–18 Uhr,
-in `Europe/Berlin` vorbereitet. Vorläufig ist der vorhandene Eigentümer ausgewählt.
-**Der Plan ist noch nicht gespeichert:** Datadog verlangt beim Anlegen die
-Zuweisung eines On-Call-Sitzes; die Bestätigung steht noch aus.
+Zwei Pläne sind in `Europe/Berlin` gespeichert:
 
-Für zusätzliche Testnutzer fehlen erreichbare, vom Eigentümer benannte Adressen.
-Noch keine Einladungen versandt und keine zusätzlichen Nutzerrechte vergeben.
-Nach Annahme der Einladungen können die Nutzer rotierend in den Werktagsplan
-und einen getrennten Wochenendplan aufgenommen werden.
+| Plan | Zeitfenster | ID |
+| --- | --- | --- |
+| [Acme – Werktage (Test)](https://app.datadoghq.eu/on-call/schedules/ae0208c7-4a47-4884-9649-3341d3ea14a5) | Montag bis Freitag, 08–18 Uhr | `ae0208c7-4a47-4884-9649-3341d3ea14a5` |
+| [Acme – Wochenende (Test)](https://app.datadoghq.eu/on-call/schedules/91767f1b-af0a-4e0d-8984-9220158856c9) | Samstag 00 Uhr bis Montag 00 Uhr | `91767f1b-af0a-4e0d-8984-9220158856c9` |
+
+Vorläufig ist in beiden Plänen der vorhandene Eigentümer eingetragen. Sein
+On-Call-Sitz wurde nach ausdrücklicher Freigabe für die laufende Testphase
+zugewiesen; ein kostenpflichtiges Upgrade wurde nicht vorgenommen.
+
+Die erfundenen Testpersonen heißen Dirk, Lena und Noah. Nach Freigabe wurden
+drei Einladungen an die vom Eigentümer gewünschten Plus-Adressen desselben
+Postfachs versandt, jeweils mit **Datadog Read Only Role**. Bei der Abnahme
+zeigten alle drei Konten **Invite Pending**. Die persönlichen Adressen werden
+nicht in dieser öffentlichen Anleitung veröffentlicht.
+
+**Rotation noch offen:** Solange die Einladungen nicht angenommen sind, bietet
+die Datadog-Nutzerauswahl die Testkonten nicht als Responder an. Nach Aktivierung
+die Anzeigenamen setzen, die drei Testpersonen in die tägliche Rotation aufnehmen
+und die dafür erforderlichen Trial-Sitze prüfen. Die Einladungen allein bestätigen
+noch keine nutzbare Bereitschaft der Testpersonen. Es wurden keine Test-Pages
+versandt und keine Eskalationsbenachrichtigungen konfiguriert.
 
 ## Portal-Anbindung vorbereiten
 
@@ -47,8 +61,8 @@ ausgewählten Ressourcen-IDs, keine Schlüssel.
 In einer eigenen Instanz die Werte aus der Vorlage als ignorierte `.env.local`
 hinterlegen. API- und Application-Key müssen serverseitig verfügbar sein.
 Der Application-Key benötigt `cases_read`, `monitors_read`, `slos_read` und
-`on_call_read`. Außerdem fehlen noch die echte Case-Projekt-ID und gespeicherte
-Schedule-IDs; CSP 0.14.0 verlangt alle vier Ressourcen-Auswahlen außerhalb der Demo.
+`on_call_read`. Außerdem fehlt noch die echte Case-Projekt-ID;
+CSP 0.14.0 verlangt alle vier Ressourcen-Auswahlen außerhalb der Demo.
 Mit den noch leeren Werten startet das Live-Profil absichtlich nicht.
 
 `pnpm check:datadog-live` validiert und baut das zusätzliche Profil; der Aufruf
