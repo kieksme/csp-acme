@@ -141,4 +141,3 @@ Am 16. Oktober ist die Anwendung ausgerollt und extern abgenommen:
 Die Anzahl sichtbarer Schichten verändert sich mit dem gleitenden Zeitfenster.
 Die öffentlichen Namen bleiben bei fehlendem Datadog-Anzeigenamen Benutzer-IDs;
 E-Mail-Aliasse werden nicht veröffentlicht. Alarmzustellung ist weiterhin nicht eingerichtet.
-
