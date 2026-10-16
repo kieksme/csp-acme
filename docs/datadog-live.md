@@ -63,7 +63,7 @@ Das Beispielticket `ACME-2` („Acme Portal – HTTP-Erreichbarkeit geprüft“)
 Die Beispiele sind unzugewiesen und lösen keine Alarmierung aus.
 
 `portal.datadog-live.json` ist ein separates Profil für echte Datadog-Abfragen.
-Es verwendet die veröffentlichten CSP-Pakete 0.15.0 und lädt Kontakt, Datadog und
+Es verwendet die veröffentlichten CSP-Pakete 0.15.1 und lädt Kontakt, Datadog und
 Hilfethemen. Die lokale API ist auf Port 3039 vorgesehen. Die Datei
 `.env.datadog.example` enthält ausschließlich Konfigurationsnamen und die
 ausgewählten Ressourcen-IDs, keine Schlüssel.

@@ -24,3 +24,5 @@ Metadata is restricted to variant, section, FAQ/process IDs, contact channel and
 | Support bis Abschluss  | `CHAT_MESSAGE_SENT` → `HUMAN_SUPPORT_REQUESTED` → `CONVERSATION_RESOLVED` |
 
 Project and funnels are managed through Swetrix MCP. New events appear after real browser interactions; do not send fake registration events. Verify event delivery, persisted metadata and funnel conversions independently after deployment. Human-support funnels apply only to variants that offer human handover.
+
+Pageviews are counted once per document load; returning visitors generate normal pageviews as well. CSP 0.15.1 removes the cross-visit `unique` API flag that could reject revisits with HTTP 403.

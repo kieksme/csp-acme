@@ -1,6 +1,6 @@
 # API image build
 
-The CLI 0.15.0 customer patch uses Docker’s official Node 22 Bookworm slim image
+The CLI 0.15.1 customer patch uses Docker’s official Node 22 Bookworm slim image
 from [Amazon ECR Public](https://gallery.ecr.aws/docker/library/node) for both
 Docker stages. The multi-platform manifest is pinned by digest so both stages use
 the reviewed version; updating the image requires updating both references.
@@ -13,3 +13,9 @@ without requiring registry credentials. No additional Actions secret is needed.
 The upstream CLI runtime remains non-root and already includes curl for HTTP healthchecks.
 The CLI still builds `dist-api/server.js` before Docker builds the image. Keep
 that output in the Docker build context; only frontend `dist` is excluded.
+
+Both support and Datadog jobs call `scripts/build-api-image.mjs` after building their matching frontend/API bundle with the published CSP CLI. Acme owns these thin build steps so both jobs use the same registry handling; the standard CSP profile validation, build commands and artifact names are preserved.
+
+The script preloads the pinned image from ECR Public. If that registry rejects the pull (for example HTTP 429), it pulls the official Docker Hub image with the identical digest and changes only the generated Dockerfile's registry reference. Both Docker stages keep the same image content; the committed CLI patch still defaults to ECR Public. If both registries fail, the build fails. No registry credentials or moving-tag fallback are introduced.
+
+`pnpm check` tests primary success, mirror fallback and failure of both registries using an isolated Docker command fixture. GitHub Actions additionally builds the real images. Updating the CLI base image requires reviewing the pinned digest and both expected Dockerfile stages in the helper.
