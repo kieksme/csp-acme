@@ -38,12 +38,33 @@ jobs:
           include-hidden-files: true
   portal:
     needs: check
-    uses: kieksme/csp/.github/workflows/customer-build.yml@v0.15.1
-    with:
-      config: portal.support.json
-      pages: false
-      public-overrides: >-
-        {"CSP_BASE_PATH":"/${{ github.event.repository.name }}/","CSP_DOMAIN":"https://${{ github.repository_owner }}.github.io"}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    env:
+      CSP_BASE_PATH: /${{ github.event.repository.name }}/
+      CSP_DOMAIN: https://${{ github.repository_owner }}.github.io
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec csp validate --config portal.support.json --production
+      - run: pnpm exec csp build --config portal.support.json --production
+      - name: Build support API image
+        run: node scripts/build-api-image.mjs portal.support.json customer-api api-image.tar
+      - uses: actions/upload-artifact@v4
+        with:
+          name: api-image
+          path: api-image.tar
+      - uses: actions/upload-artifact@v4
+        with:
+          name: customer-frontend
+          path: dist
   datadog:
     needs: check
     runs-on: ubuntu-latest
@@ -62,16 +83,7 @@ jobs:
           name: datadog-live-frontend
           path: dist
       - name: Build separate Datadog API image
-        run: |
-          cp node_modules/@kieksme/csp-cli/runtime/Dockerfile .csp/Dockerfile
-          printf 'node_modules\n.git\n.env\n.env.*\ndist\n.csp\n' > .csp/Dockerfile.dockerignore
-          node_image='node:22-bookworm-slim@sha256:c3de60bf2f9dd0ac6370e6117950ff62d6e339527e7472301c9c78a017978392'
-          if ! docker pull "public.ecr.aws/docker/library/$node_image"; then
-            docker pull "docker.io/library/$node_image"
-            sed -i 's#public.ecr.aws/docker/library/node:#docker.io/library/node:#g' .csp/Dockerfile
-          fi
-          docker build -f .csp/Dockerfile --build-arg PORTAL_CONFIG=portal.datadog-hosted.json -t datadog-api .
-          docker save datadog-api -o datadog-api-image.tar
+        run: node scripts/build-api-image.mjs portal.datadog-hosted.json datadog-api datadog-api-image.tar
       - uses: actions/upload-artifact@v4
         with:
           name: datadog-api-image

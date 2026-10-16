@@ -58,7 +58,7 @@ Der Veröffentlichungsworkflow baut jetzt `portal.support.json` mit anonymen Bes
 
 ## Datadog-Demo und CSP 0.15.1
 
-Alle CSP-Pakete und der wiederverwendbare Kundenworkflow verwenden Version 0.15.1. Die zusätzliche statische Datadog-Demo wird vom Check-Job separat gebaut und beim Pages-Deployment unter `datadog/` in das bestehende Supportportal eingefügt. Beide Frontends werden gemeinsam als ein Pages-Artefakt veröffentlicht. Das API-Image verwendet weiterhin ausschließlich `portal.support.json`; die statische Datadog-Demo aktiviert keine zusätzlichen Provider-Routen im produktiven Support-API-Prozess. [Demo, Konto-Status und lokale Befehle](datadog-demo.md).
+Alle CSP-Pakete verwenden Version 0.15.1. Der Acme-Workflow verwendet dieselben CSP-CLI-Validierungs- und Build-Befehle und baut beide API-Images über den gemeinsamen [Image-Helper](ci-image-build.md). Die zusätzliche statische Datadog-Demo wird vom Check-Job separat gebaut und beim Pages-Deployment unter `datadog/` in das bestehende Supportportal eingefügt. Beide Frontends werden gemeinsam als ein Pages-Artefakt veröffentlicht. Das API-Image verwendet weiterhin ausschließlich `portal.support.json`; die statische Datadog-Demo aktiviert keine zusätzlichen Provider-Routen im produktiven Support-API-Prozess. [Demo, Konto-Status und lokale Befehle](datadog-demo.md).
 
 ## Datadog Live-Profil
 
