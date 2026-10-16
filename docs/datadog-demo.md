@@ -1,5 +1,7 @@
 # Datadog-Demo
 
+[Echte Testmonitore, SLO und vorbereitetes Live-Profil](datadog-live.md).
+
 Die zusätzliche Demo wird unter [Acme mit Datadog](https://kieksme.github.io/csp-acme/datadog/) veröffentlicht. Sie zeigt Cases mit Filter und Pagination, Monitorstatus, SLOs über 30 Tage und Bereitschaften für sieben Tage. Das bestehende Supportportal unter `/csp-acme/` behält SIGNL4, Kuma und Slack.
 
 Das separate Profil `portal.datadog-demo.json` enthält Kontakt, Datadog, Inhalte und Chat. Sämtliche Personen und Zustände sind synthetisch. Es braucht keine Zugangsdaten und sendet keine Datadog-Anfragen. Fiktive Datensätze haben keine Links zu echten Tickets. Der statische Chat liefert eine feste Datadog-Zusammenfassung mit Quellen.
