@@ -13,3 +13,10 @@ without requiring registry credentials. No additional Actions secret is needed.
 The upstream CLI runtime remains non-root and already includes curl for HTTP healthchecks.
 The CLI still builds `dist-api/server.js` before Docker builds the image. Keep
 that output in the Docker build context; only frontend `dist` is excluded.
+
+The separate Datadog image job preloads this pinned image from ECR Public. If
+that registry rejects the pull (for example HTTP 429), it pulls the official
+Docker Hub image with the identical digest and changes only the generated
+Dockerfile's registry reference. Both Docker stages keep the same image content;
+the committed CLI patch still defaults to ECR Public. No registry credentials or
+moving-tag fallback are introduced.
