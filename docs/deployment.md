@@ -56,6 +56,19 @@ Das Slack-Paket ist in allen Profilen registriert. Die Demo- und KI-Profile akti
 
 Der Veröffentlichungsworkflow baut jetzt `portal.support.json` mit anonymen Besuchersitzungen, ohne Microsoft-Login. Die passende API-Runtime steht in `.env.slack.example`; siehe [Slack-Support](slack-support.md). Das bisherige `portal.hosted.json` bleibt als eigenständiges Profil für reinen KI-Chat verfügbar.
 
-## Datadog-Demo und CSP 0.14.0
+## Datadog-Demo und CSP 0.14.1
 
-Alle CSP-Pakete und der wiederverwendbare Kundenworkflow verwenden Version 0.14.0. Die zusätzliche statische Datadog-Demo wird vom Check-Job separat gebaut und beim Pages-Deployment unter `datadog/` in das bestehende Supportportal eingefügt. Beide Frontends werden gemeinsam als ein Pages-Artefakt veröffentlicht. Das API-Image verwendet weiterhin ausschließlich `portal.support.json`; die statische Datadog-Demo aktiviert keine zusätzlichen Provider-Routen im produktiven Support-API-Prozess. [Demo, Konto-Status und lokale Befehle](datadog-demo.md).
+Alle CSP-Pakete und der wiederverwendbare Kundenworkflow verwenden Version 0.14.1. Die zusätzliche statische Datadog-Demo wird vom Check-Job separat gebaut und beim Pages-Deployment unter `datadog/` in das bestehende Supportportal eingefügt. Beide Frontends werden gemeinsam als ein Pages-Artefakt veröffentlicht. Das API-Image verwendet weiterhin ausschließlich `portal.support.json`; die statische Datadog-Demo aktiviert keine zusätzlichen Provider-Routen im produktiven Support-API-Prozess. [Demo, Konto-Status und lokale Befehle](datadog-demo.md).
+
+## Datadog Live-Profil
+
+CSP 0.14.1 korrigiert die im EU1-Live-Test gefundenen Antwortformate. Die Pipeline
+baut zusätzlich `portal.datadog-hosted.json`, veröffentlicht sein Frontend unter
+`datadog-live/` und das private Image `ghcr.io/kieksme/csp-acme-datadog-api`.
+Es erhält eine eigene Coolify-Anwendung am HTTPS-Pfad `/datadog-api`, interne
+Portnummer 3001, HTTP-Healthcheck `/health` und `CSP_DEMO=false`.
+Die serverseitige Konfiguration basiert auf `.env.datadog.example`, mit
+`CSP_HOST=0.0.0.0`, `CSP_PORT=3001` und
+`CSP_ALLOWED_ORIGINS=https://kieksme.github.io`. Coolifys Strip-Prefix-Einstellung
+muss aktiv sein. Das Support-Image und seine Runtime bleiben getrennt.
+[Ressourcen, Abnahmestand und Rollout](datadog-live.md).
