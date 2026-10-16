@@ -24,18 +24,19 @@
     "build:datadog-hosted": "csp build --config portal.datadog-hosted.json"
   },
   "dependencies": {
-    "@kieksme/csp-core": "0.14.1",
-    "@kieksme/csp-plugin-contact": "0.14.1",
-    "@kieksme/csp-plugin-content": "0.14.1",
-    "@kieksme/csp-plugin-chat": "0.14.1",
-    "@kieksme/csp-sdk": "0.14.1",
-    "@kieksme/csp-plugin-signl4": "0.14.1",
-    "@kieksme/csp-plugin-kuma": "0.14.1",
-    "@kieksme/csp-plugin-slack": "0.14.1",
-    "@kieksme/csp-plugin-datadog": "0.14.1"
+    "@kieksme/csp-core": "0.15.0",
+    "@kieksme/csp-plugin-contact": "0.15.0",
+    "@kieksme/csp-plugin-content": "0.15.0",
+    "@kieksme/csp-plugin-chat": "0.15.0",
+    "@kieksme/csp-sdk": "0.15.0",
+    "@kieksme/csp-plugin-signl4": "0.15.0",
+    "@kieksme/csp-plugin-kuma": "0.15.0",
+    "@kieksme/csp-plugin-slack": "0.15.0",
+    "@kieksme/csp-plugin-datadog": "0.15.0",
+    "@kieksme/csp-plugin-swetrix": "0.15.0"
   },
   "devDependencies": {
-    "@kieksme/csp-cli": "0.14.1"
+    "@kieksme/csp-cli": "0.15.0"
   },
   "engines": {
     "node": ">=22.12"

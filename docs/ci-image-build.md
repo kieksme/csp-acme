@@ -1,6 +1,6 @@
 # API image build
 
-The CLI 0.14.1 customer patch uses Docker’s official Node 22 Bookworm slim image
+The CLI 0.15.0 customer patch uses Docker’s official Node 22 Bookworm slim image
 from [Amazon ECR Public](https://gallery.ecr.aws/docker/library/node) for both
 Docker stages. The multi-platform manifest is pinned by digest so both stages use
 the reviewed version; updating the image requires updating both references.
