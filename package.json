@@ -20,21 +20,22 @@
     "dev:datadog": "node scripts/datadog-demo.mjs dev",
     "build:datadog-demo": "node scripts/datadog-demo.mjs build",
     "check:datadog": "node scripts/datadog-demo.mjs check",
-    "check:datadog-live": "csp validate --config portal.datadog-live.json && csp build --config portal.datadog-live.json"
+    "check:datadog-live": "csp validate --config portal.datadog-live.json && csp build --config portal.datadog-live.json && csp validate --config portal.datadog-hosted.json && pnpm build:datadog-hosted",
+    "build:datadog-hosted": "csp build --config portal.datadog-hosted.json"
   },
   "dependencies": {
-    "@kieksme/csp-core": "0.14.0",
-    "@kieksme/csp-plugin-contact": "0.14.0",
-    "@kieksme/csp-plugin-content": "0.14.0",
-    "@kieksme/csp-plugin-chat": "0.14.0",
-    "@kieksme/csp-sdk": "0.14.0",
-    "@kieksme/csp-plugin-signl4": "0.14.0",
-    "@kieksme/csp-plugin-kuma": "0.14.0",
-    "@kieksme/csp-plugin-slack": "0.14.0",
-    "@kieksme/csp-plugin-datadog": "0.14.0"
+    "@kieksme/csp-core": "0.14.1",
+    "@kieksme/csp-plugin-contact": "0.14.1",
+    "@kieksme/csp-plugin-content": "0.14.1",
+    "@kieksme/csp-plugin-chat": "0.14.1",
+    "@kieksme/csp-sdk": "0.14.1",
+    "@kieksme/csp-plugin-signl4": "0.14.1",
+    "@kieksme/csp-plugin-kuma": "0.14.1",
+    "@kieksme/csp-plugin-slack": "0.14.1",
+    "@kieksme/csp-plugin-datadog": "0.14.1"
   },
   "devDependencies": {
-    "@kieksme/csp-cli": "0.14.0"
+    "@kieksme/csp-cli": "0.14.1"
   },
   "engines": {
     "node": ">=22.12"
@@ -51,7 +52,8 @@
     "portal.hosted.json",
     "portal.support-demo.json",
     "portal.support.json",
-    "portal.datadog-live.json"
+    "portal.datadog-live.json",
+    "portal.datadog-hosted.json"
   ],
   "version": "1.2.0",
   "csp": {

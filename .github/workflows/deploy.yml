@@ -38,14 +38,41 @@ jobs:
           include-hidden-files: true
   portal:
     needs: check
-    uses: kieksme/csp/.github/workflows/customer-build.yml@v0.14.0
+    uses: kieksme/csp/.github/workflows/customer-build.yml@v0.14.1
     with:
       config: portal.support.json
       pages: false
       public-overrides: >-
         {"CSP_BASE_PATH":"/${{ github.event.repository.name }}/","CSP_DOMAIN":"https://${{ github.repository_owner }}.github.io"}
+  datadog:
+    needs: check
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build:datadog-hosted
+      - uses: actions/upload-artifact@v4
+        with:
+          name: datadog-live-frontend
+          path: dist
+      - name: Build separate Datadog API image
+        run: |
+          cp node_modules/@kieksme/csp-cli/runtime/Dockerfile .csp/Dockerfile
+          printf 'node_modules\n.git\n.env\n.env.*\ndist\n.csp\n' > .csp/Dockerfile.dockerignore
+          docker build -f .csp/Dockerfile --build-arg PORTAL_CONFIG=portal.datadog-hosted.json -t datadog-api .
+          docker save datadog-api -o datadog-api-image.tar
+      - uses: actions/upload-artifact@v4
+        with:
+          name: datadog-api-image
+          path: datadog-api-image.tar
   pages:
-    needs: [check, portal]
+    needs: [check, portal, datadog]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     environment:
@@ -60,6 +87,10 @@ jobs:
         with:
           name: datadog-frontend
           path: site/datadog
+      - uses: actions/download-artifact@v4
+        with:
+          name: datadog-live-frontend
+          path: site/datadog-live
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site
@@ -88,6 +119,37 @@ jobs:
         run: |
           docker load -i api-image.tar
           printf 'FROM customer-api\n' | docker build \
+            --label "org.opencontainers.image.source=$SOURCE" \
+            --label "org.opencontainers.image.revision=$REVISION" \
+            -t "$IMAGE:$REVISION" -
+          docker push "$IMAGE:$REVISION"
+          if [ "$GITHUB_REF" = 'refs/heads/main' ]; then
+            docker tag "$IMAGE:$REVISION" "$IMAGE:latest"
+            docker push "$IMAGE:latest"
+          fi
+  datadog-image:
+    needs: datadog
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: datadog-api-image
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish separate Datadog API image
+        env:
+          IMAGE: ghcr.io/${{ github.repository }}-datadog-api
+          REVISION: ${{ github.sha }}
+          SOURCE: https://github.com/${{ github.repository }}
+        run: |
+          docker load -i datadog-api-image.tar
+          printf 'FROM datadog-api\n' | docker build \
             --label "org.opencontainers.image.source=$SOURCE" \
             --label "org.opencontainers.image.revision=$REVISION" \
             -t "$IMAGE:$REVISION" -

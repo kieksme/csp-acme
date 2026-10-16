@@ -54,13 +54,16 @@ keine Zustellung von Alarmen.
 
 ## Portal-Anbindung vorbereiten
 
-Das leere Work-Management-Projekt **Acme Test**, Schlüssel `ACME`, ist angelegt.
+Das Work-Management-Projekt **Acme Test**, Schlüssel `ACME`, ist angelegt.
 Seine Case-Projekt-ID lautet `dbca84fb-e14c-4936-b6ed-4987cf61f60d`.
 Die Datadog-Oberfläche bezeichnet Case Management inzwischen als Work Management.
-Die tatsächliche Lesbarkeit über die Cases-API muss bei der Live-Abnahme geprüft werden.
+Das Beispielticket `ACME-1` („Acme API – Health-Check im Portal abnehmen“) ist offen
+und wurde über die Cases-API mit und ohne OPEN-Filter erfolgreich gelesen.
+Das Beispielticket `ACME-2` („Acme Portal – HTTP-Erreichbarkeit geprüft“) ist geschlossen.
+Die Beispiele sind unzugewiesen und lösen keine Alarmierung aus.
 
 `portal.datadog-live.json` ist ein separates Profil für echte Datadog-Abfragen.
-Es verwendet die veröffentlichten CSP-Pakete 0.14.0 und lädt Kontakt, Datadog und
+Es verwendet die veröffentlichten CSP-Pakete 0.14.1 und lädt Kontakt, Datadog und
 Hilfethemen. Die lokale API ist auf Port 3039 vorgesehen. Die Datei
 `.env.datadog.example` enthält ausschließlich Konfigurationsnamen und die
 ausgewählten Ressourcen-IDs, keine Schlüssel.
@@ -69,8 +72,8 @@ In einer eigenen Instanz die Werte aus der Vorlage als ignorierte `.env.local`
 hinterlegen. API- und Application-Key müssen serverseitig verfügbar sein.
 Der Application-Key benötigt `cases_read`, `monitors_read`, `slos_read` und
 `on_call_read`. Alle vier Ressourcen-Auswahlen sind in der Vorlage eingetragen;
-die tatsächliche API-Lesbarkeit muss noch geprüft werden.
-Mit den noch leeren Werten startet das Live-Profil absichtlich nicht.
+die API-Lesbarkeit wurde lokal mit Version 0.14.1 geprüft.
+Mit den leeren Schlüsselwerten der öffentlichen Vorlage startet das Live-Profil absichtlich nicht. Für die lokale Leseabnahme wurden nach Freigabe ein eigener API-Key und ein Application-Key mit genau diesen vier Leserechten erstellt und ausschließlich in einer ignorierten Datei mit Dateimodus 0600 hinterlegt. Actions-Zugriff bleibt deaktiviert.
 
 `pnpm check:datadog-live` validiert und baut das zusätzliche Profil; der Aufruf
 ist auch Teil von `pnpm check`. Diese Build-Prüfung benötigt keine Provider-Schlüssel
@@ -89,12 +92,39 @@ und die erlaubten Browser-Origins an dieses Ziel anpassen. Nur die ausdrücklich
 ausgewählten Testdaten veröffentlichen. Der bestehende Support-API-Prozess nutzt
 weiterhin sein eigenes Profil.
 
-**Noch nicht live angebunden:** Die öffentliche Seite unter `/csp-acme/datadog/`
-bleibt eine synthetische Demo. Es wurden keine Datadog-Schlüssel erstellt und
-keine API-Verbindung als erfolgreich geprüft. Vor der Umschaltung die fünf
-Datadog-Routen für Cases, Monitore, SLOs, Schichten und Team sowie die Darstellung
-im Browser mit echten Antworten abnehmen. Niemals Provider-Schlüssel an den
+**Live-Abnahme und Veröffentlichung:** Am 16. Oktober wurde die
+korrigierte Plugin-Version aus [dem Produkt-Fix](https://github.com/kieksme/csp/pull/68)
+gegen Datadog EU1 und im lokalen Browser geprüft: zwei Monitore OK, ein SLO mit
+verfügbaren Messwerten, sieben Schichten, Team-Ableitung und das leere Case-Projekt.
+Der Produkt-Fix ist mit Version 0.14.1 veröffentlicht und im Kundenprofil übernommen.
+Die öffentliche Seite unter `/csp-acme/datadog/` bleibt eine synthetische Demo.
+Die beiden Beispieltickets und die Filter OPEN, CLOSED und IN_PROGRESS wurden lokal live geprüft. Alarmzustellung ist nicht eingerichtet oder abgenommen.
+Vor der Umschaltung die fünf Datadog-Routen und ihre Browserdarstellung auch auf
+der endgültigen HTTPS-Runtime prüfen. Niemals Provider-Schlüssel an den
 Browser oder GitHub Pages ausliefern.
 
 [Datadog-Demo](datadog-demo.md) ·
 [Provider-Konfiguration](https://github.com/kieksme/csp/blob/main/docs/datadog.md)
+
+## Getrennte HTTPS-Runtime
+
+Das zusätzliche veröffentlichte Testprofil `portal.datadog-hosted.json` verbindet
+`https://kieksme.github.io/csp-acme/datadog-live/` mit
+`https://csp-acme.kieks.me/datadog-api`. Die synthetische Demo bleibt unter
+`/csp-acme/datadog/` verfügbar. Die Pipeline baut beide Datadog-Frontends und das
+separate private Image `ghcr.io/kieksme/csp-acme-datadog-api`; die Images werden
+mit unveränderlichem Kundencommit getaggt.
+
+Die Coolify-Anwendung `kieks.me.csp-acme-datadog` hat die UUID
+`fvueroncudpbfmmdq1moxwzm` und verwendet `CSP_DEMO=false`, Port 3001,
+Browser-Origin `https://kieksme.github.io` und ausschließlich die oben ausgewählten
+Datadog-Ressourcen. Coolify entfernt `/datadog-api` beim Weiterleiten. Der
+Healthcheck ruft intern `/health` auf; extern lautet er `/datadog-api/health`.
+Schlüssel sind Runtime-Variablen und werden nicht in das Image eingebaut.
+Das veröffentlichte Testprofil lädt nur das Datadog-Plugin. Es zeigt keine
+Beispiel-Hotline oder allgemeinen Hilfe-Links; eine echte Support-Hotline ist für
+diese Testseite nicht konfiguriert. Der Build verwendet deshalb keine fachliche
+Produktionsfreigabe (`--production`), die eine echte Hotline voraussetzt.
+
+Die Anwendung ist vorbereitet; der erste Image-Rollout und die externe
+HTTPS-/Browser-Abnahme stehen noch aus.
