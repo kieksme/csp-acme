@@ -1,6 +1,6 @@
 # Datadog-Testressourcen und Live-Profil
 
-Stand: 15. Oktober 2026. Die Ressourcen liegen im eigenständigen EU1-Testkonto
+Stand: 16. Oktober 2026. Die Ressourcen liegen im eigenständigen EU1-Testkonto
 der Organisation „kieks.me GbR“, das für die Acme-Einrichtung verwendet wird.
 
 ## Echte HTTP-Monitore
@@ -14,7 +14,7 @@ Beide Synthetic-HTTP-Tests laufen alle 15 Minuten aus Frankfurt (AWS), mit einem
 Wiederholungsversuch nach einer Sekunde bei Fehlern. Tags: `project:acme`,
 `env:demo` und der jeweilige Service `acme-api` bzw. `acme-portal`.
 `env:demo` bezeichnet den Testzweck; die HTTP-Abfragen und ihr Status sind echt.
-Bei der Abnahme zeigten beide Monitore **OK**. Die Portal-Prüfung bestätigt den
+Bei der Monitor-Abnahme am 15. Oktober zeigten beide Monitore **OK**. Die Portal-Prüfung bestätigt den
 HTTP-Einstiegspunkt und das gelieferte HTML; sie führt keine Browser-Interaktionen aus.
 
 Test-IDs: API `hk8-wxs-hpm`, Portal `ium-wry-t5p`.
@@ -33,22 +33,24 @@ Zwei Pläne sind in `Europe/Berlin` gespeichert:
 | [Acme – Werktage (Test)](https://app.datadoghq.eu/on-call/schedules/ae0208c7-4a47-4884-9649-3341d3ea14a5) | Montag bis Freitag, 08–18 Uhr | `ae0208c7-4a47-4884-9649-3341d3ea14a5` |
 | [Acme – Wochenende (Test)](https://app.datadoghq.eu/on-call/schedules/91767f1b-af0a-4e0d-8984-9220158856c9) | Samstag 00 Uhr bis Montag 00 Uhr | `91767f1b-af0a-4e0d-8984-9220158856c9` |
 
-Vorläufig ist in beiden Plänen der vorhandene Eigentümer eingetragen. Sein
-On-Call-Sitz wurde nach ausdrücklicher Freigabe für die laufende Testphase
-zugewiesen; ein kostenpflichtiges Upgrade wurde nicht vorgenommen.
+Die erfundenen Testpersonen heißen Dirk, Lena und Noah. Ihre drei Konten sind
+seit der Abnahme am 16. Oktober **Active**, jeweils mit **Datadog Read Only Role**.
+Die freigegebenen drei On-Call-Sitze wurden in der laufenden Testphase zugewiesen;
+ein kostenpflichtiges Upgrade wurde nicht vorgenommen. Datadog zeigt derzeit
+die E-Mail-Aliasse als Responder an; persönliche Anzeigenamen sind nicht gesetzt.
+Die persönlichen Adressen werden nicht in dieser öffentlichen Anleitung veröffentlicht.
 
-Die erfundenen Testpersonen heißen Dirk, Lena und Noah. Nach Freigabe wurden
-drei Einladungen an die vom Eigentümer gewünschten Plus-Adressen desselben
-Postfachs versandt, jeweils mit **Datadog Read Only Role**. Bei der Abnahme
-zeigten alle drei Konten **Invite Pending**. Die persönlichen Adressen werden
-nicht in dieser öffentlichen Anleitung veröffentlicht.
+Die gespeicherten Rotationen verwenden folgende Reihenfolge:
 
-**Rotation noch offen:** Solange die Einladungen nicht angenommen sind, bietet
-die Datadog-Nutzerauswahl die Testkonten nicht als Responder an. Nach Aktivierung
-die Anzeigenamen setzen, die drei Testpersonen in die tägliche Rotation aufnehmen
-und die dafür erforderlichen Trial-Sitze prüfen. Die Einladungen allein bestätigen
-noch keine nutzbare Bereitschaft der Testpersonen. Es wurden keine Test-Pages
-versandt und keine Eskalationsbenachrichtigungen konfiguriert.
+- **Werktage:** Dirk → Lena → Noah, täglicher Wechsel im Zeitfenster 08–18 Uhr.
+- **Wochenende:** Lena → Noah → Dirk, wöchentlicher Wechsel am Samstag um
+  00 Uhr. Eine Person übernimmt jeweils das gesamte Wochenende.
+
+Der Eigentümer ist aus den zukünftigen Rotationen entfernt. Im Wochenendplan
+wurden Lena für den 17.–18. Oktober und Noah für den 24.–25. Oktober anhand der
+gespeicherten Kalenderansicht geprüft. Es wurden keine Test-Pages versandt und
+keine Eskalationsbenachrichtigungen konfiguriert. Die Pläne allein bestätigen
+keine Zustellung von Alarmen.
 
 ## Portal-Anbindung vorbereiten
 
