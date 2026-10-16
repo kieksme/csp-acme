@@ -56,9 +56,9 @@ Das Slack-Paket ist in allen Profilen registriert. Die Demo- und KI-Profile akti
 
 Der Veröffentlichungsworkflow baut jetzt `portal.support.json` mit anonymen Besuchersitzungen, ohne Microsoft-Login. Die passende API-Runtime steht in `.env.slack.example`; siehe [Slack-Support](slack-support.md). Das bisherige `portal.hosted.json` bleibt als eigenständiges Profil für reinen KI-Chat verfügbar.
 
-## Datadog-Demo und CSP 0.15.0
+## Datadog-Demo und CSP 0.15.1
 
-Alle CSP-Pakete und der wiederverwendbare Kundenworkflow verwenden Version 0.15.0. Die zusätzliche statische Datadog-Demo wird vom Check-Job separat gebaut und beim Pages-Deployment unter `datadog/` in das bestehende Supportportal eingefügt. Beide Frontends werden gemeinsam als ein Pages-Artefakt veröffentlicht. Das API-Image verwendet weiterhin ausschließlich `portal.support.json`; die statische Datadog-Demo aktiviert keine zusätzlichen Provider-Routen im produktiven Support-API-Prozess. [Demo, Konto-Status und lokale Befehle](datadog-demo.md).
+Alle CSP-Pakete und der wiederverwendbare Kundenworkflow verwenden Version 0.15.1. Die zusätzliche statische Datadog-Demo wird vom Check-Job separat gebaut und beim Pages-Deployment unter `datadog/` in das bestehende Supportportal eingefügt. Beide Frontends werden gemeinsam als ein Pages-Artefakt veröffentlicht. Das API-Image verwendet weiterhin ausschließlich `portal.support.json`; die statische Datadog-Demo aktiviert keine zusätzlichen Provider-Routen im produktiven Support-API-Prozess. [Demo, Konto-Status und lokale Befehle](datadog-demo.md).
 
 ## Datadog Live-Profil
 
@@ -75,6 +75,6 @@ muss aktiv sein. Das Support-Image und seine Runtime bleiben getrennt.
 
 ## API-Image-Mirror
 
-Ein gezielter CLI-0.15.0-Patch zieht das offizielle Node-22-Image für beide Docker-Stufen per Digest von ECR Public und kopiert die Patch-Dateien vor der Produktionsinstallation. Die veröffentlichte CLI liefert `curl` weiterhin selbst. [Build und Grenzen](ci-image-build.md).
+Ein gezielter CLI-0.15.1-Patch zieht das offizielle Node-22-Image für beide Docker-Stufen per Digest von ECR Public und kopiert die Patch-Dateien vor der Produktionsinstallation. Die veröffentlichte CLI liefert `curl` weiterhin selbst. [Build und Grenzen](ci-image-build.md).
 
 Alle acht Acme-Profile konfigurieren das [Swetrix-Plugin](analytics.md). Die Projekt-ID ist öffentlich; administrative API-Schlüssel werden nicht in Builds übernommen.

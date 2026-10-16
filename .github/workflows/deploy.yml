@@ -38,7 +38,7 @@ jobs:
           include-hidden-files: true
   portal:
     needs: check
-    uses: kieksme/csp/.github/workflows/customer-build.yml@v0.15.0
+    uses: kieksme/csp/.github/workflows/customer-build.yml@v0.15.1
     with:
       config: portal.support.json
       pages: false
