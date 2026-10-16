@@ -31,7 +31,17 @@
   "plugins": [
     "@kieksme/csp-plugin-contact",
     "@kieksme/csp-plugin-datadog",
-    "@kieksme/csp-plugin-content"
+    "@kieksme/csp-plugin-content",
+    "@kieksme/csp-plugin-swetrix"
   ],
-  "avatarsFile": "avatars.json"
+  "avatarsFile": "avatars.json",
+  "analytics": {
+    "swetrix": {
+      "projectId": "QKIxNNebrjFs",
+      "apiUrl": "https://analytics-api.kieks.me/log",
+      "enabled": true,
+      "variant": "datadog-live",
+      "respectDNT": true
+    }
+  }
 }

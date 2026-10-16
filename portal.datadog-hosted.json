@@ -28,8 +28,15 @@
     "staticDemo": false
   },
   "contentFile": "content.json",
-  "plugins": [
-    "@kieksme/csp-plugin-datadog"
-  ],
-  "avatarsFile": "avatars.json"
+  "plugins": ["@kieksme/csp-plugin-datadog", "@kieksme/csp-plugin-swetrix"],
+  "avatarsFile": "avatars.json",
+  "analytics": {
+    "swetrix": {
+      "projectId": "QKIxNNebrjFs",
+      "apiUrl": "https://analytics-api.kieks.me/log",
+      "enabled": true,
+      "variant": "datadog-hosted",
+      "respectDNT": true
+    }
+  }
 }

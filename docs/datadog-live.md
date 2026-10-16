@@ -5,9 +5,9 @@ der Organisation „kieks.me GbR“, das für die Acme-Einrichtung verwendet wir
 
 ## Echte HTTP-Monitore
 
-| Ressource | Prüfung | ID |
-| --- | --- | --- |
-| [Acme API – Health](https://app.datadoghq.eu/monitors/127595870) | `https://csp-acme.kieks.me/health`: HTTP 200, Antwort enthält `"status":"ok"`, Antwortzeit unter 5 Sekunden | `127595870` |
+| Ressource                                                                   | Prüfung                                                                                                           | ID          |
+| --------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------- |
+| [Acme API – Health](https://app.datadoghq.eu/monitors/127595870)            | `https://csp-acme.kieks.me/health`: HTTP 200, Antwort enthält `"status":"ok"`, Antwortzeit unter 5 Sekunden       | `127595870` |
 | [Acme Portal – Erreichbarkeit](https://app.datadoghq.eu/monitors/127596025) | `https://kieksme.github.io/csp-acme/`: HTTP 200, HTML enthält `Acme Service Portal`, Antwortzeit unter 5 Sekunden | `127596025` |
 
 Beide Synthetic-HTTP-Tests laufen alle 15 Minuten aus Frankfurt (AWS), mit einem
@@ -28,9 +28,9 @@ Eine Anzeige von 100 % ist keine Bestätigung einer rückwirkenden 30-Tage-Verf�
 
 Zwei Pläne sind in `Europe/Berlin` gespeichert:
 
-| Plan | Zeitfenster | ID |
-| --- | --- | --- |
-| [Acme – Werktage (Test)](https://app.datadoghq.eu/on-call/schedules/ae0208c7-4a47-4884-9649-3341d3ea14a5) | Montag bis Freitag, 08–18 Uhr | `ae0208c7-4a47-4884-9649-3341d3ea14a5` |
+| Plan                                                                                                        | Zeitfenster                      | ID                                     |
+| ----------------------------------------------------------------------------------------------------------- | -------------------------------- | -------------------------------------- |
+| [Acme – Werktage (Test)](https://app.datadoghq.eu/on-call/schedules/ae0208c7-4a47-4884-9649-3341d3ea14a5)   | Montag bis Freitag, 08–18 Uhr    | `ae0208c7-4a47-4884-9649-3341d3ea14a5` |
 | [Acme – Wochenende (Test)](https://app.datadoghq.eu/on-call/schedules/91767f1b-af0a-4e0d-8984-9220158856c9) | Samstag 00 Uhr bis Montag 00 Uhr | `91767f1b-af0a-4e0d-8984-9220158856c9` |
 
 Die erfundenen Testpersonen heißen Dirk, Lena und Noah. Ihre drei Konten sind
@@ -63,7 +63,7 @@ Das Beispielticket `ACME-2` („Acme Portal – HTTP-Erreichbarkeit geprüft“)
 Die Beispiele sind unzugewiesen und lösen keine Alarmierung aus.
 
 `portal.datadog-live.json` ist ein separates Profil für echte Datadog-Abfragen.
-Es verwendet die veröffentlichten CSP-Pakete 0.14.1 und lädt Kontakt, Datadog und
+Es verwendet die veröffentlichten CSP-Pakete 0.15.0 und lädt Kontakt, Datadog und
 Hilfethemen. Die lokale API ist auf Port 3039 vorgesehen. Die Datei
 `.env.datadog.example` enthält ausschließlich Konfigurationsnamen und die
 ausgewählten Ressourcen-IDs, keine Schlüssel.

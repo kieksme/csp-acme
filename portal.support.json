@@ -34,11 +34,21 @@
     "@kieksme/csp-plugin-kuma",
     "@kieksme/csp-plugin-content",
     "@kieksme/csp-plugin-chat",
-    "@kieksme/csp-plugin-slack"
+    "@kieksme/csp-plugin-slack",
+    "@kieksme/csp-plugin-swetrix"
   ],
   "avatarsFile": "avatars.json",
   "chatSupport": {
     "mode": "slack",
     "auth": "anonymous"
+  },
+  "analytics": {
+    "swetrix": {
+      "projectId": "QKIxNNebrjFs",
+      "apiUrl": "https://analytics-api.kieks.me/log",
+      "enabled": true,
+      "variant": "support",
+      "respectDNT": true
+    }
   }
 }

@@ -8,7 +8,7 @@ Das separate Profil `portal.datadog-demo.json` enthält Kontakt, Datadog, Inhalt
 
 ## Lokal starten
 
-Acme verwendet die regulär veröffentlichten CSP-Pakete ab 0.14.1. Ein separater Produkt-Checkout oder lokale Tarballs sind nicht mehr nötig.
+Acme verwendet die regulär veröffentlichten CSP-Pakete 0.15.0. Ein separater Produkt-Checkout oder lokale Tarballs sind nicht mehr nötig.
 
 ```sh
 pnpm install --frozen-lockfile
