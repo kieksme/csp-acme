@@ -59,3 +59,7 @@ Der Veröffentlichungsworkflow baut jetzt `portal.support.json` mit anonymen Bes
 ## Datadog-Demo und CSP 0.14.0
 
 Alle CSP-Pakete und der wiederverwendbare Kundenworkflow verwenden Version 0.14.0. Die zusätzliche statische Datadog-Demo wird vom Check-Job separat gebaut und beim Pages-Deployment unter `datadog/` in das bestehende Supportportal eingefügt. Beide Frontends werden gemeinsam als ein Pages-Artefakt veröffentlicht. Das API-Image verwendet weiterhin ausschließlich `portal.support.json`; die statische Datadog-Demo aktiviert keine zusätzlichen Provider-Routen im produktiven Support-API-Prozess. [Demo, Konto-Status und lokale Befehle](datadog-demo.md).
+
+## API-Image-Mirror
+
+Ein gezielter CLI-0.14.0-Patch zieht das offizielle Node-22-Image für beide Docker-Stufen per Digest von ECR Public und kopiert die Patch-Dateien vor der Produktionsinstallation. Die veröffentlichte CLI liefert `curl` weiterhin selbst. [Build und Grenzen](ci-image-build.md).
