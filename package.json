@@ -9,7 +9,7 @@
     "start": "csp start",
     "start:api": "csp start",
     "build:demo": "csp build --config portal.demo.json --production",
-    "check": "csp validate && csp validate --config portal.demo.json --production && csp build && csp build --config portal.demo.json --production && csp validate --config portal.hosted.json --production && csp build --config portal.hosted.json --production && csp validate --config portal.support-demo.json && csp build --config portal.support-demo.json && csp validate --config portal.support.json --production && csp build --config portal.support.json --production && pnpm check:datadog",
+    "check": "csp validate && csp validate --config portal.demo.json --production && csp build && csp build --config portal.demo.json --production && csp validate --config portal.hosted.json --production && csp build --config portal.hosted.json --production && csp validate --config portal.support-demo.json && csp build --config portal.support-demo.json && csp validate --config portal.support.json --production && csp build --config portal.support.json --production && pnpm check:datadog && pnpm check:datadog-live",
     "dev:ollama": "CSP_DEMO=true CSP_CHAT_DEMO=false CSP_CHAT_PROVIDER=ollama CSP_ALLOWED_ORIGINS=http://127.0.0.1:5173,http://localhost:5173 csp dev",
     "build:hosted": "csp build --config portal.hosted.json --production",
     "dev:support": "CSP_DEMO=true CSP_CHAT_DEMO=true CSP_SLACK_DEMO=true CSP_SLACK_ENABLED=false CSP_ALLOWED_ORIGINS=http://127.0.0.1:5173,http://localhost:5173 csp dev --config portal.support-demo.json",
@@ -19,7 +19,8 @@
     "setup:datadog": "node scripts/datadog-demo.mjs setup",
     "dev:datadog": "node scripts/datadog-demo.mjs dev",
     "build:datadog-demo": "node scripts/datadog-demo.mjs build",
-    "check:datadog": "node scripts/datadog-demo.mjs check"
+    "check:datadog": "node scripts/datadog-demo.mjs check",
+    "check:datadog-live": "csp validate --config portal.datadog-live.json && csp build --config portal.datadog-live.json"
   },
   "dependencies": {
     "@kieksme/csp-core": "0.14.0",
@@ -49,7 +50,8 @@
     "design-system",
     "portal.hosted.json",
     "portal.support-demo.json",
-    "portal.support.json"
+    "portal.support.json",
+    "portal.datadog-live.json"
   ],
   "version": "1.2.0",
   "csp": {

@@ -64,3 +64,6 @@ Lange Chats scrollen bei neuen Antworten mit, solange Sie am Ende lesen. Beim Ho
 ## Datadog-Demo
 
 `pnpm dev:datadog` startet ein separates Profil mit Datadog Cases, Monitoren, SLOs und Bereitschaften. Es nutzt nur Beispieldaten. Die [öffentliche Datadog-Demo](https://kieksme.github.io/csp-acme/datadog/) verwendet CSP 0.14.0. [Setup, Build und Grenzen](docs/datadog-demo.md).
+
+Im EU1-Testkonto überwachen zwei echte HTTP-Monitore die Acme-API und das Portal.
+[Ressourcen-IDs, Bereitschaftsstatus und vorbereitetes Live-Profil](docs/datadog-live.md).
