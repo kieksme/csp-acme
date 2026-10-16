@@ -16,6 +16,18 @@ Coolify 4.4.6 rejects inline JavaScript in custom container commands, so a
 `node -e` check cannot be saved there. Healthchecks confirm API readiness; they do
 not confirm OpenAI authentication.
 
+For `portal.support.json`, enable **Consistent Container Names** in Coolify's
+advanced application settings. The support runtime holds an exclusive PostgreSQL
+lock: only one API instance may use its database. This setting makes Coolify stop
+the previous container before starting its replacement. Expect a short API
+interruption during deployment; the static frontend remains available. A rolling
+update starts both instances together and fails with
+`Only one CSP support runtime may use this database`.
+
+After deployment, verify `/health`, the running image's immutable commit tag and
+digest, and the installed `@kieksme/csp-core` version. If startup fails, redeploy
+the previous immutable image tag and check readiness again.
+
 Use `.env.hosted.example` as runtime settings. Replace the dummy API key separately
 for each customer; never provide a real key to a frontend build. A dummy key allows
 API startup but OpenAI requests fail until replaced. Redeploy after key changes.
@@ -31,7 +43,23 @@ Adding an allowed browser origin does not authenticate API callers.
 and contacts must be supplied separately. `portal.demo.json` remains a fully static
 demo. Each container loads only its own customer configuration and sources.
 
-## CSP 0.7.0
+## Historisch: Umstellung auf CSP 0.9.0
 
-Die Instanz verwendet CSP 0.7.0. Kunden-Stylesheets, Profil-Assets und die Chat-/Bereitschaftsdarstellung kommen aus den veröffentlichten Paketen; die bisherigen Produkt-Patches entfallen.
-Der verbleibende CLI-Patch betrifft ausschließlich den API-Docker-Build: Node 22 Bookworm slim wird von ECR Public per Digest gezogen, `curl` für den bestehenden HTTP-Healthcheck und die Patch-Datei vor der Produktionsinstallation bleiben enthalten.
+Mit CSP 0.9.0 wurden die zuvor lokalen Patches abgelöst. Kunden-Stylesheets, Profil-Assets und die Chat-/Bereitschaftsdarstellung kommen aus den veröffentlichten Paketen; die bisherigen Produkt-Patches entfallen.
+CSP 0.9.0 liefert `curl` bereits im API-Dockerfile. Der bisherige CLI-Patch entfällt; die Instanz verwendet wieder ausschließlich veröffentlichte Pakete.
+
+## Optionaler Slack-Support
+
+Das Slack-Paket ist in allen Profilen registriert. Die Demo- und KI-Profile aktivieren keine Übertragung; `portal.support-demo.json` bietet die lokale Übernahme-Demo. Die veröffentlichte Webseite und API verwenden `portal.support.json` für den echten Slack-Support. [Profil-Erzeugung, Runtime und Live-Abnahme](slack-support.md).
+
+## Offene Slack-Support-Webseite
+
+Der Veröffentlichungsworkflow baut jetzt `portal.support.json` mit anonymen Besuchersitzungen, ohne Microsoft-Login. Die passende API-Runtime steht in `.env.slack.example`; siehe [Slack-Support](slack-support.md). Das bisherige `portal.hosted.json` bleibt als eigenständiges Profil für reinen KI-Chat verfügbar.
+
+## Datadog-Demo und CSP 0.14.0
+
+Alle CSP-Pakete und der wiederverwendbare Kundenworkflow verwenden Version 0.14.0. Die zusätzliche statische Datadog-Demo wird vom Check-Job separat gebaut und beim Pages-Deployment unter `datadog/` in das bestehende Supportportal eingefügt. Beide Frontends werden gemeinsam als ein Pages-Artefakt veröffentlicht. Das API-Image verwendet weiterhin ausschließlich `portal.support.json`; die statische Datadog-Demo aktiviert keine zusätzlichen Provider-Routen im produktiven Support-API-Prozess. [Demo, Konto-Status und lokale Befehle](datadog-demo.md).
+
+## API-Image-Mirror
+
+Ein gezielter CLI-0.14.0-Patch zieht das offizielle Node-22-Image für beide Docker-Stufen per Digest von ECR Public und kopiert die Patch-Dateien vor der Produktionsinstallation. Die veröffentlichte CLI liefert `curl` weiterhin selbst. [Build und Grenzen](ci-image-build.md).

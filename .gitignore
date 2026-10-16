@@ -8,3 +8,4 @@ dist-api/
 !.env.production.example
 !.env.api.example
 !.env.hosted.example
+!.env.slack.example
