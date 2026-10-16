@@ -99,8 +99,7 @@ verfügbaren Messwerten, sieben Schichten, Team-Ableitung und das leere Case-Pro
 Der Produkt-Fix ist mit Version 0.14.1 veröffentlicht und im Kundenprofil übernommen.
 Die öffentliche Seite unter `/csp-acme/datadog/` bleibt eine synthetische Demo.
 Die beiden Beispieltickets und die Filter OPEN, CLOSED und IN_PROGRESS wurden lokal live geprüft. Alarmzustellung ist nicht eingerichtet oder abgenommen.
-Vor der Umschaltung die fünf Datadog-Routen und ihre Browserdarstellung auch auf
-der endgültigen HTTPS-Runtime prüfen. Niemals Provider-Schlüssel an den
+Die fünf Datadog-Routen und ihre Browserdarstellung sind auch auf der endgültigen HTTPS-Runtime geprüft (siehe unten). Niemals Provider-Schlüssel an den
 Browser oder GitHub Pages ausliefern.
 
 [Datadog-Demo](datadog-demo.md) ·
@@ -126,5 +125,19 @@ Beispiel-Hotline oder allgemeinen Hilfe-Links; eine echte Support-Hotline ist f�
 diese Testseite nicht konfiguriert. Der Build verwendet deshalb keine fachliche
 Produktionsfreigabe (`--production`), die eine echte Hotline voraussetzt.
 
-Die Anwendung ist vorbereitet; der erste Image-Rollout und die externe
-HTTPS-/Browser-Abnahme stehen noch aus.
+Am 16. Oktober ist die Anwendung ausgerollt und extern abgenommen:
+
+- Laufender Commit-Tag: `26bb80f147bb9b4f7568d8ca374c8de3693caa3d`.
+- Laufender Image-Digest: `sha256:71c0497e6946442247449c8d79c044f4e821e51ea1e88e4d5eea83fed154c058`.
+- Im Container geprüft: Core und Datadog-Plugin jeweils **0.14.1**, Docker-Health **healthy**.
+- Deployment: `7d723d71-f865-4a9f-a8d8-3a9ec8ffbb98`, Coolify-Status **finished**.
+- [Veröffentlichungsworkflow](https://github.com/kieksme/csp-acme/actions/runs/38908835975): erfolgreich, inklusive beider Images und GitHub Pages.
+- Externes `/datadog-api/health`: `status: ok`, ausschließlich Plugin `datadog` registriert.
+- Alle fünf öffentlichen Datadog-Routen lieferten aktuelle Daten (`stale: false`) ohne Providerfehler: zwei Monitore OK, ein SLO, die Schichten im nächsten Sieben-Tage-Fenster, drei Dienstpersonen und beide Tickets.
+- [Öffentliche Liveseite](https://kieksme.github.io/csp-acme/datadog-live/) im Browser geprüft: Monitorstatus OK, SLO-Messwert 100 %, kommende Wochenend-/Werktagsschichten, offenes und geschlossenes Ticket. Außerhalb der definierten Zeiten zeigt sie korrekt keine aktive Schicht an.
+- Der bestehende Supportdienst unter `/health` blieb erreichbar und meldete seine bisherigen sechs Plugins. Er wurde für diesen Rollout nicht neu gestartet.
+- Der lokale Frontend-Scan fand keinen der beiden Datadog-Schlüssel in den gebauten Dateien.
+
+Die Anzahl sichtbarer Schichten verändert sich mit dem gleitenden Zeitfenster.
+Die öffentlichen Namen bleiben bei fehlendem Datadog-Anzeigenamen Benutzer-IDs;
+E-Mail-Aliasse werden nicht veröffentlicht. Alarmzustellung ist weiterhin nicht eingerichtet.
