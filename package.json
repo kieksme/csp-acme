@@ -9,7 +9,7 @@
     "start": "csp start",
     "start:api": "csp start",
     "build:demo": "csp build --config portal.demo.json --production",
-    "check": "node --test scripts/tests/build-api-image.test.mjs && csp validate && csp validate --config portal.demo.json --production && csp build && csp build --config portal.demo.json --production && csp validate --config portal.hosted.json --production && csp build --config portal.hosted.json --production && csp validate --config portal.support-demo.json && csp build --config portal.support-demo.json && csp validate --config portal.support.json --production && csp build --config portal.support.json --production && pnpm check:datadog && pnpm check:datadog-live",
+    "check": "pnpm test:mcp && node --test scripts/tests/build-api-image.test.mjs && csp validate && csp validate --config portal.demo.json --production && csp build && csp build --config portal.demo.json --production && csp validate --config portal.hosted.json --production && csp build --config portal.hosted.json --production && csp validate --config portal.support-demo.json && csp build --config portal.support-demo.json && csp validate --config portal.support.json --production && csp build --config portal.support.json --production && pnpm check:datadog && pnpm check:datadog-live",
     "dev:ollama": "CSP_DEMO=true CSP_CHAT_DEMO=false CSP_CHAT_PROVIDER=ollama CSP_ALLOWED_ORIGINS=http://127.0.0.1:5173,http://localhost:5173 csp dev",
     "build:hosted": "csp build --config portal.hosted.json --production",
     "dev:support": "CSP_DEMO=true CSP_CHAT_DEMO=true CSP_SLACK_DEMO=true CSP_SLACK_ENABLED=false CSP_ALLOWED_ORIGINS=http://127.0.0.1:5173,http://localhost:5173 csp dev --config portal.support-demo.json",
@@ -21,7 +21,8 @@
     "build:datadog-demo": "node scripts/datadog-demo.mjs build",
     "check:datadog": "node scripts/datadog-demo.mjs check",
     "check:datadog-live": "csp validate --config portal.datadog-live.json && csp build --config portal.datadog-live.json && csp validate --config portal.datadog-hosted.json && pnpm build:datadog-hosted",
-    "build:datadog-hosted": "csp build --config portal.datadog-hosted.json"
+    "build:datadog-hosted": "csp build --config portal.datadog-hosted.json",
+    "test:mcp": "node --test scripts/tests/mcp.test.mjs"
   },
   "dependencies": {
     "@kieksme/csp-core": "0.15.1",
@@ -33,7 +34,8 @@
     "@kieksme/csp-plugin-kuma": "0.15.1",
     "@kieksme/csp-plugin-slack": "0.15.1",
     "@kieksme/csp-plugin-datadog": "0.15.1",
-    "@kieksme/csp-plugin-swetrix": "0.15.1"
+    "@kieksme/csp-plugin-swetrix": "0.15.1",
+    "@modelcontextprotocol/sdk": "1.32.1"
   },
   "devDependencies": {
     "@kieksme/csp-cli": "0.15.1"

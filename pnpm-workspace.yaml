@@ -16,3 +16,4 @@ minimumReleaseAgeExclude:
   - "@kieksme/csp-plugin-swetrix@0.15.0 || 0.15.1"
 patchedDependencies:
   "@kieksme/csp-cli@0.15.1": patches/@kieksme__csp-cli@0.15.1.patch
+  "@kieksme/csp-core@0.15.1": patches/@kieksme__csp-core@0.15.1.patch
