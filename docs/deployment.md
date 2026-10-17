@@ -78,3 +78,7 @@ muss aktiv sein. Das Support-Image und seine Runtime bleiben getrennt.
 Ein gezielter CLI-0.15.1-Patch zieht das offizielle Node-22-Image für beide Docker-Stufen per Digest von ECR Public und kopiert die Patch-Dateien vor der Produktionsinstallation. Die veröffentlichte CLI liefert `curl` weiterhin selbst. [Build und Grenzen](ci-image-build.md).
 
 Alle acht Acme-Profile konfigurieren das [Swetrix-Plugin](analytics.md). Die Projekt-ID ist öffentlich; administrative API-Schlüssel werden nicht in Builds übernommen.
+
+## MCP
+
+API-MCP, Konfiguration und Abnahme: [MCP](mcp.md).

@@ -72,3 +72,7 @@ Die [Datadog-Liveseite](https://kieksme.github.io/csp-acme/datadog-live/) zeigt 
 separates Beispiel erhalten.
 
 Anonyme Nutzungsanalyse über [Swetrix](docs/analytics.md): Events und Support-Funnels für alle öffentlichen Acme-Varianten; lokal deaktiviert, DNT wird respektiert.
+
+## MCP für AI Agents
+
+Die API unterstützt MCP über Streamable HTTP. [Verbindung, Tools und Betrieb](docs/mcp.md).
