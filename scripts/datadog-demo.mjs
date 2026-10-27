@@ -144,4 +144,10 @@ if (command !== "setup") {
     work,
     env,
   );
+  if (command !== "dev")
+    await run(
+      process.execPath,
+      [join(root, "scripts/search-policy.mjs"), join(work, "dist")],
+      root,
+    );
 }

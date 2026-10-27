@@ -55,6 +55,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm exec csp validate --config portal.support.json --production
       - run: pnpm exec csp build --config portal.support.json --production
+      - run: node scripts/search-policy.mjs
       - name: Build support API image
         run: node scripts/build-api-image.mjs portal.support.json customer-api api-image.tar
       - uses: actions/upload-artifact@v4
