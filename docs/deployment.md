@@ -82,3 +82,11 @@ Alle acht Acme-Profile konfigurieren das [Swetrix-Plugin](analytics.md). Die Pro
 ## MCP
 
 API-MCP, Konfiguration und Abnahme: [MCP](mcp.md).
+
+## Suchmaschinensteuerung
+
+`scripts/search-policy.mjs` ergänzt nach jedem Standard-, Demo- und Hosting-Build in allen HTML-Dateien `noindex, nofollow`, schreibt `robots.txt` mit `User-agent: *` / `Disallow: /` und ergänzt `_headers` für unterstützende statische Hosts. Diese Übergangslösung benötigt kein Upgrade der festgelegten CSP-Pakete. Direkte eigene Aufrufe von `csp build` anschließend ebenfalls mit `node scripts/search-policy.mjs` abschließen.
+
+Die erzeugte `robots.txt` muss unter **`https://<domain>/robots.txt`** mit HTTP 200 und Textinhalt erreichbar sein. Bei Unterpfad-Hosting (etwa GitHub Pages) muss der Betreiber dieselbe Datei zusätzlich im Domain-Root veröffentlichen; eine Datei nur im Projekt-Unterpfad reicht nicht. GitHub Pages verarbeitet `_headers` nicht. Andere Hosts müssen `X-Robots-Tag: noindex, nofollow` über ihre Header-Konfiguration setzen, wenn sie `_headers` nicht unterstützen.
+
+Dies ist Suchmaschinensteuerung, keine Zugriffssperre. `Disallow: /` kann das Lesen von `noindex` verhindern; bestehende Suchtreffer verschwinden dadurch nicht garantiert. Live-Abnahme: initiales HTML, Root-robots.txt, HTTP-Status und ggf. Header separat prüfen.
