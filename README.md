@@ -73,6 +73,10 @@ separates Beispiel erhalten.
 
 Anonyme Nutzungsanalyse über [Swetrix](docs/analytics.md): Events und Support-Funnels für alle öffentlichen Acme-Varianten; lokal deaktiviert, DNT wird respektiert.
 
+## MCP für AI Agents
+
+Die API unterstützt MCP über Streamable HTTP. [Verbindung, Tools und Betrieb](docs/mcp.md).
+
 ## Suchmaschinen
 
 Alle Portal-Builds setzen im initialen HTML `robots: noindex, nofollow`, erzeugen `robots.txt` mit `User-agent: *` und `Disallow: /` sowie `_headers` mit `X-Robots-Tag`. Details und Hosting-Grenzen: [Deployment](docs/deployment.md#suchmaschinensteuerung).

@@ -79,6 +79,10 @@ Ein gezielter CLI-0.15.1-Patch zieht das offizielle Node-22-Image für beide Doc
 
 Alle acht Acme-Profile konfigurieren das [Swetrix-Plugin](analytics.md). Die Projekt-ID ist öffentlich; administrative API-Schlüssel werden nicht in Builds übernommen.
 
+## MCP
+
+API-MCP, Konfiguration und Abnahme: [MCP](mcp.md).
+
 ## Suchmaschinensteuerung
 
 `scripts/search-policy.mjs` ergänzt nach jedem Standard-, Demo- und Hosting-Build in allen HTML-Dateien `noindex, nofollow`, schreibt `robots.txt` mit `User-agent: *` / `Disallow: /` und ergänzt `_headers` für unterstützende statische Hosts. Diese Übergangslösung benötigt kein Upgrade der festgelegten CSP-Pakete. Direkte eigene Aufrufe von `csp build` anschließend ebenfalls mit `node scripts/search-policy.mjs` abschließen.
